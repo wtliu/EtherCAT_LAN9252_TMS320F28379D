@@ -5,48 +5,19 @@
 // TITLE:    Inter-Processor Communication module support functions
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v200 $
+// $Release Date: Tue Jun 21 13:00:02 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 //
 // Included Files
 //
-#include <string.h>
 #include "F2837xD_device.h"
 #include "F2837xD_Examples.h"
-#include "F2837xD_Ipc_defines.h"
+#include <string.h>
+
 //
 // InitIpc - Initialize all IPC registers and clear all flags
 //
@@ -79,8 +50,7 @@ void InitIpc()
     #elif defined(CPU2)
         IpcRegs.IPCBOOTSTS = 0;
     #endif
-
-    //    ReleaseFlashPump();
+    ReleaseFlashPump();
 }
 
 //
@@ -121,7 +91,7 @@ void SendIpcData(void *data, Uint16 word_length, Uint16 flag)
 void RecvIpcData(void *recv_buf, Uint16 word_length)
 {
     word_length = (word_length < MSG_RAM_SIZE) ? word_length : MSG_RAM_SIZE;
-    memcpy(recv_buf, RECV_MSG_RAM, word_length);
+    memcpy(RECV_MSG_RAM, recv_buf, word_length);
 }
 
 //

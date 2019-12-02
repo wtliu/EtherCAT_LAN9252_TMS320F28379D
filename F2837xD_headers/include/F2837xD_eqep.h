@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_eqep.h
 //
-// TITLE:   EQEP Register Definitions.
+// TITLE:   F2837xD Device EQEP Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_EQEP_H__
@@ -58,7 +29,7 @@ struct QDECCTL_BITS {                   // bits description
     Uint16 QBP:1;                       // 7 QEPB input polarity
     Uint16 QAP:1;                       // 8 QEPA input polarity
     Uint16 IGATE:1;                     // 9 Index pulse gating option
-    Uint16 SWAP:1;                      // 10 CLK/DIR Signal Source for Position Counter
+    Uint16 SWAP:1;                      // 10 CLK/DIR Signal Source for Position Counter 
     Uint16 XCR:1;                       // 11 External Clock Rate
     Uint16 SPSEL:1;                     // 12 Sync output pin selection
     Uint16 SOEN:1;                      // 13 Sync output-enable
@@ -71,17 +42,17 @@ union QDECCTL_REG {
 };
 
 struct QEPCTL_BITS {                    // bits description
-    Uint16 WDE:1;                       // 0 QEP watchdog enable
+    Uint16 WDE:1;                       // 0 QEP watchdog enable 
     Uint16 UTE:1;                       // 1 QEP unit timer enable
-    Uint16 QCLM:1;                      // 2 QEP capture latch mode
-    Uint16 QPEN:1;                      // 3 Quadrature postotion counter enable
-    Uint16 IEL:2;                       // 5:4 Index event latch
-    Uint16 SEL:1;                       // 6 Strobe event latch
+    Uint16 QCLM:1;                      // 2 QEP capture latch mode 
+    Uint16 QPEN:1;                      // 3 Quadrature postotion counter enable 
+    Uint16 IEL:2;                       // 5:4 Index event latch 
+    Uint16 SEL:1;                       // 6 Strobe event latch 
     Uint16 SWI:1;                       // 7 Software init position counter
-    Uint16 IEI:2;                       // 9:8 Index event init of position count
-    Uint16 SEI:2;                       // 11:10 Strobe event init
-    Uint16 PCRM:2;                      // 13:12 Postion counter reset
-    Uint16 FREE_SOFT:2;                 // 15:14 Emulation mode
+    Uint16 IEI:2;                       // 9:8 Index event init of position count 
+    Uint16 SEI:2;                       // 11:10 Strobe event init 
+    Uint16 PCRM:2;                      // 13:12 Postion counter reset 
+    Uint16 FREE_SOFT:2;                 // 15:14 Emulation mode 
 };
 
 union QEPCTL_REG {
@@ -102,10 +73,10 @@ union QCAPCTL_REG {
 };
 
 struct QPOSCTL_BITS {                   // bits description
-    Uint16 PCSPW:12;                    // 11:0 Position compare sync pulse width
-    Uint16 PCE:1;                       // 12 Position compare enable/disable
-    Uint16 PCPOL:1;                     // 13 Polarity of sync output
-    Uint16 PCLOAD:1;                    // 14 Position compare of shadow load
+    Uint16 PCSPW:12;                    // 11:0 Position compare sync pulse width 
+    Uint16 PCE:1;                       // 12 Position compare enable/disable 
+    Uint16 PCPOL:1;                     // 13 Polarity of sync output 
+    Uint16 PCLOAD:1;                    // 14 Position compare of shadow load 
     Uint16 PCSHDW:1;                    // 15 Position compare of shadow enable
 };
 
@@ -216,30 +187,30 @@ union QEPSTS_REG {
 };
 
 struct EQEP_REGS {
-    Uint32                                   QPOSCNT;                      // Position Counter
-    Uint32                                   QPOSINIT;                     // Position Counter Init
-    Uint32                                   QPOSMAX;                      // Maximum Position Count
-    Uint32                                   QPOSCMP;                      // Position Compare
-    Uint32                                   QPOSILAT;                     // Index Position Latch
+    Uint32                                   QPOSCNT;                      // Position Counter 
+    Uint32                                   QPOSINIT;                     // Position Counter Init 
+    Uint32                                   QPOSMAX;                      // Maximum Position Count 
+    Uint32                                   QPOSCMP;                      // Position Compare 
+    Uint32                                   QPOSILAT;                     // Index Position Latch 
     Uint32                                   QPOSSLAT;                     // Strobe Position Latch
-    Uint32                                   QPOSLAT;                      // Position Latch
-    Uint32                                   QUTMR;                        // QEP Unit Timer
-    Uint32                                   QUPRD;                        // QEP Unit Period
-    Uint16                                   QWDTMR;                       // QEP Watchdog Timer
-    Uint16                                   QWDPRD;                       // QEP Watchdog Period
-    union   QDECCTL_REG                      QDECCTL;                      // Quadrature Decoder Control
-    union   QEPCTL_REG                       QEPCTL;                       // QEP Control
-    union   QCAPCTL_REG                      QCAPCTL;                      // Qaudrature Capture Control
-    union   QPOSCTL_REG                      QPOSCTL;                      // Position Compare Control
-    union   QEINT_REG                        QEINT;                        // QEP Interrupt Control
-    union   QFLG_REG                         QFLG;                         // QEP Interrupt Flag
-    union   QCLR_REG                         QCLR;                         // QEP Interrupt Clear
-    union   QFRC_REG                         QFRC;                         // QEP Interrupt Force
-    union   QEPSTS_REG                       QEPSTS;                       // QEP Status
-    Uint16                                   QCTMR;                        // QEP Capture Timer
-    Uint16                                   QCPRD;                        // QEP Capture Period
-    Uint16                                   QCTMRLAT;                     // QEP Capture Latch
-    Uint16                                   QCPRDLAT;                     // QEP Capture Period Latch
+    Uint32                                   QPOSLAT;                      // Position Latch 
+    Uint32                                   QUTMR;                        // QEP Unit Timer 
+    Uint32                                   QUPRD;                        // QEP Unit Period 
+    Uint16                                   QWDTMR;                       // QEP Watchdog Timer 
+    Uint16                                   QWDPRD;                       // QEP Watchdog Period 
+    union   QDECCTL_REG                      QDECCTL;                      // Quadrature Decoder Control 
+    union   QEPCTL_REG                       QEPCTL;                       // QEP Control 
+    union   QCAPCTL_REG                      QCAPCTL;                      // Qaudrature Capture Control 
+    union   QPOSCTL_REG                      QPOSCTL;                      // Position Compare Control 
+    union   QEINT_REG                        QEINT;                        // QEP Interrupt Control 
+    union   QFLG_REG                         QFLG;                         // QEP Interrupt Flag 
+    union   QCLR_REG                         QCLR;                         // QEP Interrupt Clear 
+    union   QFRC_REG                         QFRC;                         // QEP Interrupt Force 
+    union   QEPSTS_REG                       QEPSTS;                       // QEP Status 
+    Uint16                                   QCTMR;                        // QEP Capture Timer 
+    Uint16                                   QCPRD;                        // QEP Capture Period 
+    Uint16                                   QCTMRLAT;                     // QEP Capture Latch 
+    Uint16                                   QCPRDLAT;                     // QEP Capture Period Latch 
     Uint16                                   rsvd1;                        // Reserved
 };
 

@@ -4,15 +4,21 @@ MEMORY
 PAGE 0 :
    /* BEGIN is used for the "boot to SARAM" bootloader mode   */
 
-   BEGIN           	: origin = 0x000000, length = 0x000002
-   RAMM0           	: origin = 0x000122, length = 0x0002DE
-   RAMD0           	: origin = 0x00B000, length = 0x000800
-   RAMLS0          	: origin = 0x008000, length = 0x000800
-   RAMLS1          	: origin = 0x008800, length = 0x000800
-   RAMLS2      		: origin = 0x009000, length = 0x000800
-   RAMLS3      		: origin = 0x009800, length = 0x000800
-   RAMLS4      		: origin = 0x00A000, length = 0x000800
-   RESET           	: origin = 0x3FFFC0, length = 0x000002
+   BEGIN           : origin = 0x000000, length = 0x000002
+   RAMM0           : origin = 0x000122, length = 0x0002DE
+   RAMD0           : origin = 0x00B000, length = 0x000800
+   RAMLS0          : origin = 0x008000, length = 0x000800
+   RAMLS1          : origin = 0x008800, length = 0x000800
+   RAMLS2      	   : origin = 0x009000, length = 0x000800
+   RAMLS3          : origin = 0x009800, length = 0x000800
+   RAMLS4      	   : origin = 0x00A000, length = 0x000800
+
+   RAMGS0          : origin = 0x00C000, length = 0x001000
+   RAMGS1          : origin = 0x00D000, length = 0x001000
+   RAMGS2          : origin = 0x00E000, length = 0x001000
+   RAMGS3          : origin = 0x00F000, length = 0x001000
+
+   RESET           : origin = 0x3FFFC0, length = 0x000002
 
 PAGE 1 :
 
@@ -22,10 +28,7 @@ PAGE 1 :
 
    RAMLS5      : origin = 0x00A800, length = 0x000800
 
-   RAMGS0      : origin = 0x00C000, length = 0x001000
-   RAMGS1      : origin = 0x00D000, length = 0x001000
-   RAMGS2      : origin = 0x00E000, length = 0x001000
-   RAMGS3      : origin = 0x00F000, length = 0x001000
+
    RAMGS4      : origin = 0x010000, length = 0x001000
    RAMGS5      : origin = 0x011000, length = 0x001000
    RAMGS6      : origin = 0x012000, length = 0x001000
@@ -50,39 +53,22 @@ PAGE 1 :
 SECTIONS
 {
    codestart        : > BEGIN,     PAGE = 0
-   .text            : >> RAMD0 |  RAMLS0 | RAMLS1 | RAMLS2 | RAMLS3 | RAMLS4,   PAGE = 0
-   .cinit           : > RAMM0,     PAGE = 0
-   .switch          : > RAMM0,     PAGE = 0
+   ramfuncs         : > RAMM0      PAGE = 0
+   .text            : >>RAMLS1 | RAMLS2 | RAMLS3 | RAMLS4 | RAMGS0 | RAMGS1 | RAMGS2,   PAGE = 0
+   .cinit           : > RAMLS0,     PAGE = 0
+   .pinit           : >>RAMM0 | RAMD0,     PAGE = 0
+   .switch          : >>RAMM0 | RAMD0,     PAGE = 0
    .reset           : > RESET,     PAGE = 0, TYPE = DSECT /* not used, */
+
    .stack           : > RAMM1,     PAGE = 1
-
-#if defined(__TI_EABI__)
-   .bss             : > RAMLS5,    PAGE = 1
-   .bss:output      : > RAMLS3,    PAGE = 0
-   .init_array      : > RAMM0,     PAGE = 0
-   .const           : > RAMLS5,    PAGE = 1
-   .data            : > RAMLS5,    PAGE = 1
-   .sysmem          : > RAMLS5,    PAGE = 1
-#else
-   .pinit           : > RAMM0,     PAGE = 0
    .ebss            : > RAMLS5,    PAGE = 1
-   .econst          : > RAMLS5,    PAGE = 1
-   .esysmem         : > RAMLS5,    PAGE = 1
-#endif
+   .econst          : > RAMGS4,    PAGE = 1
+   .esysmem         : > RAMGS4,    PAGE = 1
+   Filter_RegsFile  : > RAMGS4,	   PAGE = 1
 
-   Filter_RegsFile  : > RAMGS0,	   PAGE = 1
+   ramgs0           : > RAMGS4,    PAGE = 1
+   ramgs1           : > RAMGS5,    PAGE = 1
 
-
-   ramgs0           : > RAMGS0,    PAGE = 1
-   ramgs1           : > RAMGS1,    PAGE = 1
-
-#ifdef __TI_COMPILER_VERSION__
-   #if __TI_COMPILER_VERSION__ >= 15009000
-    .TI.ramfunc : {} > RAMM0,      PAGE = 0
-   #else
-    ramfuncs    : > RAMM0      PAGE = 0   
-   #endif
-#endif
 
    /* The following section definitions are required when using the IPC API Drivers */
     GROUP : > CPU1TOCPU2RAM, PAGE = 1
@@ -99,12 +85,7 @@ SECTIONS
         PUTREADIDX :   TYPE = DSECT
     }
 
-    /* The following section definition are for SDFM examples */
-   Filter1_RegsFile : > RAMGS1,	PAGE = 1, fill=0x1111
-   Filter2_RegsFile : > RAMGS2,	PAGE = 1, fill=0x2222
-   Filter3_RegsFile : > RAMGS3,	PAGE = 1, fill=0x3333
-   Filter4_RegsFile : > RAMGS4,	PAGE = 1, fill=0x4444
-   Difference_RegsFile : >RAMGS5, 	PAGE = 1, fill=0x3333
+
 }
 
 /*

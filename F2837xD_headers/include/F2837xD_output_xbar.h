@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_output_xbar.h
 //
-// TITLE:   OUTPUT_XBAR Register Definitions.
+// TITLE:   F2837xD Device OUTPUT_XBAR Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_OUTPUT_XBAR_H__
@@ -811,13 +782,13 @@ union OUTPUTLATCHFRC_REG {
 
 struct OUTPUTLATCHENABLE_BITS {         // bits description
     Uint16 OUTPUT1:1;                   // 0 Selects the output latch to drive OUTPUT1 for OUTPUT-XBAR
-    Uint16 OUTPUT2:1;                   // 1 Selects the output latch to drive OUTPUT2 for OUTPUT-XBAR
-    Uint16 OUTPUT3:1;                   // 2 Selects the output latch to drive OUTPUT3 for OUTPUT-XBAR
-    Uint16 OUTPUT4:1;                   // 3 Selects the output latch to drive OUTPUT4 for OUTPUT-XBAR
-    Uint16 OUTPUT5:1;                   // 4 Selects the output latch to drive OUTPUT5 for OUTPUT-XBAR
-    Uint16 OUTPUT6:1;                   // 5 Selects the output latch to drive OUTPUT6 for OUTPUT-XBAR
-    Uint16 OUTPUT7:1;                   // 6 Selects the output latch to drive OUTPUT7 for OUTPUT-XBAR
-    Uint16 OUTPUT8:1;                   // 7 Selects the output latch to drive OUTPUT8 for OUTPUT-XBAR
+    Uint16 OUTPUT2:1;                   // 1 Selects the output latch to drive output1 for OUTPUT-XBAR
+    Uint16 OUTPUT3:1;                   // 2 Selects the output latch to drive output2 for OUTPUT-XBAR
+    Uint16 OUTPUT4:1;                   // 3 Selects the output latch to drive output3 for OUTPUT-XBAR
+    Uint16 OUTPUT5:1;                   // 4 Selects the output latch to drive output4 for OUTPUT-XBAR
+    Uint16 OUTPUT6:1;                   // 5 Selects the output latch to drive output5 for OUTPUT-XBAR
+    Uint16 OUTPUT7:1;                   // 6 Selects the output latch to drive output6 for OUTPUT-XBAR
+    Uint16 OUTPUT8:1;                   // 7 Selects the output latch to drive output7 for OUTPUT-XBAR
     Uint16 rsvd1:8;                     // 15:8 Reserved
     Uint16 rsvd2:16;                    // 31:16 Reserved
 };
@@ -881,11 +852,11 @@ struct OUTPUT_XBAR_REGS {
     union   OUTPUT6MUXENABLE_REG             OUTPUT6MUXENABLE;             // Output X-BAR Mux Enable  for Output 6
     union   OUTPUT7MUXENABLE_REG             OUTPUT7MUXENABLE;             // Output X-BAR Mux Enable  for Output 7
     union   OUTPUT8MUXENABLE_REG             OUTPUT8MUXENABLE;             // Output X-BAR Mux Enable  for Output 8
-    union   OUTPUTLATCH_REG                  OUTPUTLATCH;                  // Output X-BAR Output Latch
-    union   OUTPUTLATCHCLR_REG               OUTPUTLATCHCLR;               // Output X-BAR Output Latch Clear
-    union   OUTPUTLATCHFRC_REG               OUTPUTLATCHFRC;               // Output X-BAR Output Latch Clear
-    union   OUTPUTLATCHENABLE_REG            OUTPUTLATCHENABLE;            // Output X-BAR Output Latch Enable
-    union   OUTPUTINV_REG                    OUTPUTINV;                    // Output X-BAR Output Inversion
+    union   OUTPUTLATCH_REG                  OUTPUTLATCH;                  // Output X-BAR Output Latch 
+    union   OUTPUTLATCHCLR_REG               OUTPUTLATCHCLR;               // Output X-BAR Output Latch Clear 
+    union   OUTPUTLATCHFRC_REG               OUTPUTLATCHFRC;               // Output X-BAR Output Latch Clear 
+    union   OUTPUTLATCHENABLE_REG            OUTPUTLATCHENABLE;            // Output X-BAR Output Latch Enable 
+    union   OUTPUTINV_REG                    OUTPUTINV;                    // Output X-BAR Output Inversion 
     Uint16                                   rsvd1[4];                     // Reserved
     union   OUTPUTLOCK_REG                   OUTPUTLOCK;                   // Output X-BAR Configuration Lock register
 };

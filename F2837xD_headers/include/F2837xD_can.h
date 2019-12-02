@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_can.h
 //
-// TITLE:   CAN Register Definitions.
+// TITLE:   F2837xD Device CAN Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 (Patch) $
+// $Release Date: March 3 2017 $
+// $Copyright: Copyright (C) 2014-2017 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_CAN_H__
@@ -53,9 +24,9 @@ extern "C" {
 
 struct CAN_CTL_BITS {                  // bits description
     bp_16 Init:1;                      // 0 Initialization
-    bp_16 IE0:1;                       // 1 Interrupt line 0 Enable
-    bp_16 SIE:1;                       // 2 Status Change Interrupt Enable
-    bp_16 EIE:1;                       // 3 Error Interrupt Enable
+    bp_16 IE0:1;                       // 1 Interrupt line 0 Enable Disabled
+    bp_16 SIE:1;                       // 2 Status Change Interrupt Enable Disabled
+    bp_16 EIE:1;                       // 3 Error Interrupt Enable Disabled
     bp_16 rsvd1:1;                     // 4 Reserved
     bp_16 DAR:1;                       // 5 Disable Automatic Retransmission
     bp_16 CCE:1;                       // 6 Configuration Change Enable
@@ -71,9 +42,9 @@ struct CAN_CTL_BITS {                  // bits description
     bp_32 rsvd4:1;                     // 19 Reserved
     bp_32 rsvd5:1;                     // 20 Reserved
     bp_32 rsvd6:3;                     // 23:21 Reserved
-    bp_32 rsvd7:1;                     // 24 Reserved
-    bp_32 rsvd8:1;                     // 25 Reserved
-    bp_32 rsvd9:6;                     // 31:26 Reserved
+    bp_32 PDR:1;                       // 24 Power Down Request Mode
+    bp_32 WUBA:1;                      // 25 Wake Up on Bus Activity
+    bp_32 rsvd7:6;                     // 31:26 Reserved
 };
 
 union CAN_CTL_REG {
@@ -89,10 +60,10 @@ struct CAN_ES_BITS {                   // bits description
     bp_16 EWarn:1;                     // 6 Warning State
     bp_16 BOff:1;                      // 7 Bus-Off State
     bp_16 PER:1;                       // 8 Parity Error Detected
-    bp_16 rsvd1:1;                     // 9 Reserved
-    bp_16 rsvd2:1;                     // 10 Reserved
-    bp_16 rsvd3:5;                     // 15:11 Reserved
-    bp_32 rsvd4:16;                    // 31:16 Reserved
+    bp_16 WakeUpPnd:1;                 // 9 Wake Up Pending
+    bp_16 PDA:1;                       // 10 Power down mode acknowledge
+    bp_16 rsvd1:5;                     // 15:11 Reserved
+    bp_32 rsvd2:16;                    // 31:16 Reserved
 };
 
 union CAN_ES_REG {
@@ -167,6 +138,20 @@ union CAN_PERR_REG {
     struct  CAN_PERR_BITS  bit;
 };
 
+struct CAN_REL_BITS {                  // bits description
+    bp_16 DAY:8;                       // 7:0 Day
+    bp_16 MON:8;                       // 15:8 Month
+    bp_32 YEAR:4;                      // 19:16 Year
+    bp_32 SUBSTEP:4;                   // 23:20 Substep
+    bp_32 STEP:4;                      // 27:24 Step
+    bp_32 REL:4;                       // 31:28 Release
+};
+
+union CAN_REL_REG {
+    bp_32  all;
+    struct  CAN_REL_BITS  bit;
+};
+
 struct CAN_RAM_INIT_BITS {             // bits description
     bp_16 KEY0:1;                      // 0 KEY0
     bp_16 KEY1:1;                      // 1 KEY1
@@ -196,7 +181,7 @@ union CAN_GLB_INT_EN_REG {
 };
 
 struct CAN_GLB_INT_FLG_BITS {          // bits description
-    bp_16 INT0_FLG:1;                  // 0 Global Interrupt Flag for CAN INT0
+    bp_16 Name:1;                      // 0 Global Interrupt Flag for CAN INT0
     bp_16 INT1_FLG:1;                  // 1 Global Interrupt Flag for CAN INT1
     bp_16 rsvd1:14;                    // 15:2 Reserved
     bp_32 rsvd2:16;                    // 31:16 Reserved
@@ -544,7 +529,8 @@ struct CAN_REGS {
     union   CAN_TEST_REG                     CAN_TEST;                     // Test Register
     uint32_t                                 rsvd1[2];                     // Reserved
     union   CAN_PERR_REG                     CAN_PERR;                     // CAN Parity Error Code Register
-    uint32_t                                 rsvd2[16];                    // Reserved
+    union   CAN_REL_REG                      CAN_REL;                      // CAN Core Release Register
+    uint32_t                                 rsvd2[14];                    // Reserved
     union   CAN_RAM_INIT_REG                 CAN_RAM_INIT;                 // CAN RAM Initialization Register
     uint32_t                                 rsvd3[6];                     // Reserved
     union   CAN_GLB_INT_EN_REG               CAN_GLB_INT_EN;               // CAN Global Interrupt Enable Register
@@ -552,31 +538,31 @@ struct CAN_REGS {
     union   CAN_GLB_INT_CLR_REG              CAN_GLB_INT_CLR;              // CAN Global Interrupt Clear Register
     uint32_t                                 rsvd4[18];                    // Reserved
     bp_32                                    CAN_ABOTR;                    // Auto-Bus-On Time Register
-    union   CAN_TXRQ_X_REG                   CAN_TXRQ_X;                   // CAN Transmission Request Register
+    union   CAN_TXRQ_X_REG                   CAN_TXRQ_X;                   // CAN Transmission Request X Register
     bp_32                                    CAN_TXRQ_21;                  // CAN Transmission Request 2_1 Register
     uint32_t                                 rsvd5[6];                     // Reserved
-    union   CAN_NDAT_X_REG                   CAN_NDAT_X;                   // CAN New Data Register
+    union   CAN_NDAT_X_REG                   CAN_NDAT_X;                   // CAN New Data X Register
     bp_32                                    CAN_NDAT_21;                  // CAN New Data 2_1 Register
     uint32_t                                 rsvd6[6];                     // Reserved
-    union   CAN_IPEN_X_REG                   CAN_IPEN_X;                   // CAN Interrupt Pending Register
+    union   CAN_IPEN_X_REG                   CAN_IPEN_X;                   // CAN Interrupt Pending X Register
     bp_32                                    CAN_IPEN_21;                  // CAN Interrupt Pending 2_1 Register
     uint32_t                                 rsvd7[6];                     // Reserved
-    union   CAN_MVAL_X_REG                   CAN_MVAL_X;                   // CAN Message Valid Register
+    union   CAN_MVAL_X_REG                   CAN_MVAL_X;                   // CAN Message Valid X Register
     bp_32                                    CAN_MVAL_21;                  // CAN Message Valid 2_1 Register
     uint32_t                                 rsvd8[8];                     // Reserved
     bp_32                                    CAN_IP_MUX21;                 // CAN Interrupt Multiplexer 2_1 Register
     uint32_t                                 rsvd9[18];                    // Reserved
-    union   CAN_IF1CMD_REG                   CAN_IF1CMD;                   // IF1 Command Register
+    union   CAN_IF1CMD_REG                   CAN_IF1CMD;                   //  IF1 Command Register
     union   CAN_IF1MSK_REG                   CAN_IF1MSK;                   // IF1 Mask Register
     union   CAN_IF1ARB_REG                   CAN_IF1ARB;                   // IF1 Arbitration Register
     union   CAN_IF1MCTL_REG                  CAN_IF1MCTL;                  // IF1 Message Control Register
-    union   CAN_IF1DATA_REG                  CAN_IF1DATA;                  // IF1 Data A Register
-    union   CAN_IF1DATB_REG                  CAN_IF1DATB;                  // IF1 Data B Register
+    union   CAN_IF1DATA_REG                  CAN_IF1DATA;                  //  IF1 Data A Register
+    union   CAN_IF1DATB_REG                  CAN_IF1DATB;                  //  IF1 Data B Register
     uint32_t                                 rsvd10[4];                    // Reserved
     union   CAN_IF2CMD_REG                   CAN_IF2CMD;                   // IF2 Command Register
     union   CAN_IF2MSK_REG                   CAN_IF2MSK;                   // IF2 Mask Register
-    union   CAN_IF2ARB_REG                   CAN_IF2ARB;                   // IF2 Arbitration Register
-    union   CAN_IF2MCTL_REG                  CAN_IF2MCTL;                  // IF2 Message Control Register
+    union   CAN_IF2ARB_REG                   CAN_IF2ARB;                   //  IF2 Arbitration Register
+    union   CAN_IF2MCTL_REG                  CAN_IF2MCTL;                  //  IF2 Message Control Register
     union   CAN_IF2DATA_REG                  CAN_IF2DATA;                  // IF2 Data A Register
     union   CAN_IF2DATB_REG                  CAN_IF2DATB;                  // IF2 Data B Register
     uint32_t                                 rsvd11[4];                    // Reserved
@@ -587,7 +573,7 @@ struct CAN_REGS {
     union   CAN_IF3DATA_REG                  CAN_IF3DATA;                  // IF3 Data A Register
     union   CAN_IF3DATB_REG                  CAN_IF3DATB;                  // IF3 Data B Register
     uint32_t                                 rsvd12[4];                    // Reserved
-    bp_32                                    CAN_IF3UPD;                   // IF3 Update Enable Register
+    bp_32                                    CAN_IF3UPD;                   //  IF3 Update Enable Register
 };
 
 //---------------------------------------------------------------------------

@@ -5,6 +5,12 @@
 // TITLE:  F2837xD Device Definitions.
 //
 //###########################################################################
+// $TI Release: F2837xD Support Library v210 (Patch) $
+// $Release Date: March 3 2017 $
+// $Copyright: Copyright (C) 2014-2017 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
+//###########################################################################
+
 #ifndef F2837xD_DEVICE_H
 #define F2837xD_DEVICE_H
 
@@ -23,7 +29,7 @@ extern "C" {
 #define   TARGET   1
 
 //
-//选择调试器件
+// User To Select Target Device:
 //
 #define   F28_2837xD    TARGET
 
@@ -121,54 +127,71 @@ extern __cregister volatile unsigned int IER;
 #ifndef C28X_BIT14
 #define C28X_BIT14   0x00004000
 #endif
+
 #ifndef C28X_BIT15
 #define C28X_BIT15   0x00008000
 #endif
+
 #ifndef C28X_BIT16
 #define C28X_BIT16   0x00010000
 #endif
+
 #ifndef C28X_BIT17
 #define C28X_BIT17   0x00020000
 #endif
+
 #ifndef C28X_BIT18
 #define C28X_BIT18   0x00040000
 #endif
+
 #ifndef C28X_BIT19
 #define C28X_BIT19   0x00080000
 #endif
+
 #ifndef C28X_BIT20
 #define C28X_BIT20   0x00100000
 #endif
+
 #ifndef C28X_BIT21
 #define C28X_BIT21   0x00200000
 #endif
+
 #ifndef C28X_BIT22
 #define C28X_BIT22   0x00400000
 #endif
+
 #ifndef C28X_BIT23
 #define C28X_BIT23   0x00800000
 #endif
+
 #ifndef C28X_BIT24
 #define C28X_BIT24   0x01000000
 #endif
+
 #ifndef C28X_BIT25
 #define C28X_BIT25   0x02000000
 #endif
+
 #ifndef C28X_BIT26
 #define C28X_BIT26   0x04000000
 #endif
+
 #ifndef C28X_BIT27
 #define C28X_BIT27   0x08000000
 #endif
+
 #ifndef C28X_BIT28
 #define C28X_BIT28   0x10000000
 #endif
+
 #ifndef C28X_BIT29
 #define C28X_BIT29   0x20000000
 #endif
+
 #ifndef C28X_BIT30
 #define C28X_BIT30   0x40000000
 #endif
+
 #ifndef C28X_BIT31
 #define C28X_BIT31   0x80000000
 #endif
@@ -192,8 +215,8 @@ typedef bool _Bool;
 #endif
 
 //
-// C99将布尔类型定义为_Bool，但这与格式不匹配
-// 其他标准整数类型。 bool_t已被定义为填补这一空白。
+// C99 defines boolean type to be _Bool, but this doesn't match the format of
+// the other standard integer types.  bool_t has been defined to fill this gap.
 //
 typedef _Bool bool_t;
 
@@ -217,10 +240,6 @@ typedef _Bool status_t;
 //
 #ifndef DSP28_DATA_TYPES
 #define DSP28_DATA_TYPES
-typedef unsigned            uint8_t;
-typedef char                int8_t;
-typedef char                int8;
-typedef unsigned char       Uint8;
 typedef int             	int16;
 typedef long            	int32;
 typedef long long			int64;
@@ -291,6 +310,7 @@ typedef unsigned long bp_32 __attribute__((byte_peripheral));
 #endif                                  // extern "C"
 
 #endif                                  // end of F2837xD_DEVICE_H definition
+
 //
 // End of file.
 //

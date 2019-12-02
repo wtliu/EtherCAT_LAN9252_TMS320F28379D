@@ -5,39 +5,10 @@
 // TITLE:    GPIO module support functions
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v200 $
+// $Release Date: Tue Jun 21 13:00:02 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 //
@@ -45,7 +16,7 @@
 //
 #include "F2837xD_device.h"
 #include "F2837xD_Examples.h"
-#include "f2837xD_Gpio_defines.h"
+
 //
 //Low-level functions for GPIO configuration (CPU1 only)
 //
@@ -109,21 +80,21 @@
     //                    Pins table(4.4) in the  datasheet. Use the GPIO index
     //                    row (0 to 15) to select a muxing option for the GPIO.
     //
-    void GPIO_SetupPinMux(Uint16 gpioNumber, Uint16 cpu, Uint16 muxPosition)
+    void GPIO_SetupPinMux(Uint16 pin, Uint16 cpu, Uint16 peripheral)
     {
         volatile Uint32 *gpioBaseAddr;
         volatile Uint32 *mux, *gmux, *csel;
         Uint16 pin32, pin16, pin8;
 
-        pin32 = gpioNumber % 32;
-        pin16 = gpioNumber % 16;
-        pin8 = gpioNumber % 8;
-        gpioBaseAddr = (Uint32 *)&GpioCtrlRegs + (gpioNumber/32)*GPY_CTRL_OFFSET;
+        pin32 = pin % 32;
+        pin16 = pin % 16;
+        pin8 = pin % 8;
+        gpioBaseAddr = (Uint32 *)&GpioCtrlRegs + (pin/32)*GPY_CTRL_OFFSET;
 
         //
         //Sanity check for valid cpu and peripheral values
         //
-        if (cpu > GPIO_MUX_CPU2CLA || muxPosition > 0xF)
+        if (cpu > GPIO_MUX_CPU2CLA || peripheral > 0xF)
             return;
 
         //
@@ -155,8 +126,8 @@
         //
         *mux &= ~(0x3UL << (2*pin16));
         *gmux &= ~(0x3UL << (2*pin16));
-        *gmux |= (Uint32)((muxPosition >> 2) & 0x3UL) << (2*pin16);
-        *mux |= (Uint32)(muxPosition & 0x3UL) << (2*pin16);
+        *gmux |= (Uint32)((peripheral >> 2) & 0x3UL) << (2*pin16);
+        *mux |= (Uint32)(peripheral & 0x3UL) << (2*pin16);
 
         *csel &= ~(0x3L << (4*pin8));
         *csel |= (Uint32)(cpu & 0x3L) << (4*pin8);
@@ -192,16 +163,16 @@
     //pull-up or polarity inversion. The default output state is
     //the standard digital output.
     //
-    void GPIO_SetupPinOptions(Uint16 gpioNumber, Uint16 output, Uint16 flags)
+    void GPIO_SetupPinOptions(Uint16 pin, Uint16 output, Uint16 flags)
     {
         volatile Uint32 *gpioBaseAddr;
         volatile Uint32 *dir, *pud, *inv, *odr, *qsel;
         Uint32 pin32, pin16, pinMask, qual;
 
-        pin32 = gpioNumber % 32;
-        pin16 = gpioNumber % 16;
+        pin32 = pin % 32;
+        pin16 = pin % 16;
         pinMask = 1UL << pin32;
-        gpioBaseAddr = (Uint32 *)&GpioCtrlRegs + (gpioNumber/32)*GPY_CTRL_OFFSET;
+        gpioBaseAddr = (Uint32 *)&GpioCtrlRegs + (pin/32)*GPY_CTRL_OFFSET;
 
         //
         //Create pointers to the appropriate registers. This is a workaround
@@ -313,15 +284,15 @@
     //                  GPIO_LOCK - Lock the pin setup register bits for the
     //                              specified pin
     //
-    void GPIO_SetupLock(Uint16 gpioNumber, Uint16 flags)
+    void GPIO_SetupLock(Uint16 pin, Uint16 flags)
     {
         volatile Uint32 *gpioBaseAddr;
         volatile Uint32 *lock;
         Uint32 pin32, pinMask;
 
-        pin32 = gpioNumber % 32;
+        pin32 = pin % 32;
         pinMask = 1UL << pin32;
-        gpioBaseAddr = (Uint32 *)&GpioCtrlRegs + (gpioNumber/32)*GPY_CTRL_OFFSET;
+        gpioBaseAddr = (Uint32 *)&GpioCtrlRegs + (pin/32)*GPY_CTRL_OFFSET;
 
         //
         //Create pointers to the appropriate registers. This is a workaround
@@ -352,34 +323,34 @@
     //
     //External interrupt setup
     //
-    void GPIO_SetupXINT1Gpio(Uint16 gpioNumber)
+    void GPIO_SetupXINT1Gpio(Uint16 pin)
     {
         EALLOW;
-        InputXbarRegs.INPUT4SELECT = gpioNumber;      //Set XINT1 source to GPIO-pin
+        InputXbarRegs.INPUT4SELECT = pin;      //Set XINT1 source to GPIO-pin
         EDIS;
     }
-    void GPIO_SetupXINT2Gpio(Uint16 gpioNumber)
+    void GPIO_SetupXINT2Gpio(Uint16 pin)
     {
         EALLOW;
-        InputXbarRegs.INPUT5SELECT = gpioNumber;      //Set XINT2 source to GPIO-pin
+        InputXbarRegs.INPUT5SELECT = pin;      //Set XINT2 source to GPIO-pin
         EDIS;
     }
-    void GPIO_SetupXINT3Gpio(Uint16 gpioNumber)
+    void GPIO_SetupXINT3Gpio(Uint16 pin)
     {
         EALLOW;
-        InputXbarRegs.INPUT6SELECT = gpioNumber;      //Set XINT3 source to GPIO-pin
+        InputXbarRegs.INPUT6SELECT = pin;      //Set XINT3 source to GPIO-pin
         EDIS;
     }
-    void GPIO_SetupXINT4Gpio(Uint16 gpioNumber)
+    void GPIO_SetupXINT4Gpio(Uint16 pin)
     {
         EALLOW;
-        InputXbarRegs.INPUT13SELECT = gpioNumber;     //Set XINT4 source to GPIO-pin
+        InputXbarRegs.INPUT13SELECT = pin;     //Set XINT4 source to GPIO-pin
         EDIS;
     }
-    void GPIO_SetupXINT5Gpio(Uint16 gpioNumber)
+    void GPIO_SetupXINT5Gpio(Uint16 pin)
     {
         EALLOW;
-        InputXbarRegs.INPUT14SELECT = gpioNumber;     //Set XINT5 source to GPIO-pin
+        InputXbarRegs.INPUT14SELECT = pin;     //Set XINT5 source to GPIO-pin
         EDIS;
     }
 
@@ -469,13 +440,13 @@
 //                this returns the actual state of the pin, not the state of
 //                the output latch.
 //
-Uint16 GPIO_ReadPin(Uint16 gpioNumber)
+Uint16 GPIO_ReadPin(Uint16 pin)
 {
     volatile Uint32 *gpioDataReg;
     Uint16 pinVal;
 
-    gpioDataReg = (volatile Uint32 *)&GpioDataRegs + (gpioNumber/32)*GPY_DATA_OFFSET;
-    pinVal = (gpioDataReg[GPYDAT] >> (gpioNumber % 32)) & 0x1;
+    gpioDataReg = (volatile Uint32 *)&GpioDataRegs + (pin/32)*GPY_DATA_OFFSET;
+    pinVal = (gpioDataReg[GPYDAT] >> (pin % 32)) & 0x1;
 
     return pinVal;
 }
@@ -483,13 +454,13 @@ Uint16 GPIO_ReadPin(Uint16 gpioNumber)
 //
 // GPIO_WritePin - Set the GPyDAT register bit for the specified pin.
 //
-void GPIO_WritePin(Uint16 gpioNumber, Uint16 outVal)
+void GPIO_WritePin(Uint16 pin, Uint16 outVal)
 {
     volatile Uint32 *gpioDataReg;
     Uint32 pinMask;
 
-    gpioDataReg = (volatile Uint32 *)&GpioDataRegs + (gpioNumber/32)*GPY_DATA_OFFSET;
-    pinMask = 1UL << (gpioNumber % 32);
+    gpioDataReg = (volatile Uint32 *)&GpioDataRegs + (pin/32)*GPY_DATA_OFFSET;
+    pinMask = 1UL << (pin % 32);
 
     if (outVal == 0)
     {

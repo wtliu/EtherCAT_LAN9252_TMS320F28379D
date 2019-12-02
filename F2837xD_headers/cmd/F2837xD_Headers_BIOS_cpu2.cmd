@@ -15,9 +15,6 @@ MEMORY
    ADCC          : origin = 0x007500, length = 0x000080
    ADCD          : origin = 0x007580, length = 0x000080
 
-   CANA          : origin = 0x048000, length = 0x000800
-   CANB          : origin = 0x04A000, length = 0x000800
-
    CLA1         : origin = 0x001400, length = 0x000040     /* CLA registers */
 
    CMPSS1       : origin = 0x005C80, length = 0x000020
@@ -118,6 +115,8 @@ MEMORY
    DCSM_Z2      : origin = 0x05F040, length = 0x000030     /* Zone 2 Dual code security module registers */
    DCSM_COMMON  : origin = 0x05F070, length = 0x000010     /* Common Dual code security module registers */
 
+   DCSM_Z1_OTP  : origin = 0x078000, length = 0x000020     /* Part of Z1 OTP.  LinkPointer/JTAG lock/ Boot Mode */
+   DCSM_Z2_OTP  : origin = 0x078200, length = 0x000020     /* Part of Z2 OTP.  LinkPointer/JTAG lock */
 }
 
 
@@ -129,7 +128,10 @@ SECTIONS
       PieVectTableFile    : TYPE=DSECT
       GROUP
       {
+         EmuKeyVar        : TYPE=DSECT
          EmuBModeVar      : TYPE=DSECT
+         FlashCallbackVar : TYPE=DSECT
+         FlashScalingVar  : TYPE=DSECT
       }
    }
 
@@ -142,9 +144,6 @@ SECTIONS
    AdcbRegsFile          : > ADCB,         PAGE = 1
    AdccRegsFile          : > ADCC,         PAGE = 1
    AdcdRegsFile          : > ADCD,         PAGE = 1
-
-   CanaRegsFile          : > CANA,         PAGE = 1
-   CanbRegsFile          : > CANB,         PAGE = 1
 
    Cla1RegsFile          : > CLA1,         PAGE = 1
    Cla1SoftIntRegsFile   : > PIE_CTRL,     PAGE = 1, type=DSECT
@@ -169,6 +168,10 @@ SECTIONS
    DcsmZ1RegsFile        : > DCSM_Z1,          PAGE = 1
    DcsmZ2RegsFile        : > DCSM_Z2,          PAGE = 1
    DcsmCommonRegsFile    : > DCSM_COMMON,      PAGE = 1
+
+   /*** Warning:  Only remove "Type = NOLOAD" to program OTP Locations ***/
+   DcsmZ1OtpFile         : > DCSM_Z1_OTP,      PAGE = 1, type = NOLOAD
+   DcsmZ2OtpFile         : > DCSM_Z2_OTP,      PAGE = 1, type = NOLOAD
 
    DmaRegsFile           : > DMA           PAGE = 1
    DmaClaSrcSelRegsFile  : > DMACLASRCSEL  PAGE = 1

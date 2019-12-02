@@ -13,7 +13,7 @@
 
 #ifndef F2837xD_GLOBALPROTOTYPES_H
 #define F2837xD_GLOBALPROTOTYPES_H
-#include "F2837xD_device.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

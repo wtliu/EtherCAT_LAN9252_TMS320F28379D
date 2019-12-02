@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_sdfm.h
 //
-// TITLE:   SDFM Register Definitions.
+// TITLE:   F2837xD Device SDFM Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_SDFM_H__
@@ -121,7 +92,7 @@ struct SDMFILEN_BITS {                  // bits description
     Uint16 rsvd3:2;                     // 8:7 Reserved
     Uint16 rsvd4:1;                     // 9 Reserved
     Uint16 rsvd5:1;                     // 10 Reserved
-    Uint16 MFE:1;                       // 11 Master Filter Enable.
+    Uint16 MFE:1;                       // 11 Master Filter Enable. 
     Uint16 rsvd6:1;                     // 12 Reserved
     Uint16 rsvd7:3;                     // 15:13 Reserved
 };
@@ -146,10 +117,10 @@ union SDCTLPARM1_REG {
 
 struct SDDFPARM1_BITS {                 // bits description
     Uint16 DOSR:8;                      // 7:0 Data Filter Oversample Ratio= DOSR+1
-    Uint16 FEN:1;                       // 8 Filter Enable
+    Uint16 FEN:1;                       // 8 Filter Enable 
     Uint16 AE:1;                        // 9 Ack Enable
     Uint16 SST:2;                       // 11:10 Data Filter Structure (DataFast/1/2/3)
-    Uint16 SDSYNCEN:1;                  // 12 Data FILTER Reset Enable
+    Uint16 FILRESEN:1;                  // 12 Data FILTER Reset Enable
     Uint16 rsvd1:3;                     // 15:13 Reserved
 };
 
@@ -158,7 +129,7 @@ union SDDFPARM1_REG {
     struct  SDDFPARM1_BITS  bit;
 };
 
-struct SDDPARM1_BITS {                  // bits description
+struct SDIPARM1_BITS {                  // bits description
     Uint16 rsvd1:7;                     // 6:0 Reserved
     Uint16 rsvd2:1;                     // 7 Reserved
     Uint16 rsvd3:1;                     // 8 Reserved
@@ -167,9 +138,9 @@ struct SDDPARM1_BITS {                  // bits description
     Uint16 SH:5;                        // 15:11 Shift Control (# bits to shift in 16b mode)
 };
 
-union SDDPARM1_REG {
+union SDIPARM1_REG {
     Uint16  all;
-    struct  SDDPARM1_BITS  bit;
+    struct  SDIPARM1_BITS  bit;
 };
 
 struct SDCMPH1_BITS {                   // bits description
@@ -231,10 +202,10 @@ union SDCTLPARM2_REG {
 
 struct SDDFPARM2_BITS {                 // bits description
     Uint16 DOSR:8;                      // 7:0 Data Filter Oversample Ratio= DOSR+1
-    Uint16 FEN:1;                       // 8 Filter Enable
+    Uint16 FEN:1;                       // 8 Filter Enable 
     Uint16 AE:1;                        // 9 Ack Enable
     Uint16 SST:2;                       // 11:10 Data Filter Structure (SincFast/1/2/3)
-    Uint16 SDSYNCEN:1;                  // 12 Data FILTER Reset Enable
+    Uint16 FILRESEN:1;                  // 12 Data FILTER Reset Enable
     Uint16 rsvd1:3;                     // 15:13 Reserved
 };
 
@@ -243,7 +214,7 @@ union SDDFPARM2_REG {
     struct  SDDFPARM2_BITS  bit;
 };
 
-struct SDDPARM2_BITS {                  // bits description
+struct SDIPARM2_BITS {                  // bits description
     Uint16 rsvd1:7;                     // 6:0 Reserved
     Uint16 rsvd2:1;                     // 7 Reserved
     Uint16 rsvd3:1;                     // 8 Reserved
@@ -252,9 +223,9 @@ struct SDDPARM2_BITS {                  // bits description
     Uint16 SH:5;                        // 15:11 Shift Control (# bits to shift in 16b mode)
 };
 
-union SDDPARM2_REG {
+union SDIPARM2_REG {
     Uint16  all;
-    struct  SDDPARM2_BITS  bit;
+    struct  SDIPARM2_BITS  bit;
 };
 
 struct SDCMPH2_BITS {                   // bits description
@@ -316,10 +287,10 @@ union SDCTLPARM3_REG {
 
 struct SDDFPARM3_BITS {                 // bits description
     Uint16 DOSR:8;                      // 7:0 Data Filter Oversample Ratio= DOSR+1
-    Uint16 FEN:1;                       // 8 Filter Enable
+    Uint16 FEN:1;                       // 8 Filter Enable 
     Uint16 AE:1;                        // 9 Ack Enable
     Uint16 SST:2;                       // 11:10 Data filter structure (SincFast/1/2/3)
-    Uint16 SDSYNCEN:1;                  // 12 Data FILTER Reset Enable
+    Uint16 FILRESEN:1;                  // 12 Data FILTER Reset Enable
     Uint16 rsvd1:3;                     // 15:13 Reserved
 };
 
@@ -328,7 +299,7 @@ union SDDFPARM3_REG {
     struct  SDDFPARM3_BITS  bit;
 };
 
-struct SDDPARM3_BITS {                  // bits description
+struct SDIPARM3_BITS {                  // bits description
     Uint16 rsvd1:7;                     // 6:0 Reserved
     Uint16 rsvd2:1;                     // 7 Reserved
     Uint16 rsvd3:1;                     // 8 Reserved
@@ -337,9 +308,9 @@ struct SDDPARM3_BITS {                  // bits description
     Uint16 SH:5;                        // 15:11 Shift Control (# bits to shift in 16b mode)
 };
 
-union SDDPARM3_REG {
+union SDIPARM3_REG {
     Uint16  all;
-    struct  SDDPARM3_BITS  bit;
+    struct  SDIPARM3_BITS  bit;
 };
 
 struct SDCMPH3_BITS {                   // bits description
@@ -401,10 +372,10 @@ union SDCTLPARM4_REG {
 
 struct SDDFPARM4_BITS {                 // bits description
     Uint16 DOSR:8;                      // 7:0 SINC Filter Oversample Ratio= DOSR+1
-    Uint16 FEN:1;                       // 8 Filter Enable
+    Uint16 FEN:1;                       // 8 Filter Enable 
     Uint16 AE:1;                        // 9 Ack Enable
     Uint16 SST:2;                       // 11:10 Data filter structure (SincFast/1/2/3)
-    Uint16 SDSYNCEN:1;                  // 12 SINC FILTER Reset Enable
+    Uint16 FILRESEN:1;                  // 12 SINC FILTER Reset Enable
     Uint16 rsvd1:3;                     // 15:13 Reserved
 };
 
@@ -413,7 +384,7 @@ union SDDFPARM4_REG {
     struct  SDDFPARM4_BITS  bit;
 };
 
-struct SDDPARM4_BITS {                  // bits description
+struct SDIPARM4_BITS {                  // bits description
     Uint16 rsvd1:7;                     // 6:0 Reserved
     Uint16 rsvd2:1;                     // 7 Reserved
     Uint16 rsvd3:1;                     // 8 Reserved
@@ -422,9 +393,9 @@ struct SDDPARM4_BITS {                  // bits description
     Uint16 SH:5;                        // 15:11 Shift Control (# bits to shift in 16b mode)
 };
 
-union SDDPARM4_REG {
+union SDIPARM4_REG {
     Uint16  all;
-    struct  SDDPARM4_BITS  bit;
+    struct  SDIPARM4_BITS  bit;
 };
 
 struct SDCMPH4_BITS {                   // bits description
@@ -480,7 +451,7 @@ struct SDFM_REGS {
     Uint16                                   rsvd2[9];                     // Reserved
     union   SDCTLPARM1_REG                   SDCTLPARM1;                   // Control Parameter Register for Ch1
     union   SDDFPARM1_REG                    SDDFPARM1;                    // Data Filter Parameter Register for Ch1
-    union   SDDPARM1_REG                     SDDPARM1;                     // Integer Parameter Register for Ch1
+    union   SDIPARM1_REG                     SDIPARM1;                     // Integer Parameter Register for Ch1
     union   SDCMPH1_REG                      SDCMPH1;                      // High-level Threshold Register for Ch1
     union   SDCMPL1_REG                      SDCMPL1;                      // Low-level Threshold Register for Ch1
     union   SDCPARM1_REG                     SDCPARM1;                     // Comparator Parameter Register for Ch1
@@ -488,7 +459,7 @@ struct SDFM_REGS {
     Uint16                                   rsvd3[8];                     // Reserved
     union   SDCTLPARM2_REG                   SDCTLPARM2;                   // Control Parameter Register for Ch2
     union   SDDFPARM2_REG                    SDDFPARM2;                    // Data Filter Parameter Register for Ch2
-    union   SDDPARM2_REG                     SDDPARM2;                     // Integer Parameter Register for Ch2
+    union   SDIPARM2_REG                     SDIPARM2;                     // Integer Parameter Register for Ch2
     union   SDCMPH2_REG                      SDCMPH2;                      // High-level Threshold Register for Ch2
     union   SDCMPL2_REG                      SDCMPL2;                      // Low-level Threshold Register for Ch2
     union   SDCPARM2_REG                     SDCPARM2;                     // Comparator Parameter Register for Ch2
@@ -496,7 +467,7 @@ struct SDFM_REGS {
     Uint16                                   rsvd4[8];                     // Reserved
     union   SDCTLPARM3_REG                   SDCTLPARM3;                   // Control Parameter Register for Ch3
     union   SDDFPARM3_REG                    SDDFPARM3;                    // Data Filter Parameter Register for Ch3
-    union   SDDPARM3_REG                     SDDPARM3;                     // Integer Parameter Register for Ch3
+    union   SDIPARM3_REG                     SDIPARM3;                     // Integer Parameter Register for Ch3
     union   SDCMPH3_REG                      SDCMPH3;                      // High-level Threshold Register for Ch3
     union   SDCMPL3_REG                      SDCMPL3;                      // Low-level Threshold Register for Ch3
     union   SDCPARM3_REG                     SDCPARM3;                     // Comparator Parameter Register for Ch3
@@ -504,7 +475,7 @@ struct SDFM_REGS {
     Uint16                                   rsvd5[8];                     // Reserved
     union   SDCTLPARM4_REG                   SDCTLPARM4;                   // Control Parameter Register for Ch4
     union   SDDFPARM4_REG                    SDDFPARM4;                    // Data Filter Parameter Register for Ch4
-    union   SDDPARM4_REG                     SDDPARM4;                     // Integer Parameter Register for Ch4
+    union   SDIPARM4_REG                     SDIPARM4;                     // Integer Parameter Register for Ch4
     union   SDCMPH4_REG                      SDCMPH4;                      // High-level Threshold Register for Ch4
     union   SDCMPL4_REG                      SDCMPL4;                      // Low-level Threshold Register for Ch4
     union   SDCPARM4_REG                     SDCPARM4;                     // Comparator Parameter Register for Ch4

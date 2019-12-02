@@ -15,9 +15,6 @@ MEMORY
    ADCC          : origin = 0x007500, length = 0x000080
    ADCD          : origin = 0x007580, length = 0x000080
 
-   CANA          : origin = 0x048000, length = 0x000800
-   CANB          : origin = 0x04A000, length = 0x000800
-
    CLA1         : origin = 0x001400, length = 0x000040     /* CLA registers */
 
    CMPSS1       : origin = 0x005C80, length = 0x000020
@@ -115,6 +112,8 @@ MEMORY
    DCSM_Z2      : origin = 0x05F040, length = 0x000030     /* Zone 2 Dual code security module registers */
    DCSM_COMMON  : origin = 0x05F070, length = 0x000010     /* Common Dual code security module registers */
 
+   DCSM_Z1_OTP  : origin = 0x078000, length = 0x000020     /* Part of Z1 OTP.  LinkPointer/JTAG lock/ Boot Mode */
+   DCSM_Z2_OTP  : origin = 0x078200, length = 0x000020     /* Part of Z2 OTP.  LinkPointer/JTAG lock */
 }
 
 
@@ -126,7 +125,10 @@ SECTIONS
       PieVectTableFile
       GROUP
       {
+         EmuKeyVar
          EmuBModeVar
+         FlashCallbackVar
+         FlashScalingVar
       }
    }
 
@@ -140,9 +142,6 @@ SECTIONS
    AdccRegsFile          : > ADCC,         PAGE = 1
    AdcdRegsFile          : > ADCD,         PAGE = 1
 
-   CanaRegsFile          : > CANA,         PAGE = 1
-   CanbRegsFile          : > CANB,         PAGE = 1
-
    Cla1RegsFile          : > CLA1,         PAGE = 1
    Cla1SoftIntRegsFile   : > PIE_CTRL,     PAGE = 1, type=DSECT
 
@@ -155,9 +154,9 @@ SECTIONS
    Cmpss7RegsFile        : > CMPSS7,      PAGE = 1
    Cmpss8RegsFile        : > CMPSS8,      PAGE = 1
 
-   CpuTimer0RegsFile     : > CPU_TIMER0,    PAGE = 1
-   CpuTimer1RegsFile     : > CPU_TIMER1,    PAGE = 1
-   CpuTimer2RegsFile     : > CPU_TIMER2,    PAGE = 1
+   CpuTimer0RegsFile    : > CPU_TIMER0,  PAGE = 1
+   CpuTimer1RegsFile    : > CPU_TIMER1,  PAGE = 1
+   CpuTimer2RegsFile    : > CPU_TIMER2,  PAGE = 1
 
    DacaRegsFile          : > DACA          PAGE = 1
    DacbRegsFile          : > DACB          PAGE = 1
@@ -166,6 +165,10 @@ SECTIONS
    DcsmZ1RegsFile        : > DCSM_Z1,          PAGE = 1
    DcsmZ2RegsFile        : > DCSM_Z2,          PAGE = 1
    DcsmCommonRegsFile    : > DCSM_COMMON,      PAGE = 1
+
+   /*** Warning:  Only remove "Type = NOLOAD" to program OTP Locations ***/
+   DcsmZ1OtpFile         : > DCSM_Z1_OTP,      PAGE = 1, type = NOLOAD
+   DcsmZ2OtpFile         : > DCSM_Z2_OTP,      PAGE = 1, type = NOLOAD
 
    DmaRegsFile           : > DMA           PAGE = 1
    DmaClaSrcSelRegsFile  : > DMACLASRCSEL  PAGE = 1
@@ -210,7 +213,7 @@ SECTIONS
 
    FlashPumpSemaphoreRegsFile   : > FLASHPUMPSEMAPHORE,    PAGE = 1
 
-   MemCfgRegsFile            : > MEMCFG,            PAGE = 1
+   MemCfgRegsFile        : > MEMCFG,       PAGE = 1
    Emif1ConfigRegsFile       : > EMIF1CONFIG,       PAGE = 1
    AccessProtectionRegsFile  : > ACCESSPROTECTION,  PAGE = 1
    MemoryErrorRegsFile       : > MEMORYERROR,       PAGE = 1
@@ -221,10 +224,10 @@ SECTIONS
    NmiIntruptRegsFile    : > NMIINTRUPT,   PAGE = 1
    PieCtrlRegsFile       : > PIE_CTRL,     PAGE = 1
 
-   SciaRegsFile          : > SCIA,         PAGE = 1
-   ScibRegsFile          : > SCIB,         PAGE = 1
-   ScicRegsFile          : > SCIC,         PAGE = 1
-   ScidRegsFile          : > SCID,         PAGE = 1
+   SciaRegsFile         : > SCIA,         PAGE = 1
+   ScibRegsFile         : > SCIB,         PAGE = 1
+   ScicRegsFile         : > SCIC,         PAGE = 1
+   ScidRegsFile         : > SCID,         PAGE = 1
 
    Sdfm1RegsFile         : > SDFM1,        PAGE = 1
    Sdfm2RegsFile         : > SDFM2,        PAGE = 1
@@ -234,13 +237,13 @@ SECTIONS
    SpicRegsFile          : > SPIC,        PAGE = 1
    SpidRegsFile          : > SPID,        PAGE = 1
 
-   ClkCfgRegsFile        : > CLK_CFG,     PAGE = 1
-   CpuSysRegsFile        : > CPU_SYS,     PAGE = 1
+   ClkCfgRegsFile       : > CLK_CFG,     PAGE = 1
+   CpuSysRegsFile       : > CPU_SYS,     PAGE = 1
 
    WdRegsFile            : > WD,           PAGE = 1
 
    XintRegsFile          : > XINT          PAGE = 1
-   MemCfgRegs            : > MEMCFG        PAGE = 1
+   MemCfgRegs        : > MEMCFG        PAGE = 1
 
 }
 

@@ -5,6 +5,12 @@
 // TITLE:  F2837xD Device Default Interrupt Service Routines
 //
 //###########################################################################
+// $TI Release: F2837xD Support Library v200 $
+// $Release Date: Tue Jun 21 13:00:02 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
+//###########################################################################
+
 //
 // Included Files
 //

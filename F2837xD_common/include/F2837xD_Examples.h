@@ -317,17 +317,17 @@ extern "C" {
 #include "F2837xD_GlobalPrototypes.h"       // Prototypes for global functions
                                            // within the .c files.
 #include "F2837xD_cputimervars.h"
-//#include "F2837xD_Cla_defines.h"            // Macros used for CLA examples.
-//#include "F2837xD_EPwm_defines.h"           // Macros used for PWM examples.
-//#include "F2837xD_Adc_defines.h"            // Macros used for ADC examples.
-//#include "F2837xD_Emif_defines.h"           // Macros used for EMIF examples.
+#include "F2837xD_Cla_defines.h"            // Macros used for CLA examples.
+#include "F2837xD_EPwm_defines.h"           // Macros used for PWM examples.
+#include "F2837xD_Adc_defines.h"            // Macros used for ADC examples.
+#include "F2837xD_Emif_defines.h"           // Macros used for EMIF examples.
 #include "F2837xD_Gpio_defines.h"           // Macros used for GPIO support code
-//#include "F2837xD_I2c_defines.h"            // Macros used for I2C examples.
-//#include "F2837xD_Ipc_defines.h"            // Macros used for IPC support code.
-//#include "F2837xD_Pie_defines.h"            // Macros used for PIE examples.
-//#include "F2837xD_Dma_defines.h"            // Macros used for DMA examples.
+#include "F2837xD_I2c_defines.h"            // Macros used for I2C examples.
+#include "F2837xD_Ipc_defines.h"            // Macros used for IPC support code.
+#include "F2837xD_Pie_defines.h"            // Macros used for PIE examples.
+#include "F2837xD_Dma_defines.h"            // Macros used for DMA examples.
 #include "F2837xD_SysCtrl_defines.h"        // Macros used for LPM support code
-//#include "F2837xD_Upp_defines.h"            // Macros used for UPP examples.
+#include "F2837xD_Upp_defines.h"            // Macros used for UPP examples.
 
 #define   PARTNO_2837xPACKAGEHERE 0x00
 

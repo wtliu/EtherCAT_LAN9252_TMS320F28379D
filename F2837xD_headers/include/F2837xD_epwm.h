@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_epwm.h
 //
-// TITLE:   EPWM Register Definitions.
+// TITLE:   F2837xD Device EPWM Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_EPWM_H__
@@ -70,10 +41,10 @@ union TBCTL_REG {
 
 struct TBCTL2_BITS {                    // bits description
     Uint16 rsvd1:5;                     // 4:0 Reserved
-    Uint16 rsvd2:1;                     // 5 Reserved
+    Uint16 SELFCLRTRREM:1;              // 5 Self clear Translator reminder
     Uint16 OSHTSYNCMODE:1;              // 6 One shot sync mode
     Uint16 OSHTSYNC:1;                  // 7 One shot sync
-    Uint16 rsvd3:4;                     // 11:8 Reserved
+    Uint16 rsvd2:4;                     // 11:8 Reserved
     Uint16 SYNCOSELX:2;                 // 13:12 Syncout selection
     Uint16 PRDLDSYNC:2;                 // 15:14 PRD Shadow to Active Load on SYNC Event
 };
@@ -201,35 +172,6 @@ union PCCTL_REG {
     struct  PCCTL_BITS  bit;
 };
 
-struct VCAPCTL_BITS {                   // bits description
-    Uint16 VCAPE:1;                     // 0 Valley  Capture mode
-    Uint16 VCAPSTART:1;                 // 1 Valley  Capture Start
-    Uint16 TRIGSEL:3;                   // 4:2 Capture Trigger Select
-    Uint16 rsvd1:2;                     // 6:5 Reserved
-    Uint16 VDELAYDIV:3;                 // 9:7 Valley Delay Mode Divide Enable
-    Uint16 EDGEFILTDLYSEL:1;            // 10 Valley Switching Mode Delay Select
-    Uint16 rsvd2:5;                     // 15:11 Reserved
-};
-
-union VCAPCTL_REG {
-    Uint16  all;
-    struct  VCAPCTL_BITS  bit;
-};
-
-struct VCNTCFG_BITS {                   // bits description
-    Uint16 STARTEDGE:4;                 // 3:0 Counter Start Edge Selection
-    Uint16 rsvd1:3;                     // 6:4 Reserved
-    Uint16 STARTEDGESTS:1;              // 7 Start Edge Status Bit
-    Uint16 STOPEDGE:4;                  // 11:8 Counter Start Edge Selection
-    Uint16 rsvd2:3;                     // 14:12 Reserved
-    Uint16 STOPEDGESTS:1;               // 15 Stop Edge Status Bit
-};
-
-union VCNTCFG_REG {
-    Uint16  all;
-    struct  VCNTCFG_BITS  bit;
-};
-
 struct HRCNFG_BITS {                    // bits description
     Uint16 EDGMODE:2;                   // 1:0 ePWMxA Edge Mode Select Bits
     Uint16 CTLMODE:1;                   // 2 ePWMxA Control Mode Select Bits
@@ -291,10 +233,10 @@ union HRCNFG2_REG {
 
 struct HRPCTL_BITS {                    // bits description
     Uint16 HRPE:1;                      // 0 High Resolution Period Enable
-    Uint16 PWMSYNCSEL:1;                // 1 PWMSYNC Source Select
-    Uint16 TBPHSHRLOADE:1;              // 2 TBPHSHR Load Enable
+    Uint16 PWMSYNCSEL:1;                // 1 PWMSYNC Source Select 
+    Uint16 TBPHSHRLOADE:1;              // 2 TBPHSHR Load Enable 
     Uint16 rsvd1:1;                     // 3 Reserved
-    Uint16 PWMSYNCSELX:3;               // 6:4 PWMSYNCX Source Select Bit:
+    Uint16 PWMSYNCSELX:3;               // 6:4 PWMSYNCX Source Select Bit: 
     Uint16 rsvd2:9;                     // 15:7 Reserved
 };
 
@@ -329,17 +271,17 @@ union GLDCTL_REG {
 };
 
 struct GLDCFG_BITS {                    // bits description
-    Uint16 TBPRD_TBPRDHR:1;             // 0 Global load event configuration for TBPRD:TBPRDHR
-    Uint16 CMPA_CMPAHR:1;               // 1 Global load event configuration for CMPA:CMPAHR
-    Uint16 CMPB_CMPBHR:1;               // 2 Global load event configuration for CMPB:CMPBHR
-    Uint16 CMPC:1;                      // 3 Global load event configuration for CMPC
-    Uint16 CMPD:1;                      // 4 Global load event configuration for CMPD
-    Uint16 DBRED_DBREDHR:1;             // 5 Global load event configuration for DBRED:DBREDHR
+    Uint16 TBPRD_TBPRDHR:1;             // 0 Global load event configuration for TBPRD:TBPRDHR 
+    Uint16 CMPA_CMPAHR:1;               // 1 Global load event configuration for CMPA:CMPAHR 
+    Uint16 CMPB_CMPBHR:1;               // 2 Global load event configuration for CMPB:CMPBHR 
+    Uint16 CMPC:1;                      // 3 Global load event configuration for CMPC 
+    Uint16 CMPD:1;                      // 4 Global load event configuration for CMPD 
+    Uint16 DBRED_DBREDHR:1;             // 5 Global load event configuration for DBRED:DBREDHR 
     Uint16 DBFED_DBFEDHR:1;             // 6 Global load event configuration for DBFED:DBFEDHR
     Uint16 DBCTL:1;                     // 7 Global load event configuration for DBCTL
-    Uint16 AQCTLA_AQCTLA2:1;            // 8 Global load event configuration for AQCTLA/A2
-    Uint16 AQCTLB_AQCTLB2:1;            // 9 Global load event configuration for AQCTLB/B2
-    Uint16 AQCSFRC:1;                   // 10 Global load event configuration for AQCSFRC
+    Uint16 AQCTLA_AQCTLA2:1;            // 8 Global load event configuration for AQCTLA/A2 
+    Uint16 AQCTLB_AQCTLB2:1;            // 9 Global load event configuration for AQCTLB/B2 
+    Uint16 AQCSFRC:1;                   // 10 Global load event configuration for AQCSFRC 
     Uint16 rsvd1:5;                     // 15:11 Reserved
 };
 
@@ -349,8 +291,8 @@ union GLDCFG_REG {
 };
 
 struct EPWMXLINK_BITS {                 // bits description
-    Uint16 TBPRDLINK:4;                 // 3:0 TBPRD:TBPRDHR  Link
-    Uint16 CMPALINK:4;                  // 7:4 CMPA:CMPAHR Link
+    Uint16 TBPRDLINK:4;                 // 3:0 TBPRD:TBPRDHR  Link 
+    Uint16 CMPALINK:4;                  // 7:4 CMPA:CMPAHR Link 
     Uint16 CMPBLINK:4;                  // 11:8 CMPB:CMPBHR Link
     Uint16 CMPCLINK:4;                  // 15:12 CMPC Link
     Uint16 CMPDLINK:4;                  // 19:16 CMPD Link
@@ -361,16 +303,6 @@ struct EPWMXLINK_BITS {                 // bits description
 union EPWMXLINK_REG {
     Uint32  all;
     struct  EPWMXLINK_BITS  bit;
-};
-
-struct EPWMREV_BITS {                   // bits description
-    Uint16 REV:8;                       // 7:0 EPWM Silicon Revision bits
-    Uint16 TYPE:8;                      // 15:8 EPWM Type Bits
-};
-
-union EPWMREV_REG {
-    Uint16  all;
-    struct  EPWMREV_BITS  bit;
 };
 
 struct AQCTLA_BITS {                    // bits description
@@ -499,7 +431,7 @@ union DBFED_REG {
 };
 
 struct TBPHS_BITS {                     // bits description
-    Uint16 TBPHSHR:16;                  // 15:0 Extension Register for HRPWM Phase (8-bits)
+    Uint16 TBPHSHR:16;                  // 15:0 Extension Register for HRPWM Phase (8-bits) 
     Uint16 TBPHS:16;                    // 31:16 Phase Offset Register
 };
 
@@ -529,8 +461,8 @@ union CMPB_REG {
 };
 
 struct GLDCTL2_BITS {                   // bits description
-    Uint16 OSHTLD:1;                    // 0 Enable reload event in one shot mode
-    Uint16 GFRCLD:1;                    // 1 Force reload event in one shot mode
+    Uint16 OSHTLD:1;                    // 0 Enable reload event in one shot mode 
+    Uint16 GFRCLD:1;                    // 1 Force reload event in one shot mode 
     Uint16 rsvd1:14;                    // 15:2 Reserved
 };
 
@@ -752,10 +684,10 @@ struct TZFRC_BITS {                     // bits description
     Uint16 rsvd1:1;                     // 0 Reserved
     Uint16 CBC:1;                       // 1 Force Trip Zones Cycle By Cycle Event
     Uint16 OST:1;                       // 2 Force Trip Zones One Shot Event
-    Uint16 DCAEVT1:1;                   // 3 Force Digital Compare A Event 1
-    Uint16 DCAEVT2:1;                   // 4 Force Digital Compare A Event 2
-    Uint16 DCBEVT1:1;                   // 5 Force Digital Compare B Event 1
-    Uint16 DCBEVT2:1;                   // 6 Force Digital Compare B Event 2
+    Uint16 DCAEVT1:1;                   // 3 Force Digital Compare A Event 1 
+    Uint16 DCAEVT2:1;                   // 4 Force Digital Compare A Event 2 
+    Uint16 DCBEVT1:1;                   // 5 Force Digital Compare B Event 1 
+    Uint16 DCBEVT2:1;                   // 6 Force Digital Compare B Event 2 
     Uint16 rsvd2:9;                     // 15:7 Reserved
 };
 
@@ -889,8 +821,8 @@ union ETCNTINIT_REG {
 };
 
 struct DCTRIPSEL_BITS {                 // bits description
-    Uint16 DCAHCOMPSEL:4;               // 3:0 Digital Compare A High COMP Input Select
-    Uint16 DCALCOMPSEL:4;               // 7:4 Digital Compare A Low COMP Input Select
+    Uint16 DCAHCOMPSEL:4;               // 3:0 Digital Compare A High COMP Input Select 
+    Uint16 DCALCOMPSEL:4;               // 7:4 Digital Compare A Low COMP Input Select 
     Uint16 DCBHCOMPSEL:4;               // 11:8 Digital Compare B High COMP Input Select
     Uint16 DCBLCOMPSEL:4;               // 15:12 Digital Compare B Low COMP Input Select
 };
@@ -905,15 +837,10 @@ struct DCACTL_BITS {                    // bits description
     Uint16 EVT1FRCSYNCSEL:1;            // 1 DCAEVT1 Force Sync Signal
     Uint16 EVT1SOCE:1;                  // 2 DCAEVT1 SOC Enable
     Uint16 EVT1SYNCE:1;                 // 3 DCAEVT1 SYNC Enable
-    Uint16 rsvd1:1;                     // 4 Reserved
-    Uint16 rsvd2:2;                     // 6:5 Reserved
-    Uint16 rsvd3:1;                     // 7 Reserved
+    Uint16 rsvd1:4;                     // 7:4 Reserved
     Uint16 EVT2SRCSEL:1;                // 8 DCAEVT2 Source Signal
     Uint16 EVT2FRCSYNCSEL:1;            // 9 DCAEVT2 Force Sync Signal
-    Uint16 rsvd4:2;                     // 11:10 Reserved
-    Uint16 rsvd5:1;                     // 12 Reserved
-    Uint16 rsvd6:2;                     // 14:13 Reserved
-    Uint16 rsvd7:1;                     // 15 Reserved
+    Uint16 rsvd2:6;                     // 15:10 Reserved
 };
 
 union DCACTL_REG {
@@ -926,15 +853,10 @@ struct DCBCTL_BITS {                    // bits description
     Uint16 EVT1FRCSYNCSEL:1;            // 1 DCBEVT1 Force Sync Signal
     Uint16 EVT1SOCE:1;                  // 2 DCBEVT1 SOC Enable
     Uint16 EVT1SYNCE:1;                 // 3 DCBEVT1 SYNC Enable
-    Uint16 rsvd1:1;                     // 4 Reserved
-    Uint16 rsvd2:2;                     // 6:5 Reserved
-    Uint16 rsvd3:1;                     // 7 Reserved
+    Uint16 rsvd1:4;                     // 7:4 Reserved
     Uint16 EVT2SRCSEL:1;                // 8 DCBEVT2 Source Signal
     Uint16 EVT2FRCSYNCSEL:1;            // 9 DCBEVT2 Force Sync Signal
-    Uint16 rsvd4:2;                     // 11:10 Reserved
-    Uint16 rsvd5:1;                     // 12 Reserved
-    Uint16 rsvd6:2;                     // 14:13 Reserved
-    Uint16 rsvd7:1;                     // 15 Reserved
+    Uint16 rsvd2:6;                     // 15:10 Reserved
 };
 
 union DCBCTL_REG {
@@ -947,11 +869,11 @@ struct DCFCTL_BITS {                    // bits description
     Uint16 BLANKE:1;                    // 2 Blanking Enable/Disable
     Uint16 BLANKINV:1;                  // 3 Blanking Window Inversion
     Uint16 PULSESEL:2;                  // 5:4 Pulse Select for Blanking & Capture Alignment
-    Uint16 EDGEFILTSEL:1;               // 6 Edge Filter Select
-    Uint16 rsvd1:1;                     // 7 Reserved
-    Uint16 EDGEMODE:2;                  // 9:8 Edge Mode
-    Uint16 EDGECOUNT:3;                 // 12:10 Edge Count
-    Uint16 EDGESTATUS:3;                // 15:13 Edge Status
+    Uint16 rsvd1:1;                     // 6 Reserved
+    Uint16 rsvd2:1;                     // 7 Reserved
+    Uint16 rsvd3:2;                     // 9:8 Reserved
+    Uint16 rsvd4:3;                     // 12:10 Reserved
+    Uint16 rsvd5:3;                     // 15:13 Reserved
 };
 
 union DCFCTL_REG {
@@ -1086,116 +1008,106 @@ struct EPWM_REGS {
     union   AQTSRCSEL_REG                    AQTSRCSEL;                    // Action Qualifier Trigger Event Source Select Register
     Uint16                                   rsvd5[2];                     // Reserved
     union   PCCTL_REG                        PCCTL;                        // PWM Chopper Control Register
-    Uint16                                   rsvd6[3];                     // Reserved
-    union   VCAPCTL_REG                      VCAPCTL;                      // Valley Capture Control Register
-    union   VCNTCFG_REG                      VCNTCFG;                      // Valley Counter Config Register
-    Uint16                                   rsvd7[6];                     // Reserved
+    Uint16                                   rsvd6[11];                    // Reserved
     union   HRCNFG_REG                       HRCNFG;                       // HRPWM Configuration Register
     union   HRPWR_REG                        HRPWR;                        // HRPWM Power Register
-    Uint16                                   rsvd8[4];                     // Reserved
+    Uint16                                   rsvd7[4];                     // Reserved
     union   HRMSTEP_REG                      HRMSTEP;                      // HRPWM MEP Step Register
     union   HRCNFG2_REG                      HRCNFG2;                      // HRPWM Configuration 2 Register
-    Uint16                                   rsvd9[5];                     // Reserved
-    union   HRPCTL_REG                       HRPCTL;                       // High Resolution Period Control Register
+    Uint16                                   rsvd8[5];                     // Reserved
+    union   HRPCTL_REG                       HRPCTL;                       // High Resolution Period Control Register 
     union   TRREM_REG                        TRREM;                        // Translator High Resolution Remainder Register
-    Uint16                                   rsvd10[5];                    // Reserved
+    Uint16                                   rsvd9[5];                     // Reserved
     union   GLDCTL_REG                       GLDCTL;                       // Global PWM Load Control Register
-    union   GLDCFG_REG                       GLDCFG;                       // Global PWM Load Config Register
-    Uint16                                   rsvd11[2];                    // Reserved
+    union   GLDCFG_REG                       GLDCFG;                       // Global PWM Load Config Register 
+    Uint16                                   rsvd10[2];                    // Reserved
     union   EPWMXLINK_REG                    EPWMXLINK;                    // EPWMx Link Register
-    Uint16                                   rsvd12[4];                    // Reserved
-    union   EPWMREV_REG                      EPWMREV;                      // EPWM Revision Register
-    Uint16                                   rsvd13;                       // Reserved
-    union   AQCTLA_REG                       AQCTLA;                       // Action Qualifier Control Register For Output A
-    union   AQCTLA2_REG                      AQCTLA2;                      // Additional Action Qualifier Control Register For Output A
-    union   AQCTLB_REG                       AQCTLB;                       // Action Qualifier Control Register For Output B
-    union   AQCTLB2_REG                      AQCTLB2;                      // Additional Action Qualifier Control Register For Output B
-    Uint16                                   rsvd14[3];                    // Reserved
+    Uint16                                   rsvd11[6];                    // Reserved
+    union   AQCTLA_REG                       AQCTLA;                       // Action Qualifier Control Register For Output A 
+    union   AQCTLA2_REG                      AQCTLA2;                      // Additional Action Qualifier Control Register For Output A 
+    union   AQCTLB_REG                       AQCTLB;                       // Action Qualifier Control Register For Output B 
+    union   AQCTLB2_REG                      AQCTLB2;                      // Additional Action Qualifier Control Register For Output B 
+    Uint16                                   rsvd12[3];                    // Reserved
     union   AQSFRC_REG                       AQSFRC;                       // Action Qualifier Software Force Register
-    Uint16                                   rsvd15;                       // Reserved
-    union   AQCSFRC_REG                      AQCSFRC;                      // Action Qualifier Continuous S/W Force Register
-    Uint16                                   rsvd16[6];                    // Reserved
-    union   DBREDHR_REG                      DBREDHR;                      // Dead-Band Generator Rising Edge Delay High Resolution Mirror Register
-    union   DBRED_REG                        DBRED;                        // Dead-Band Generator Rising Edge Delay High Resolution Mirror Register
-    union   DBFEDHR_REG                      DBFEDHR;                      // Dead-Band Generator Falling Edge Delay High Resolution Register
+    Uint16                                   rsvd13;                       // Reserved
+    union   AQCSFRC_REG                      AQCSFRC;                      // Action Qualifier Continuous S/W Force Register 
+    Uint16                                   rsvd14[6];                    // Reserved
+    union   DBREDHR_REG                      DBREDHR;                      // Dead-Band Generator Rising Edge Delay High Resolution Mirror Register 
+    union   DBRED_REG                        DBRED;                        // Dead-Band Generator Rising Edge Delay High Resolution Mirror Register 
+    union   DBFEDHR_REG                      DBFEDHR;                      // Dead-Band Generator Falling Edge Delay High Resolution Register 
     union   DBFED_REG                        DBFED;                        // Dead-Band Generator Falling Edge Delay Count Register
-    Uint16                                   rsvd17[12];                   // Reserved
+    Uint16                                   rsvd15[12];                   // Reserved
     union   TBPHS_REG                        TBPHS;                        // Time Base Phase High
-    Uint16                                   TBPRDHR;                      // Time Base Period High Resolution Register
-    Uint16                                   TBPRD;                        // Time Base Period Register
-    Uint16                                   rsvd18[6];                    // Reserved
-    union   CMPA_REG                         CMPA;                         // Counter Compare A Register
-    union   CMPB_REG                         CMPB;                         // Compare B Register
-    Uint16                                   rsvd19;                       // Reserved
+    Uint16                                   TBPRDHR;                      // Time Base Period High Resolution Register 
+    Uint16                                   TBPRD;                        // Time Base Period Register 
+    Uint16                                   rsvd16[6];                    // Reserved
+    union   CMPA_REG                         CMPA;                         // Counter Compare A Register 
+    union   CMPB_REG                         CMPB;                         // Compare B Register 
+    Uint16                                   rsvd17;                       // Reserved
     Uint16                                   CMPC;                         // Counter Compare C Register
-    Uint16                                   rsvd20;                       // Reserved
+    Uint16                                   rsvd18;                       // Reserved
     Uint16                                   CMPD;                         // Counter Compare D Register
-    Uint16                                   rsvd21[2];                    // Reserved
+    Uint16                                   rsvd19[2];                    // Reserved
     union   GLDCTL2_REG                      GLDCTL2;                      // Global PWM Load Control Register 2
-    Uint16                                   rsvd22[2];                    // Reserved
-    Uint16                                   SWVDELVAL;                    // Software Valley Mode Delay Register
-    Uint16                                   rsvd23[8];                    // Reserved
-    union   TZSEL_REG                        TZSEL;                        // Trip Zone Select Register
-    Uint16                                   rsvd24;                       // Reserved
+    Uint16                                   rsvd20[11];                   // Reserved
+    union   TZSEL_REG                        TZSEL;                        // Trip Zone Select Register 
+    Uint16                                   rsvd21;                       // Reserved
     union   TZDCSEL_REG                      TZDCSEL;                      // Trip Zone Digital Comparator Select Register
-    Uint16                                   rsvd25;                       // Reserved
+    Uint16                                   rsvd22;                       // Reserved
     union   TZCTL_REG                        TZCTL;                        // Trip Zone Control Register
     union   TZCTL2_REG                       TZCTL2;                       // Additional Trip Zone Control Register
-    union   TZCTLDCA_REG                     TZCTLDCA;                     // Trip Zone Control Register Digital Compare A
-    union   TZCTLDCB_REG                     TZCTLDCB;                     // Trip Zone Control Register Digital Compare B
-    Uint16                                   rsvd26[5];                    // Reserved
+    union   TZCTLDCA_REG                     TZCTLDCA;                     // Trip Zone Control Register Digital Compare A 
+    union   TZCTLDCB_REG                     TZCTLDCB;                     // Trip Zone Control Register Digital Compare B 
+    Uint16                                   rsvd23[5];                    // Reserved
     union   TZEINT_REG                       TZEINT;                       // Trip Zone Enable Interrupt Register
-    Uint16                                   rsvd27[5];                    // Reserved
+    Uint16                                   rsvd24[5];                    // Reserved
     union   TZFLG_REG                        TZFLG;                        // Trip Zone Flag Register
     union   TZCBCFLG_REG                     TZCBCFLG;                     // Trip Zone CBC Flag Register
     union   TZOSTFLG_REG                     TZOSTFLG;                     // Trip Zone OST Flag Register
-    Uint16                                   rsvd28;                       // Reserved
+    Uint16                                   rsvd25;                       // Reserved
     union   TZCLR_REG                        TZCLR;                        // Trip Zone Clear Register
     union   TZCBCCLR_REG                     TZCBCCLR;                     // Trip Zone CBC Clear Register
     union   TZOSTCLR_REG                     TZOSTCLR;                     // Trip Zone OST Clear Register
-    Uint16                                   rsvd29;                       // Reserved
+    Uint16                                   rsvd26;                       // Reserved
     union   TZFRC_REG                        TZFRC;                        // Trip Zone Force Register
-    Uint16                                   rsvd30[8];                    // Reserved
+    Uint16                                   rsvd27[8];                    // Reserved
     union   ETSEL_REG                        ETSEL;                        // Event Trigger Selection Register
-    Uint16                                   rsvd31;                       // Reserved
+    Uint16                                   rsvd28;                       // Reserved
     union   ETPS_REG                         ETPS;                         // Event Trigger Pre-Scale Register
-    Uint16                                   rsvd32;                       // Reserved
+    Uint16                                   rsvd29;                       // Reserved
     union   ETFLG_REG                        ETFLG;                        // Event Trigger Flag Register
-    Uint16                                   rsvd33;                       // Reserved
+    Uint16                                   rsvd30;                       // Reserved
     union   ETCLR_REG                        ETCLR;                        // Event Trigger Clear Register
-    Uint16                                   rsvd34;                       // Reserved
+    Uint16                                   rsvd31;                       // Reserved
     union   ETFRC_REG                        ETFRC;                        // Event Trigger Force Register
-    Uint16                                   rsvd35;                       // Reserved
+    Uint16                                   rsvd32;                       // Reserved
     union   ETINTPS_REG                      ETINTPS;                      // Event-Trigger Interrupt Pre-Scale Register
-    Uint16                                   rsvd36;                       // Reserved
+    Uint16                                   rsvd33;                       // Reserved
     union   ETSOCPS_REG                      ETSOCPS;                      // Event-Trigger SOC Pre-Scale Register
-    Uint16                                   rsvd37;                       // Reserved
+    Uint16                                   rsvd34;                       // Reserved
     union   ETCNTINITCTL_REG                 ETCNTINITCTL;                 // Event-Trigger Counter Initialization Control Register
-    Uint16                                   rsvd38;                       // Reserved
+    Uint16                                   rsvd35;                       // Reserved
     union   ETCNTINIT_REG                    ETCNTINIT;                    // Event-Trigger Counter Initialization Register
-    Uint16                                   rsvd39[11];                   // Reserved
+    Uint16                                   rsvd36[11];                   // Reserved
     union   DCTRIPSEL_REG                    DCTRIPSEL;                    // Digital Compare Trip Select Register
-    Uint16                                   rsvd40[2];                    // Reserved
+    Uint16                                   rsvd37[2];                    // Reserved
     union   DCACTL_REG                       DCACTL;                       // Digital Compare A Control Register
     union   DCBCTL_REG                       DCBCTL;                       // Digital Compare B Control Register
-    Uint16                                   rsvd41[2];                    // Reserved
+    Uint16                                   rsvd38[2];                    // Reserved
     union   DCFCTL_REG                       DCFCTL;                       // Digital Compare Filter Control Register
     union   DCCAPCTL_REG                     DCCAPCTL;                     // Digital Compare Capture Control Register
-    Uint16                                   DCFOFFSET;                    // Digital Compare Filter Offset Register
+    Uint16                                   DCFOFFSET;                    // Digital Compare Filter Offset Register 
     Uint16                                   DCFOFFSETCNT;                 // Digital Compare Filter Offset Counter Register
     Uint16                                   DCFWINDOW;                    // Digital Compare Filter Window Register
     Uint16                                   DCFWINDOWCNT;                 // Digital Compare Filter Window Counter Register
-    Uint16                                   rsvd42[2];                    // Reserved
-    Uint16                                   DCCAP;                        // Digital Compare Counter Capture Register
-    Uint16                                   rsvd43[2];                    // Reserved
-    union   DCAHTRIPSEL_REG                  DCAHTRIPSEL;                  // Digital Compare AH Trip Select
-    union   DCALTRIPSEL_REG                  DCALTRIPSEL;                  // Digital Compare AL Trip Select
-    union   DCBHTRIPSEL_REG                  DCBHTRIPSEL;                  // Digital Compare BH Trip Select
-    union   DCBLTRIPSEL_REG                  DCBLTRIPSEL;                  // Digital Compare BL Trip Select
-    Uint16                                   rsvd44[39];                   // Reserved
-    Uint16                                   HWVDELVAL;                    // Hardware Valley Mode Delay Register
-    Uint16                                   VCNTVAL;                      // Hardware Valley Counter Register
-    Uint16                                   rsvd45;                       // Reserved
+    Uint16                                   rsvd39[2];                    // Reserved
+    Uint16                                   DCCAP;                        // Digital Compare Counter Capture Register 
+    Uint16                                   rsvd40[2];                    // Reserved
+    union   DCAHTRIPSEL_REG                  DCAHTRIPSEL;                  // Digital Compare AH Trip Select 
+    union   DCALTRIPSEL_REG                  DCALTRIPSEL;                  // Digital Compare AL Trip Select 
+    union   DCBHTRIPSEL_REG                  DCBHTRIPSEL;                  // Digital Compare BH Trip Select 
+    union   DCBLTRIPSEL_REG                  DCBLTRIPSEL;                  // Digital Compare BL Trip Select 
+    Uint16                                   rsvd41[42];                   // Reserved
 };
 
 //---------------------------------------------------------------------------

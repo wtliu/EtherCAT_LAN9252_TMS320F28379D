@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_adc.h
 //
-// TITLE:   ADC Register Definitions.
+// TITLE:   F2837xD Device ADC Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_ADC_H__
@@ -322,11 +293,11 @@ union ADCSOCOVFCLR1_REG {
 };
 
 struct ADCSOC0CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC0 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC0 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC0 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -336,11 +307,11 @@ union ADCSOC0CTL_REG {
 };
 
 struct ADCSOC1CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC1 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC1 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC1 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -350,11 +321,11 @@ union ADCSOC1CTL_REG {
 };
 
 struct ADCSOC2CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC2 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC2 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC2 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -364,11 +335,11 @@ union ADCSOC2CTL_REG {
 };
 
 struct ADCSOC3CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC3 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC3 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC3 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -378,11 +349,11 @@ union ADCSOC3CTL_REG {
 };
 
 struct ADCSOC4CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC4 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC4 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC4 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -392,11 +363,11 @@ union ADCSOC4CTL_REG {
 };
 
 struct ADCSOC5CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC5 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC5 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC5 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -406,11 +377,11 @@ union ADCSOC5CTL_REG {
 };
 
 struct ADCSOC6CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC6 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC6 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC6 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -420,11 +391,11 @@ union ADCSOC6CTL_REG {
 };
 
 struct ADCSOC7CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC7 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC7 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC7 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -434,11 +405,11 @@ union ADCSOC7CTL_REG {
 };
 
 struct ADCSOC8CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC8 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC8 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC8 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -448,11 +419,11 @@ union ADCSOC8CTL_REG {
 };
 
 struct ADCSOC9CTL_BITS {                // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC9 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC9 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC9 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -462,11 +433,11 @@ union ADCSOC9CTL_REG {
 };
 
 struct ADCSOC10CTL_BITS {               // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC10 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC10 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC10 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -476,11 +447,11 @@ union ADCSOC10CTL_REG {
 };
 
 struct ADCSOC11CTL_BITS {               // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC11 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC11 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC11 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -490,11 +461,11 @@ union ADCSOC11CTL_REG {
 };
 
 struct ADCSOC12CTL_BITS {               // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC12 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC12 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC12 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -504,11 +475,11 @@ union ADCSOC12CTL_REG {
 };
 
 struct ADCSOC13CTL_BITS {               // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC13 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC13 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC13 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -518,11 +489,11 @@ union ADCSOC13CTL_REG {
 };
 
 struct ADCSOC14CTL_BITS {               // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC14 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC14 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC14 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -532,11 +503,11 @@ union ADCSOC14CTL_REG {
 };
 
 struct ADCSOC15CTL_BITS {               // bits description
-    Uint16 ACQPS:9;                     // 8:0 SOC15 Acquisition Prescale
+    Uint16 ACQPS:9;                     // 8:0 SOC Acquisition Prescale
     Uint16 rsvd1:6;                     // 14:9 Reserved
-    Uint32 CHSEL:4;                     // 18:15 SOC15 Channel Select
+    Uint32 CHSEL:4;                     // 18:15 SOC Channel Select
     Uint16 rsvd2:1;                     // 19 Reserved
-    Uint16 TRIGSEL:5;                   // 24:20 SOC15 Trigger Source Select
+    Uint16 TRIGSEL:5;                   // 24:20 SOC Trigger Source Select
     Uint16 rsvd3:7;                     // 31:25 Reserved
 };
 
@@ -672,10 +643,9 @@ union ADCOFFTRIM_REG {
 };
 
 struct ADCPPB1CONFIG_BITS {             // bits description
-    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block 1 Configuration
-    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block 1 Two's Complement Enable
-    Uint16 rsvd1:1;                     // 5 Reserved
-    Uint16 rsvd2:10;                    // 15:6 Reserved
+    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block Configuration
+    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block Two's Complement Enable
+    Uint16 rsvd1:11;                    // 15:5 Reserved
 };
 
 union ADCPPB1CONFIG_REG {
@@ -684,7 +654,7 @@ union ADCPPB1CONFIG_REG {
 };
 
 struct ADCPPB1STAMP_BITS {              // bits description
-    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block 1 Delay Time Stamp
+    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block Delay Time Stamp
     Uint16 rsvd1:4;                     // 15:12 Reserved
 };
 
@@ -704,7 +674,7 @@ union ADCPPB1OFFCAL_REG {
 };
 
 struct ADCPPB1TRIPHI_BITS {             // bits description
-    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block 1 Trip High Limit
+    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block Trip High Limit
     Uint16 HSIGN:1;                     // 16 High Limit Sign Bit
     Uint16 rsvd1:15;                    // 31:17 Reserved
 };
@@ -715,10 +685,10 @@ union ADCPPB1TRIPHI_REG {
 };
 
 struct ADCPPB1TRIPLO_BITS {             // bits description
-    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block 1 Trip Low Limit
+    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block Trip Low Limit
     Uint16 LSIGN:1;                     // 16 Low Limit Sign Bit
     Uint16 rsvd1:3;                     // 19:17 Reserved
-    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block 1 Request Time Stamp
+    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block Request Time Stamp
 };
 
 union ADCPPB1TRIPLO_REG {
@@ -727,10 +697,9 @@ union ADCPPB1TRIPLO_REG {
 };
 
 struct ADCPPB2CONFIG_BITS {             // bits description
-    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block 2 Configuration
-    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block 2 Two's Complement Enable
-    Uint16 rsvd1:1;                     // 5 Reserved
-    Uint16 rsvd2:10;                    // 15:6 Reserved
+    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block Configuration
+    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block Two's Complement Enable
+    Uint16 rsvd1:11;                    // 15:5 Reserved
 };
 
 union ADCPPB2CONFIG_REG {
@@ -739,7 +708,7 @@ union ADCPPB2CONFIG_REG {
 };
 
 struct ADCPPB2STAMP_BITS {              // bits description
-    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block 2 Delay Time Stamp
+    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block Delay Time Stamp
     Uint16 rsvd1:4;                     // 15:12 Reserved
 };
 
@@ -759,7 +728,7 @@ union ADCPPB2OFFCAL_REG {
 };
 
 struct ADCPPB2TRIPHI_BITS {             // bits description
-    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block 2 Trip High Limit
+    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block Trip High Limit
     Uint16 HSIGN:1;                     // 16 High Limit Sign Bit
     Uint16 rsvd1:15;                    // 31:17 Reserved
 };
@@ -770,10 +739,10 @@ union ADCPPB2TRIPHI_REG {
 };
 
 struct ADCPPB2TRIPLO_BITS {             // bits description
-    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block 2 Trip Low Limit
+    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block Trip Low Limit
     Uint16 LSIGN:1;                     // 16 Low Limit Sign Bit
     Uint16 rsvd1:3;                     // 19:17 Reserved
-    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block 2 Request Time Stamp
+    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block Request Time Stamp
 };
 
 union ADCPPB2TRIPLO_REG {
@@ -782,10 +751,9 @@ union ADCPPB2TRIPLO_REG {
 };
 
 struct ADCPPB3CONFIG_BITS {             // bits description
-    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block 3 Configuration
-    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block 3 Two's Complement Enable
-    Uint16 rsvd1:1;                     // 5 Reserved
-    Uint16 rsvd2:10;                    // 15:6 Reserved
+    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block Configuration
+    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block Two's Complement Enable
+    Uint16 rsvd1:11;                    // 15:5 Reserved
 };
 
 union ADCPPB3CONFIG_REG {
@@ -794,7 +762,7 @@ union ADCPPB3CONFIG_REG {
 };
 
 struct ADCPPB3STAMP_BITS {              // bits description
-    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block 3 Delay Time Stamp
+    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block Delay Time Stamp
     Uint16 rsvd1:4;                     // 15:12 Reserved
 };
 
@@ -814,7 +782,7 @@ union ADCPPB3OFFCAL_REG {
 };
 
 struct ADCPPB3TRIPHI_BITS {             // bits description
-    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block 3 Trip High Limit
+    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block Trip High Limit
     Uint16 HSIGN:1;                     // 16 High Limit Sign Bit
     Uint16 rsvd1:15;                    // 31:17 Reserved
 };
@@ -825,10 +793,10 @@ union ADCPPB3TRIPHI_REG {
 };
 
 struct ADCPPB3TRIPLO_BITS {             // bits description
-    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block 3 Trip Low Limit
+    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block Trip Low Limit
     Uint16 LSIGN:1;                     // 16 Low Limit Sign Bit
     Uint16 rsvd1:3;                     // 19:17 Reserved
-    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block 3 Request Time Stamp
+    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block Request Time Stamp
 };
 
 union ADCPPB3TRIPLO_REG {
@@ -837,10 +805,9 @@ union ADCPPB3TRIPLO_REG {
 };
 
 struct ADCPPB4CONFIG_BITS {             // bits description
-    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block 4 Configuration
-    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block 4 Two's Complement Enable
-    Uint16 rsvd1:1;                     // 5 Reserved
-    Uint16 rsvd2:10;                    // 15:6 Reserved
+    Uint16 CONFIG:4;                    // 3:0 ADC Post Processing Block Configuration
+    Uint16 TWOSCOMPEN:1;                // 4 ADC Post Processing Block Two's Complement Enable
+    Uint16 rsvd1:11;                    // 15:5 Reserved
 };
 
 union ADCPPB4CONFIG_REG {
@@ -849,7 +816,7 @@ union ADCPPB4CONFIG_REG {
 };
 
 struct ADCPPB4STAMP_BITS {              // bits description
-    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block 4 Delay Time Stamp
+    Uint16 DLYSTAMP:12;                 // 11:0 ADC Post Processing Block Delay Time Stamp
     Uint16 rsvd1:4;                     // 15:12 Reserved
 };
 
@@ -869,7 +836,7 @@ union ADCPPB4OFFCAL_REG {
 };
 
 struct ADCPPB4TRIPHI_BITS {             // bits description
-    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block 4 Trip High Limit
+    Uint16 LIMITHI:16;                  // 15:0 ADC Post Processing Block Trip High Limit
     Uint16 HSIGN:1;                     // 16 High Limit Sign Bit
     Uint16 rsvd1:15;                    // 31:17 Reserved
 };
@@ -880,10 +847,10 @@ union ADCPPB4TRIPHI_REG {
 };
 
 struct ADCPPB4TRIPLO_BITS {             // bits description
-    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block 4 Trip Low Limit
+    Uint16 LIMITLO:16;                  // 15:0 ADC Post Processing Block Trip Low Limit
     Uint16 LSIGN:1;                     // 16 Low Limit Sign Bit
     Uint16 rsvd1:3;                     // 19:17 Reserved
-    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block 4 Request Time Stamp
+    Uint16 REQSTAMP:12;                 // 31:20 ADC Post Processing Block Request Time Stamp
 };
 
 union ADCPPB4TRIPLO_REG {

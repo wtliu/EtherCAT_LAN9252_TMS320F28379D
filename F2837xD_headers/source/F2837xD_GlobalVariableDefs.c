@@ -5,42 +5,13 @@
 // TITLE:   F2837xD Global Variables and Data Section Pragmas.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v200 $
+// $Release Date: Tue Jun 21 13:00:02 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
-#include "../../F2837xD_headers/include/F2837xD_device.h"     // F2837xD Headerfile Include File
+#include "F2837xD_device.h"     // F2837xD Headerfile Include File
 
 //---------------------------------------------------------------------------
 // Define Global Peripheral Variables:
@@ -116,23 +87,6 @@ volatile struct ADC_RESULT_REGS AdcdResultRegs;
 volatile struct ANALOG_SUBSYS_REGS AnalogSubsysRegs;
 #endif
 
-#if __TI_COMPILER_VERSION__ >= 16006000
-//----------------------------------------
-#ifdef __cplusplus
-#pragma DATA_SECTION("CanaRegsFile")
-#else
-#pragma DATA_SECTION(CanaRegs,"CanaRegsFile");
-#endif
-volatile struct CAN_REGS CanaRegs;
-
-//----------------------------------------
-#ifdef __cplusplus
-#pragma DATA_SECTION("CanbRegsFile")
-#else
-#pragma DATA_SECTION(CanbRegs,"CanbRegsFile");
-#endif
-volatile struct CAN_REGS CanbRegs;
-#endif
 
 //----------------------------------------
 #ifdef __cplusplus
@@ -299,6 +253,22 @@ volatile struct DCSM_Z2_REGS DcsmZ2Regs;
 #pragma DATA_SECTION(DcsmCommonRegs,"DcsmCommonRegsFile");
 #endif
 volatile struct DCSM_COMMON_REGS DcsmCommonRegs;
+
+//----------------------------------------
+#ifdef __cplusplus
+#pragma DATA_SECTION("DcsmZ1OtpFile")
+#else
+#pragma DATA_SECTION(DcsmZ1Otp,"DcsmZ1OtpFile");
+#endif
+volatile struct DCSM_Z1_OTP DcsmZ1Otp;
+
+//----------------------------------------
+#ifdef __cplusplus
+#pragma DATA_SECTION("DcsmZ2OtpFile")
+#else
+#pragma DATA_SECTION(DcsmZ2Otp,"DcsmZ2OtpFile");
+#endif
+volatile struct DCSM_Z2_OTP DcsmZ2Otp;
 
 //----------------------------------------
 #ifdef __cplusplus
@@ -835,23 +805,23 @@ volatile struct WD_REGS WdRegs;
 #endif
 volatile struct XINT_REGS XintRegs;
 
+
+
 //--------------------------------------
+#ifdef __cplusplus
+#pragma DATA_SECTION("EmuKeyVar");
+#else
+#pragma DATA_SECTION(EmuKey,"EmuKeyVar");
+#endif
+Uint16 EmuKey;
+
+//----------------------------------------
 #ifdef __cplusplus
 #pragma DATA_SECTION("EmuBModeVar");
 #else
 #pragma DATA_SECTION(EmuBMode,"EmuBModeVar");
 #endif
 Uint16 EmuBMode;
-
-//----------------------------------------
-#ifdef CPU1
-#ifdef __cplusplus
-#pragma DATA_SECTION("EmuBootPinsVar");
-#else
-#pragma DATA_SECTION(EmuBootPins,"EmuBootPinsVar");
-#endif
-Uint16 EmuBootPins;
-#endif
 
 //----------------------------------------
 #ifdef __cplusplus

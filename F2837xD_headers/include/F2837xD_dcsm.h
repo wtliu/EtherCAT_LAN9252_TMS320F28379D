@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_dcsm.h
 //
-// TITLE:   DCSM Register Definitions.
+// TITLE:   F2837xD Device DCSM Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_DCSM_H__
@@ -50,6 +21,34 @@ extern "C" {
 
 //---------------------------------------------------------------------------
 // DCSM Individual Register Bit Definitions:
+
+struct DCSM_Z1_OTP {
+    Uint32                                   Z1OTP_LINKPOINTER1;           // Zone 1 Link Pointer1 in Z1 OTP
+    Uint16                                   rsvd1[2];                     // Reserved
+    Uint32                                   Z1OTP_LINKPOINTER2;           // Zone 1 Link Pointer2 in Z1 OTP
+    Uint16                                   rsvd2[2];                     // Reserved
+    Uint32                                   Z1OTP_LINKPOINTER3;           // Zone 1 Link Pointer3 in Z1 OTP
+    Uint16                                   rsvd3[6];                     // Reserved
+    Uint32                                   Z1OTP_PSWDLOCK;               // Secure Password Lock in Z1 OTP
+    Uint16                                   rsvd4[2];                     // Reserved
+    Uint32                                   Z1OTP_CRCLOCK;                // Secure CRC Lock in Z1 OTP
+    Uint16                                   rsvd5[8];                     // Reserved
+    Uint32                                   Z1OTP_BOOTCTRL;               // Boot Mode in Z1 OTP
+};
+
+struct DCSM_Z2_OTP {
+    Uint32                                   Z2OTP_LINKPOINTER1;           // Zone 2 Link Pointer1 in Z2 OTP
+    Uint16                                   rsvd1[2];                     // Reserved
+    Uint32                                   Z2OTP_LINKPOINTER2;           // Zone 2 Link Pointer2 in Z2 OTP
+    Uint16                                   rsvd2[2];                     // Reserved
+    Uint32                                   Z2OTP_LINKPOINTER3;           // Zone 2 Link Pointer3 in Z2 OTP
+    Uint16                                   rsvd3[6];                     // Reserved
+    Uint32                                   Z2OTP_PSWDLOCK;               // Secure Password Lock in Z2 OTP
+    Uint16                                   rsvd4[2];                     // Reserved
+    Uint32                                   Z2OTP_CRCLOCK;                // Secure CRC Lock in Z2 OTP
+    Uint16                                   rsvd5[8];                     // Reserved
+    Uint32                                   Z2OTP_BOOTCTRL;               // Boot Mode in Z2 OTP
+};
 
 struct Z1_LINKPOINTER_BITS {            // bits description
     Uint32 LINKPOINTER:29;              // 28:0 Zone1 LINK Pointer.
@@ -149,10 +148,10 @@ struct Z1_EXEONLYSECTR_BITS {           // bits description
     Uint16 EXEONLY_SECTA:1;             // 0 Execute-Only Flash Sector A
     Uint16 EXEONLY_SECTB:1;             // 1 Execute-Only Flash Sector B
     Uint16 EXEONLY_SECTC:1;             // 2 Execute-Only Flash Sector C
-    Uint16 EXEONLY_SECTD:1;             // 3 Execute-Only Flash Sector D
+    Uint16 EXEONLY_SECTD:1;             // 3 Execute-Only Flash Sector D 
     Uint16 EXEONLY_SECTE:1;             // 4 Execute-Only Flash Sector E
-    Uint16 EXEONLY_SECTF:1;             // 5 Execute-Only Flash Sector F
-    Uint16 EXEONLY_SECTG:1;             // 6 Execute-Only Flash Sector G
+    Uint16 EXEONLY_SECTF:1;             // 5 Execute-Only Flash Sector F 
+    Uint16 EXEONLY_SECTG:1;             // 6 Execute-Only Flash Sector G 
     Uint16 EXEONLY_SECTH:1;             // 7 Execute-Only Flash Sector H
     Uint16 EXEONLY_SECTI:1;             // 8 Execute-Only Flash Sector I
     Uint16 EXEONLY_SECTJ:1;             // 9 Execute-Only Flash Sector J
@@ -305,10 +304,10 @@ struct Z2_EXEONLYSECTR_BITS {           // bits description
     Uint16 EXEONLY_SECTA:1;             // 0 Execute-Only Flash Sector A
     Uint16 EXEONLY_SECTB:1;             // 1 Execute-Only Flash Sector B
     Uint16 EXEONLY_SECTC:1;             // 2 Execute-Only Flash Sector C
-    Uint16 EXEONLY_SECTD:1;             // 3 Execute-Only Flash Sector D
+    Uint16 EXEONLY_SECTD:1;             // 3 Execute-Only Flash Sector D 
     Uint16 EXEONLY_SECTE:1;             // 4 Execute-Only Flash Sector E
-    Uint16 EXEONLY_SECTF:1;             // 5 Execute-Only Flash Sector F
-    Uint16 EXEONLY_SECTG:1;             // 6 Execute-Only Flash Sector G
+    Uint16 EXEONLY_SECTF:1;             // 5 Execute-Only Flash Sector F 
+    Uint16 EXEONLY_SECTG:1;             // 6 Execute-Only Flash Sector G 
     Uint16 EXEONLY_SECTH:1;             // 7 Execute-Only Flash Sector H
     Uint16 EXEONLY_SECTI:1;             // 8 Execute-Only Flash Sector I
     Uint16 EXEONLY_SECTJ:1;             // 9 Execute-Only Flash Sector J
@@ -379,10 +378,10 @@ struct SECTSTAT_BITS {                  // bits description
     Uint16 STATUS_SECTA:2;              // 1:0 Zone Status Flash Sector A
     Uint16 STATUS_SECTB:2;              // 3:2 Zone Status Flash Sector B
     Uint16 STATUS_SECTC:2;              // 5:4 Zone Status Flash Sector C
-    Uint16 STATUS_SECTD:2;              // 7:6 Zone Status Flash Sector D
+    Uint16 STATUS_SECTD:2;              // 7:6 Zone Status Flash Sector D 
     Uint16 STATUS_SECTE:2;              // 9:8 Zone Status Flash Sector E
-    Uint16 STATUS_SECTF:2;              // 11:10 Zone Status Flash Sector F
-    Uint16 STATUS_SECTG:2;              // 13:12 Zone Status Flash Sector G
+    Uint16 STATUS_SECTF:2;              // 11:10 Zone Status Flash Sector F 
+    Uint16 STATUS_SECTG:2;              // 13:12 Zone Status Flash Sector G 
     Uint16 STATUS_SECTH:2;              // 15:14 Zone Status Flash Sector H
     Uint16 STATUS_SECTI:2;              // 17:16 Zone Status Flash Sector I
     Uint16 STATUS_SECTJ:2;              // 19:18 Zone Status Flash Sector J

@@ -9,20 +9,20 @@
 //         Example initialization of system resources.
 //
 //###########################################################################
+// $TI Release: F2837xD Support Library v200 $
+// $Release Date: Tue Jun 21 13:00:02 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
+//###########################################################################
 
 //
 // Included Files
 //
 #include "F2837xD_device.h"
 #include "F2837xD_Examples.h"
-#ifdef __cplusplus
-using std::memcpy;
-#endif
 
 #define STATUS_FAIL          0
 #define STATUS_SUCCESS       1
-#define TMR1SYSCLKCTR        0xF0000000
-#define TMR2INPCLKCTR        0x800
 
 //
 // Functions that will be run from RAM need to be assigned to a different
@@ -31,20 +31,13 @@ using std::memcpy;
 //
 //      *IMPORTANT*
 //
-//  IF RUNNING FROM FLASH, PLEASE COPY OVER THE SECTION ".TI.ramfunc" FROM
-//  FLASH TO RAM PRIOR TO CALLING InitSysCtrl(). THIS PREVENTS THE MCU FROM
-//  THROWING AN EXCEPTION WHEN A CALL TO DELAY_US() IS MADE.
+//  IF RUNNING FROM FLASH, PLEASE COPY OVER THE SECTION "ramfuncs"  FROM FLASH
+//  TO RAM PRIOR TO CALLING InitSysCtrl(). THIS PREVENTS THE MCU FROM THROWING
+//  AN EXCEPTION WHEN A CALL TO DELAY_US() IS MADE.
 //
 #ifndef __cplusplus
-    #ifdef __TI_COMPILER_VERSION__
-        #if __TI_COMPILER_VERSION__ >= 15009000
-            #pragma CODE_SECTION(InitFlash, ".TI.ramfunc");
-            #pragma CODE_SECTION(FlashOff, ".TI.ramfunc");
-        #else
-            #pragma CODE_SECTION(InitFlash, "ramfuncs");
-            #pragma CODE_SECTION(FlashOff, "ramfuncs");
-        #endif
-    #endif
+#pragma CODE_SECTION(InitFlash, "ramfuncs");
+#pragma CODE_SECTION(FlashOff, "ramfuncs");
 #endif
 
 //
@@ -52,28 +45,55 @@ using std::memcpy;
 //
 void InitSysCtrl(void)
 {
-//失能看门狗
+    //
+    // Disable the watchdog
+    //
     DisableDog();
 
 #ifdef _FLASH
- //复制函数到RAM中
+    //
+    // Copy time critical code and Flash setup code to RAM. This includes the
+    // following functions: InitFlash()
+    //
+    // The  RamfuncsLoadStart, RamfuncsLoadSize, and RamfuncsRunStart
+    // symbols are created by the linker. Refer to the device .cmd file.
+    //
     memcpy(&RamfuncsRunStart, &RamfuncsLoadStart, (size_t)&RamfuncsLoadSize);
+
+    //
+    // Call Flash Initialization to setup flash waitstates. This function must
+    // reside in RAM.
+    //
     InitFlash();
 #endif
+
     //
-    //      *重要*
-    //   复制ADC和振荡器校准
+    //      *IMPORTANT*
+    //
+    // The Device_cal function, which copies the ADC & oscillator calibration
+    // values from TI reserved OTP into the appropriate trim registers, occurs
+    // automatically in the Boot ROM. If the boot ROM code is bypassed during
+    // the debug process, the following function MUST be called for the ADC and
+    // oscillators to function according to specification. The clocks to the
+    // ADC MUST be enabled before calling this function.
+    //
+    // See the device data manual and/or the ADC Reference Manual for more
+    // information.
+    //
 #ifdef CPU1
     EALLOW;
-    //
-    //尽快启用未绑定IO上的上拉电路，以降低功耗
 
+    //
+    // Enable pull-ups on unbonded IOs as soon as possible to reduce power
+    // consumption.
+    //
     GPIO_EnableUnbondedIOPullups();
 
     CpuSysRegs.PCLKCR13.bit.ADC_A = 1;
     CpuSysRegs.PCLKCR13.bit.ADC_B = 1;
     CpuSysRegs.PCLKCR13.bit.ADC_C = 1;
     CpuSysRegs.PCLKCR13.bit.ADC_D = 1;
+
     //
     // Check if device is trimmed
     //
@@ -107,15 +127,17 @@ void InitSysCtrl(void)
 #ifdef _LAUNCHXL_F28379D
     InitSysPll(XTAL_OSC,IMULT_40,FMULT_0,PLLCLK_BY_2);
 #else
-    InitSysPll(INT_OSC1, IMULT_40, FMULT_0, PLLCLK_BY_2);
+    InitSysPll(XTAL_OSC, IMULT_20, FMULT_0, PLLCLK_BY_2);
 #endif // _LAUNCHXL_F28379D
+
 #endif // CPU1
 
     //
-    // 所有外设时钟使能
+    // Turn on all peripherals
     //
     InitPeripheralClocks();
 }
+
 //
 // InitPeripheralClocks - Initializes the clocks for the peripherals.
 //
@@ -250,24 +272,15 @@ void DisablePeripheralClocks(void)
 // will yield unpredictable results.
 //
 #ifdef __cplusplus
-    #ifdef __TI_COMPILER_VERSION__
-        #if __TI_COMPILER_VERSION__ >= 15009000
-            #pragma CODE_SECTION(".TI.ramfunc");
-        #else
-            #pragma CODE_SECTION("ramfuncs");
-        #endif
-    #endif
+#pragma CODE_SECTION("ramfuncs");
 #endif
 void InitFlash(void)
 {
     EALLOW;
 
     //
-    // The default value of VREADST is good enough for the flash to power up
-    // properly at the INTOSC frequency. Below VREADST configuration covers up
-    // to the max frequency possible for this device. This is required for
-    // proper flash wake up at the higher frequencies if users put it to sleep
-    // for power saving reason.
+    // Set VREADST to the proper value for the flash banks to power up
+    // properly. This sets the bank power up delay.
     //
     Flash0CtrlRegs.FBAC.bit.VREADST = 0x14;
 
@@ -341,13 +354,7 @@ void InitFlash(void)
 // order to power it down.
 //
 #ifdef __cplusplus
-    #ifdef __TI_COMPILER_VERSION__
-        #if __TI_COMPILER_VERSION__ >= 15009000
-            #pragma CODE_SECTION(".TI.ramfunc");
-        #else
-            #pragma CODE_SECTION("ramfuncs");
-        #endif
-    #endif
+#pragma CODE_SECTION("ramfuncs");
 #endif
 void FlashOff(void)
 {
@@ -434,30 +441,17 @@ void DisableDog(void)
 
 #ifdef CPU1
 //
-// InitSysPll()
-// This function initializes the PLL registers.
-// Note:
-//  - The internal oscillator CANNOT be used as the PLL source if the
-//    PLLSYSCLK is configured to frequencies above 194 MHz.
+// InitSysPll - This function initializes the PLL registers.
 //
-//  - This function uses the Watchdog as a monitor for the PLL. The user
-//  watchdog settings will be modified and restored upon completion.  Function
-//  allows for a minimum re lock attempt for 5 tries.  Re lock attempt is carried
-//  out if either SLIP condition occurs or SYSCLK to Input Clock ratio is off by 10%
+// Note: The internal oscillator CANNOT be used as the PLL source if the
+// PLLSYSCLK is configured to frequencies above 194 MHz.
 //
-//  - This function uses the following resources to support PLL initialization:
-//          o Watchdog
-//          o CPU Timer 1
-//          o CPU Timer 2
+// Note: This function uses the Watchdog as a monitor for the PLL. The user
+// watchdog settings will be modified and restored upon completion.
 //
 void InitSysPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
 {
-    Uint16 SCSR, WDCR, WDWCR, intStatus,  t1TCR, t1TPR, t1TPRH;
-    Uint16 t2TCR, t2TPR, t2TPRH, t2SRC, t2Prescale;
-    Uint32 t1PRD, t2PRD, ctr1;
-    float sysclkToInClkError, mult, div;
-    bool sysclkInvalidFreq=true;
-
+    Uint16 SCSR, WDCR, WDWCR, intStatus;
     if((clock_source == ClkCfgRegs.CLKSRCCTL1.bit.OSCCLKSRCSEL)    &&
        (imult        == ClkCfgRegs.SYSPLLMULT.bit.IMULT)           &&
        (fmult        == ClkCfgRegs.SYSPLLMULT.bit.FMULT)           &&
@@ -510,11 +504,6 @@ void InitSysPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
             //
             // No action here will continue with retrying the PLL as normal.
             //
-            // Failed PLL initialization is due to any of the following:
-            //      - No PLL clock
-            //      - SLIP condition
-            //      - Wrong Frequency
-            //
         }
 
         //
@@ -561,8 +550,7 @@ void InitSysPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
     if(divsel != PLLCLK_BY_126)
     {
          ClkCfgRegs.SYSCLKDIVSEL.bit.PLLSYSCLKDIV = divsel + 1;
-    }
-    else
+    }else
     {
          ClkCfgRegs.SYSCLKDIVSEL.bit.PLLSYSCLKDIV = divsel;
     }
@@ -618,162 +606,6 @@ void InitSysPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
     asm(" RPT #20 || NOP");
 
     //
-    // Service watchdog
-    //
-    ServiceDog();
-
-    //
-    // Slip Bit Monitor and SYSCLK Frequency Check using timers
-    // Re-lock routine for SLIP condition or if SYSCLK and CLKSRC timer counts
-    // are off by +/- 10%.
-    // At a minimum, SYSCLK check is performed.  Re lock attempt is carried out
-    // if SLIPS bit is set. This while loop is monitored by watchdog.
-    // In the event that the PLL does not successfully lock, the loop will be
-    // aborted by watchdog reset.
-    //
-    EALLOW;
-    while(sysclkInvalidFreq == true)
-    {
-        if(ClkCfgRegs.SYSPLLSTS.bit.SLIPS == 1)
-        {
-            //
-            // Bypass PLL
-            //
-            ClkCfgRegs.SYSPLLCTL1.bit.PLLCLKEN = 0;
-            asm(" RPT #20 || NOP");
-
-            //
-            // Turn off PLL
-            //
-            ClkCfgRegs.SYSPLLCTL1.bit.PLLEN = 0;
-            asm(" RPT #20 || NOP");
-
-            //
-            // Write multipliers, which automatically turns on the PLL
-            //
-            ClkCfgRegs.SYSPLLMULT.all = ((fmult << 8U) | imult);
-
-            //
-            // Wait for the SYSPLL lock counter to expire
-            //
-            while(ClkCfgRegs.SYSPLLSTS.bit.LOCKS != 1);
-
-            //
-            // Enable PLLSYSCLK is fed from system PLL clock
-            //
-            ClkCfgRegs.SYSPLLCTL1.bit.PLLCLKEN = 1;
-
-            //
-            // Delay to ensure system is clocking from PLL
-            //
-            asm(" RPT #20 || NOP");
-        }
-
-        //
-        // Backup timer1 and timer2 settings
-        //
-        t1TCR = CpuTimer1Regs.TCR.all;
-        t1PRD = CpuTimer1Regs.PRD.all;
-        t1TPR = CpuTimer1Regs.TPR.all;
-        t1TPRH = CpuTimer1Regs.TPRH.all;
-        t2SRC = CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL;
-        t2Prescale = CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKPRESCALE;
-        t2TCR = CpuTimer2Regs.TCR.all;
-        t2PRD = CpuTimer2Regs.PRD.all;
-        t2TPR = CpuTimer2Regs.TPR.all;
-        t2TPRH = CpuTimer2Regs.TPRH.all;
-
-        //
-        // Set up timers 1 and 2
-        // Configure timer1 to count SYSCLK cycles
-        //
-        CpuTimer1Regs.TCR.bit.TSS = 1;                                    // stop timer1
-        CpuTimer1Regs.PRD.all = TMR1SYSCLKCTR;                            // seed timer1 counter
-        CpuTimer1Regs.TPR.bit.TDDR = 0x0;                                 // sysclock divider
-        CpuTimer1Regs.TCR.bit.TRB = 1;                                    // reload timer with value in PRD
-        CpuTimer1Regs.TCR.bit.TIF = 1;                                    // clear interrupt flag
-        CpuTimer1Regs.TCR.bit.TIE = 1;                                    // enable interrupt
-
-        //
-        // Configure timer2 to count Input clock cycles
-        //
-        switch(clock_source)
-        {
-            case INT_OSC1:
-                // Clk Src = INT_OSC1
-                CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL = 0x1;
-                break;
-            case INT_OSC2:
-                // Clk Src = INT_OSC2
-                CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL = 0x2;
-                break;
-            case XTAL_OSC:
-                // Clk Src = XTAL
-                CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL = 0x3;
-                break;
-
-        }
-        CpuTimer2Regs.TCR.bit.TIF = 1;                                    // clear interrupt flag
-        CpuTimer2Regs.TCR.bit.TIE = 1;                                    // enable interrupt
-        CpuTimer2Regs.TCR.bit.TSS = 1;                                    // stop timer2
-        CpuTimer2Regs.PRD.all = TMR2INPCLKCTR;                            // seed timer2 counter
-        CpuTimer2Regs.TPR.bit.TDDR = 0x0;                                 // sysclock divider
-        CpuTimer2Regs.TCR.bit.TRB = 1;                                    // reload timer with value in PRD
-
-        //
-        // Stop/Start timer counters
-        //
-        CpuTimer1Regs.TCR.bit.TSS = 1;                                    // stop timer1
-        CpuTimer2Regs.TCR.bit.TSS = 1;                                    // stop timer2
-        CpuTimer1Regs.TCR.bit.TRB = 1;                                    // reload timer1 with value in PRD
-        CpuTimer2Regs.TCR.bit.TRB = 1;                                    // reload timer2 with value in PRD
-        CpuTimer2Regs.TCR.bit.TIF = 1;                                    // clear timer2 interrupt flag
-        CpuTimer2Regs.TCR.bit.TSS = 0;                                    // start timer2
-        CpuTimer1Regs.TCR.bit.TSS = 0;                                    // start timer1
-
-        //
-        // Stop timers if either timer1 or timer2 counters overflow
-        //
-        while((CpuTimer2Regs.TCR.bit.TIF == 0) && (CpuTimer1Regs.TCR.bit.TIF == 0));
-
-        CpuTimer1Regs.TCR.bit.TSS = 1;                                    // stop timer1
-        CpuTimer2Regs.TCR.bit.TSS = 1;                                    // stop timer2
-
-        //
-        // Calculate elapsed counts on timer1
-        //
-        ctr1 = TMR1SYSCLKCTR - CpuTimer1Regs.TIM.all;
-
-        //
-        // Restore timer settings
-        //
-        CpuTimer1Regs.TCR.all = t1TCR;
-        CpuTimer1Regs.PRD.all = t1PRD;
-        CpuTimer1Regs.TPR.all = t1TPR;
-        CpuTimer1Regs.TPRH.all = t1TPRH;
-        CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL = t2SRC;
-        CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKPRESCALE = t2Prescale;
-        CpuTimer2Regs.TCR.all = t2TCR;
-        CpuTimer2Regs.PRD.all = t2PRD;
-        CpuTimer2Regs.TPR.all = t2TPR;
-        CpuTimer2Regs.TPRH.all = t2TPRH;
-
-        //
-        // Calculate Clock Error:
-        // Error = (mult/div) - (timer1 count/timer2 count)
-        //
-        mult = (float)(imult) + (float)(fmult)/4;
-        div = (float)((!ClkCfgRegs.SYSCLKDIVSEL.bit.PLLSYSCLKDIV) ? 1 : (ClkCfgRegs.SYSCLKDIVSEL.bit.PLLSYSCLKDIV << 1));
-
-        sysclkToInClkError = (mult/div) - ((float)ctr1/(float)TMR2INPCLKCTR);
-
-        //
-        // sysclkInvalidFreq will be set to true if sysclkToInClkError is off by 10%
-        //
-        sysclkInvalidFreq = ((sysclkToInClkError > 0.10) || (sysclkToInClkError < -0.10));
-    }
-
-    //
     // Clear bit
     //
     DevCfgRegs.SYSDBGCTL.bit.BIT_0 = 0;
@@ -817,7 +649,6 @@ void InitSysPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
     // Set the divider to user value
     //
     ClkCfgRegs.SYSCLKDIVSEL.bit.PLLSYSCLKDIV = divsel;
-
     EDIS;
 }
 #endif // CPU1
@@ -836,8 +667,8 @@ void InitAuxPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
     Uint16 i;
     Uint16 counter = 0;
     Uint16 started = 0;
-    Uint16 t2TCR, t2TPR, t2TPRH, t2SRC, t2Prescale, attempts;
-    Uint32 t2PRD;
+    Uint16 t2_tcr, t2_tpr, t2_tprh, t2_src, t2_prescale;
+    Uint32 t2_prd;
 
     if((clock_source == ClkCfgRegs.CLKSRCCTL2.bit.AUXOSCCLKSRCSEL) &&
        (imult        == ClkCfgRegs.AUXPLLMULT.bit.IMULT)           &&
@@ -868,12 +699,12 @@ void InitAuxPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
     //
     // Backup Timer 2 settings
     //
-    t2SRC = CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL;
-    t2Prescale = CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKPRESCALE;
-    t2TCR = CpuTimer2Regs.TCR.all;
-    t2PRD = CpuTimer2Regs.PRD.all;
-    t2TPR = CpuTimer2Regs.TPR.all;
-    t2TPRH = CpuTimer2Regs.TPRH.all;
+    t2_src = CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL;
+    t2_prescale = CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKPRESCALE;
+    t2_tcr = CpuTimer2Regs.TCR.all;
+    t2_prd = CpuTimer2Regs.PRD.all;
+    t2_tpr = CpuTimer2Regs.TPR.all;
+    t2_tprh = CpuTimer2Regs.TPRH.all;
 
     //
     // Configure Timer 2 for AUXPLL as source in known configuration
@@ -986,47 +817,6 @@ void InitAuxPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
     }
 
     //
-    // Slip Bit Monitor
-    // Re-lock routine for SLIP condition
-    //
-    attempts = 0;
-    while(ClkCfgRegs.AUXPLLSTS.bit.SLIPS && (attempts < 10))
-    {
-        EALLOW;
-        //
-        // Bypass AUXPLL
-        //
-        ClkCfgRegs.AUXPLLCTL1.bit.PLLCLKEN = 0;
-        asm(" RPT #20 || NOP");
-
-        //
-        // Turn off AUXPLL
-        //
-        ClkCfgRegs.AUXPLLCTL1.bit.PLLEN = 0;
-        asm(" RPT #20 || NOP");
-
-        //
-        // Set integer and fractional multiplier, which automatically turns
-        // on the PLL
-        //
-        ClkCfgRegs.AUXPLLMULT.all = ((fmult << 8U) | imult);
-
-        //
-        // Wait for the AUXPLL lock counter
-        //
-        while(ClkCfgRegs.AUXPLLSTS.bit.LOCKS != 1);
-
-        //
-        // Enable AUXPLLCLK to be fed from AUXPLL
-        //
-        ClkCfgRegs.AUXPLLCTL1.bit.PLLCLKEN = 1;
-        asm(" RPT #20 || NOP");
-
-        attempts++;
-        EDIS;
-    }
-
-    //
     // Set divider to desired value
     //
     EALLOW;
@@ -1035,12 +825,12 @@ void InitAuxPll(Uint16 clock_source, Uint16 imult, Uint16 fmult, Uint16 divsel)
     //
     // Restore Timer 2 configuration
     //
-    CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL = t2SRC;
-    CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKPRESCALE = t2Prescale;
-    CpuTimer2Regs.TCR.all = t2TCR;
-    CpuTimer2Regs.PRD.all = t2PRD;
-    CpuTimer2Regs.TPR.all = t2TPR;
-    CpuTimer2Regs.TPRH.all = t2TPRH;
+    CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKSRCSEL = t2_src;
+    CpuSysRegs.TMR2CLKCTL.bit.TMR2CLKPRESCALE = t2_prescale;
+    CpuTimer2Regs.TCR.all = t2_tcr;
+    CpuTimer2Regs.PRD.all = t2_prd;
+    CpuTimer2Regs.TPR.all = t2_tpr;
+    CpuTimer2Regs.TPRH.all = t2_tprh;
 
     //
     // Reload period value
@@ -1084,7 +874,6 @@ void SysIntOsc1Sel(void)
 {
     EALLOW;
     ClkCfgRegs.CLKSRCCTL1.bit.OSCCLKSRCSEL = 2;     // Clk Src = INTOSC1
-    ClkCfgRegs.CLKSRCCTL1.bit.XTALOFF=1;            // Turn off XTALOSC
     EDIS;
 }
 
@@ -1096,7 +885,6 @@ void SysIntOsc2Sel(void)
     EALLOW;
     ClkCfgRegs.CLKSRCCTL1.bit.INTOSC2OFF=0;         // Turn on INTOSC2
     ClkCfgRegs.CLKSRCCTL1.bit.OSCCLKSRCSEL = 0;     // Clk Src = INTOSC2
-    ClkCfgRegs.CLKSRCCTL1.bit.XTALOFF=1;            // Turn off XTALOSC
     EDIS;
 }
 
@@ -1210,4 +998,3 @@ void HIB(void)
     asm(" IDLE");
 #endif
 }
-

@@ -5,39 +5,10 @@
 // TITLE:  F2837xD EMIF Initialization & Support Functions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v200 $
+// $Release Date: Tue Jun 21 13:00:02 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 //
@@ -246,14 +217,14 @@ void setup_emif1_pinmux_async_16bit(Uint16 cpu_sel)
 {
     Uint16 i;
 
-    for (i=28; i<=52; i++)
+    for (i=28; i<=52;i++)
     {
-        if ((i != 42) && (i != 43))
+        if (i != 42 || i != 43)
         {
             GPIO_SetupPinMux(i,cpu_sel,2);
         }
     }
-    for (i=63; i<=87; i++)
+    for (i=63; i<=87;i++)
     {
         if (i != 84)
         {
@@ -272,14 +243,14 @@ void setup_emif1_pinmux_async_16bit(Uint16 cpu_sel)
     //
     //setup async mode and enable pull-ups for Data pins
     //
-    for (i=69; i<=85; i++)
+    for (i=69; i<=85;i++)
     {
         if (i != 84)
         {
             GPIO_SetupPinOptions(i,0,0x31); // GPIO_ASYNC||GPIO_PULLUP
         }
     }
-}
+ }
 
 //
 // setup_emif1_pinmux_async_32bit - Setup pinmux for 32bit async
@@ -288,9 +259,9 @@ void setup_emif1_pinmux_async_32bit(Uint16 cpu_sel)
 {
     Uint16 i;
 
-    for (i=28; i<=87; i++)
+    for (i=28; i<=87;i++)
     {
-        if ((i != 42) && (i != 43) && (i != 84))
+        if (i != 42 || i != 43 || i != 84 )
         {
             GPIO_SetupPinMux(i,cpu_sel,2);
         }
@@ -307,7 +278,7 @@ void setup_emif1_pinmux_async_32bit(Uint16 cpu_sel)
     //
     //setup async mode for Data pins
     //
-    for (i=53; i<=85; i++)
+    for (i=53; i<=85;i++)
     {
         if (i != 84)
         {
@@ -323,12 +294,12 @@ void setup_emif2_pinmux_async_16bit(Uint16 cpu_sel)
 {
     Uint16 i;
 
-    for (i=96; i<=121; i++)
+    for (i=96; i<=121;i++)
     {
         GPIO_SetupPinMux(i,cpu_sel,3);
     }
 
-    for (i=53; i<=68; i++)
+    for (i=53; i<=68;i++)
     {
         GPIO_SetupPinMux(i,cpu_sel,3);
     }
@@ -336,7 +307,7 @@ void setup_emif2_pinmux_async_16bit(Uint16 cpu_sel)
     //
     //setup async mode for Data pins
     //
-    for (i=53; i<=68; i++)
+    for (i=53; i<=68;i++)
     {
         GPIO_SetupPinOptions(i,0,0x31);
     }
@@ -349,15 +320,15 @@ void setup_emif1_pinmux_sdram_16bit(Uint16 cpu_sel)
 {
     int i;
 
-    for (i=29; i<=52; i++)
+    for (i=29; i<=52;i++)
     {
-        if ((i != 42) && (i != 43))
+        if (i != 42 || i != 43)
         {
             GPIO_SetupPinMux(i,cpu_sel,2);
         }
     }
 
-    for (i=69; i<=85; i++)
+    for (i=69; i<=85;i++)
     {
         if (i != 84)
         {
@@ -365,7 +336,7 @@ void setup_emif1_pinmux_sdram_16bit(Uint16 cpu_sel)
         }
     }
 
-    for(i=86; i<=93; i++)
+    for(i=86;i<=93;i++)
     {
        GPIO_SetupPinMux(i,cpu_sel,3);
     }
@@ -373,7 +344,7 @@ void setup_emif1_pinmux_sdram_16bit(Uint16 cpu_sel)
     //
     //configure Data pins for Async mode
     //
-    for (i = 69; i <= 85; i++)
+    for (i = 69;i <= 85;i++)
     {
         if (i != 84)
         {
@@ -394,11 +365,11 @@ void setup_emif2_pinmux_sdram_16bit(Uint16 cpu_sel)
 {
     int i;
 
-    for (i=53; i<=68; i++)
+    for (i=53; i<=68;i++)
     {
         GPIO_SetupPinMux(i,cpu_sel,3);
     }
-    for (i=96; i<=121; i++)
+    for (i=96; i<=121;i++)
     {
         GPIO_SetupPinMux(i,cpu_sel,3);
     }
@@ -406,7 +377,7 @@ void setup_emif2_pinmux_sdram_16bit(Uint16 cpu_sel)
     //
     //configure Data pins for Async mode
     //
-    for (i = 53; i <= 68; i++)
+    for (i = 53;i <= 68;i++)
     {
         GPIO_SetupPinOptions(i,0,0x31);
     }
@@ -419,15 +390,15 @@ void setup_emif1_pinmux_sdram_32bit(Uint16 cpu_sel)
 {
     int i;
 
-    for (i=28; i<=85; i++)
+    for (i=28; i<=85;i++)
     {
-        if ((i != 42) && (i != 43) && (i != 84))
+        if (i != 42 || i != 43 || i != 84 )
         {
             GPIO_SetupPinMux(i,cpu_sel,2);
         }
     }
 
-    for(i=86; i<=93; i++)
+    for(i=86;i<=93;i++)
     {
         GPIO_SetupPinMux(i,cpu_sel,3);
     }
@@ -437,7 +408,7 @@ void setup_emif1_pinmux_sdram_32bit(Uint16 cpu_sel)
     //
     //configure Data pins for Async mode
     //
-    for (i = 53; i <= 85; i++)
+    for (i = 53;i <= 85;i++)
     {
         if (i != 84)
         {

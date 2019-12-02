@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_sysctrl.h
 //
-// TITLE:   SYSCTRL Register Definitions.
+// TITLE:   F2837xD Device SYSCTRL Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_SYSCTRL_H__
@@ -109,7 +80,7 @@ union PARTIDH_REG {
 };
 
 struct DC0_BITS {                       // bits description
-    Uint16 SINGLE_CORE:1;               // 0 Single Core vs Dual Core
+    Uint16 SINGLE_CORE:1;               // 0 Single Core vs Dual Core 
     Uint16 rsvd1:15;                    // 15:1 Reserved
     Uint16 rsvd2:16;                    // 31:16 Reserved
 };
@@ -120,14 +91,14 @@ union DC0_REG {
 };
 
 struct DC1_BITS {                       // bits description
-    Uint16 CPU1_FPU_TMU:1;              // 0 CPU1's FPU1+TMU1
-    Uint16 CPU2_FPU_TMU:1;              // 1 CPU2's FPU2+TMU2
-    Uint16 CPU1_VCU:1;                  // 2 CPU1's VCU
-    Uint16 CPU2_VCU:1;                  // 3 CPU2's VCU
+    Uint16 CPU1_FPU_TMU:1;              // 0 CPU1's FPU1+TMU1 
+    Uint16 CPU2_FPU_TMU:1;              // 1 CPU2's FPU2+TMU2 
+    Uint16 CPU1_VCU:1;                  // 2 CPU1's VCU 
+    Uint16 CPU2_VCU:1;                  // 3 CPU2's VCU 
     Uint16 rsvd1:2;                     // 5:4 Reserved
-    Uint16 CPU1_CLA1:1;                 // 6 CPU1.CLA1
+    Uint16 CPU1_CLA1:1;                 // 6 CPU1.CLA1 
     Uint16 rsvd2:1;                     // 7 Reserved
-    Uint16 CPU2_CLA1:1;                 // 8 CPU2.CLA1
+    Uint16 CPU2_CLA1:1;                 // 8 CPU2.CLA1 
     Uint16 rsvd3:1;                     // 9 Reserved
     Uint16 rsvd4:6;                     // 15:10 Reserved
     Uint16 rsvd5:16;                    // 31:16 Reserved
@@ -139,8 +110,8 @@ union DC1_REG {
 };
 
 struct DC2_BITS {                       // bits description
-    Uint16 EMIF1:1;                     // 0 EMIF1
-    Uint16 EMIF2:1;                     // 1 EMIF2
+    Uint16 EMIF1:1;                     // 0 EMIF1 
+    Uint16 EMIF2:1;                     // 1 EMIF2 
     Uint16 rsvd1:14;                    // 15:2 Reserved
     Uint16 rsvd2:16;                    // 31:16 Reserved
 };
@@ -151,18 +122,18 @@ union DC2_REG {
 };
 
 struct DC3_BITS {                       // bits description
-    Uint16 EPWM1:1;                     // 0 EPWM1
-    Uint16 EPWM2:1;                     // 1 EPWM2
-    Uint16 EPWM3:1;                     // 2 EPWM3
-    Uint16 EPWM4:1;                     // 3 EPWM4
-    Uint16 EPWM5:1;                     // 4 EPWM5
-    Uint16 EPWM6:1;                     // 5 EPWM6
-    Uint16 EPWM7:1;                     // 6 EPWM7
-    Uint16 EPWM8:1;                     // 7 EPWM8
-    Uint16 EPWM9:1;                     // 8 EPWM9
-    Uint16 EPWM10:1;                    // 9 EPWM10
-    Uint16 EPWM11:1;                    // 10 EPWM11
-    Uint16 EPWM12:1;                    // 11 EPWM12
+    Uint16 EPWM1:1;                     // 0 EPWM1 
+    Uint16 EPWM2:1;                     // 1 EPWM2 
+    Uint16 EPWM3:1;                     // 2 EPWM3 
+    Uint16 EPWM4:1;                     // 3 EPWM4 
+    Uint16 EPWM5:1;                     // 4 EPWM5 
+    Uint16 EPWM6:1;                     // 5 EPWM6 
+    Uint16 EPWM7:1;                     // 6 EPWM7 
+    Uint16 EPWM8:1;                     // 7 EPWM8 
+    Uint16 EPWM9:1;                     // 8 EPWM9 
+    Uint16 EPWM10:1;                    // 9 EPWM10 
+    Uint16 EPWM11:1;                    // 10 EPWM11 
+    Uint16 EPWM12:1;                    // 11 EPWM12 
     Uint16 rsvd1:1;                     // 12 Reserved
     Uint16 rsvd2:1;                     // 13 Reserved
     Uint16 rsvd3:1;                     // 14 Reserved
@@ -176,12 +147,12 @@ union DC3_REG {
 };
 
 struct DC4_BITS {                       // bits description
-    Uint16 ECAP1:1;                     // 0 ECAP1
-    Uint16 ECAP2:1;                     // 1 ECAP2
-    Uint16 ECAP3:1;                     // 2 ECAP3
-    Uint16 ECAP4:1;                     // 3 ECAP4
-    Uint16 ECAP5:1;                     // 4 ECAP5
-    Uint16 ECAP6:1;                     // 5 ECAP6
+    Uint16 ECAP1:1;                     // 0 ECAP1 
+    Uint16 ECAP2:1;                     // 1 ECAP2 
+    Uint16 ECAP3:1;                     // 2 ECAP3 
+    Uint16 ECAP4:1;                     // 3 ECAP4 
+    Uint16 ECAP5:1;                     // 4 ECAP5 
+    Uint16 ECAP6:1;                     // 5 ECAP6 
     Uint16 rsvd1:1;                     // 6 Reserved
     Uint16 rsvd2:1;                     // 7 Reserved
     Uint16 rsvd3:8;                     // 15:8 Reserved
@@ -194,9 +165,9 @@ union DC4_REG {
 };
 
 struct DC5_BITS {                       // bits description
-    Uint16 EQEP1:1;                     // 0 EQEP1
-    Uint16 EQEP2:1;                     // 1 EQEP2
-    Uint16 EQEP3:1;                     // 2 EQEP3
+    Uint16 EQEP1:1;                     // 0 EQEP1 
+    Uint16 EQEP2:1;                     // 1 EQEP2 
+    Uint16 EQEP3:1;                     // 2 EQEP3 
     Uint16 rsvd1:1;                     // 3 Reserved
     Uint16 rsvd2:12;                    // 15:4 Reserved
     Uint16 rsvd3:16;                    // 31:16 Reserved
@@ -207,27 +178,9 @@ union DC5_REG {
     struct  DC5_BITS  bit;
 };
 
-struct DC6_BITS {                       // bits description
-    Uint16 CLB1:1;                      // 0 CLB1
-    Uint16 CLB2:1;                      // 1 CLB2
-    Uint16 CLB3:1;                      // 2 CLB3
-    Uint16 CLB4:1;                      // 3 CLB4
-    Uint16 rsvd1:1;                     // 4 Reserved
-    Uint16 rsvd2:1;                     // 5 Reserved
-    Uint16 rsvd3:1;                     // 6 Reserved
-    Uint16 rsvd4:1;                     // 7 Reserved
-    Uint16 rsvd5:8;                     // 15:8 Reserved
-    Uint16 rsvd6:16;                    // 31:16 Reserved
-};
-
-union DC6_REG {
-    Uint32  all;
-    struct  DC6_BITS  bit;
-};
-
 struct DC7_BITS {                       // bits description
-    Uint16 SD1:1;                       // 0 SD1
-    Uint16 SD2:1;                       // 1 SD2
+    Uint16 SD1:1;                       // 0 SD1 
+    Uint16 SD2:1;                       // 1 SD2 
     Uint16 rsvd1:1;                     // 2 Reserved
     Uint16 rsvd2:1;                     // 3 Reserved
     Uint16 rsvd3:1;                     // 4 Reserved
@@ -244,10 +197,10 @@ union DC7_REG {
 };
 
 struct DC8_BITS {                       // bits description
-    Uint16 SCI_A:1;                     // 0 SCI_A
-    Uint16 SCI_B:1;                     // 1 SCI_B
-    Uint16 SCI_C:1;                     // 2 SCI_C
-    Uint16 SCI_D:1;                     // 3 SCI_D
+    Uint16 SCI_A:1;                     // 0 SCI_A 
+    Uint16 SCI_B:1;                     // 1 SCI_B 
+    Uint16 SCI_C:1;                     // 2 SCI_C 
+    Uint16 SCI_D:1;                     // 3 SCI_D 
     Uint16 rsvd1:12;                    // 15:4 Reserved
     Uint16 rsvd2:16;                    // 31:16 Reserved
 };
@@ -258,9 +211,9 @@ union DC8_REG {
 };
 
 struct DC9_BITS {                       // bits description
-    Uint16 SPI_A:1;                     // 0 SPI_A
-    Uint16 SPI_B:1;                     // 1 SPI_B
-    Uint16 SPI_C:1;                     // 2 SPI_C
+    Uint16 SPI_A:1;                     // 0 SPI_A 
+    Uint16 SPI_B:1;                     // 1 SPI_B 
+    Uint16 SPI_C:1;                     // 2 SPI_C 
     Uint16 rsvd1:1;                     // 3 Reserved
     Uint16 rsvd2:12;                    // 15:4 Reserved
     Uint16 rsvd3:1;                     // 16 Reserved
@@ -274,8 +227,8 @@ union DC9_REG {
 };
 
 struct DC10_BITS {                      // bits description
-    Uint16 I2C_A:1;                     // 0 I2C_A
-    Uint16 I2C_B:1;                     // 1 I2C_B
+    Uint16 I2C_A:1;                     // 0 I2C_A 
+    Uint16 I2C_B:1;                     // 1 I2C_B 
     Uint16 rsvd1:14;                    // 15:2 Reserved
     Uint16 rsvd2:1;                     // 16 Reserved
     Uint16 rsvd3:1;                     // 17 Reserved
@@ -288,8 +241,8 @@ union DC10_REG {
 };
 
 struct DC11_BITS {                      // bits description
-    Uint16 CAN_A:1;                     // 0 CAN_A
-    Uint16 CAN_B:1;                     // 1 CAN_B
+    Uint16 CAN_A:1;                     // 0 CAN_A 
+    Uint16 CAN_B:1;                     // 1 CAN_B 
     Uint16 rsvd1:1;                     // 2 Reserved
     Uint16 rsvd2:1;                     // 3 Reserved
     Uint16 rsvd3:12;                    // 15:4 Reserved
@@ -302,8 +255,8 @@ union DC11_REG {
 };
 
 struct DC12_BITS {                      // bits description
-    Uint16 McBSP_A:1;                   // 0 McBSP_A
-    Uint16 McBSP_B:1;                   // 1 McBSP_B
+    Uint16 McBSP_A:1;                   // 0 McBSP_A 
+    Uint16 McBSP_B:1;                   // 1 McBSP_B 
     Uint16 rsvd1:14;                    // 15:2 Reserved
     Uint16 USB_A:2;                     // 17:16 Decides the capability of the USB_A Module
     Uint16 rsvd2:2;                     // 19:18 Reserved
@@ -316,7 +269,7 @@ union DC12_REG {
 };
 
 struct DC13_BITS {                      // bits description
-    Uint16 uPP_A:1;                     // 0 uPP_A
+    Uint16 uPP_A:1;                     // 0 uPP_A 
     Uint16 rsvd1:1;                     // 1 Reserved
     Uint16 rsvd2:14;                    // 15:2 Reserved
     Uint16 rsvd3:16;                    // 31:16 Reserved
@@ -342,14 +295,14 @@ union DC14_REG {
 };
 
 struct DC15_BITS {                      // bits description
-    Uint16 CMPSS1:1;                    // 0 CMPSS1
-    Uint16 CMPSS2:1;                    // 1 CMPSS2
-    Uint16 CMPSS3:1;                    // 2 CMPSS3
-    Uint16 CMPSS4:1;                    // 3 CMPSS4
-    Uint16 CMPSS5:1;                    // 4 CMPSS5
-    Uint16 CMPSS6:1;                    // 5 CMPSS6
-    Uint16 CMPSS7:1;                    // 6 CMPSS7
-    Uint16 CMPSS8:1;                    // 7 CMPSS8
+    Uint16 CMPSS1:1;                    // 0 CMPSS1 
+    Uint16 CMPSS2:1;                    // 1 CMPSS2 
+    Uint16 CMPSS3:1;                    // 2 CMPSS3 
+    Uint16 CMPSS4:1;                    // 3 CMPSS4 
+    Uint16 CMPSS5:1;                    // 4 CMPSS5 
+    Uint16 CMPSS6:1;                    // 5 CMPSS6 
+    Uint16 CMPSS7:1;                    // 6 CMPSS7 
+    Uint16 CMPSS8:1;                    // 7 CMPSS8 
     Uint16 rsvd1:8;                     // 15:8 Reserved
     Uint16 rsvd2:16;                    // 31:16 Reserved
 };
@@ -378,12 +331,12 @@ union DC17_REG {
 };
 
 struct DC18_BITS {                      // bits description
-    Uint16 LS0_1:1;                     // 0 LS0_1
-    Uint16 LS1_1:1;                     // 1 LS1_1
-    Uint16 LS2_1:1;                     // 2 LS2_1
-    Uint16 LS3_1:1;                     // 3 LS3_1
-    Uint16 LS4_1:1;                     // 4 LS4_1
-    Uint16 LS5_1:1;                     // 5 LS5_1
+    Uint16 LS0_1:1;                     // 0 LS0_1 
+    Uint16 LS1_1:1;                     // 1 LS1_1 
+    Uint16 LS2_1:1;                     // 2 LS2_1 
+    Uint16 LS3_1:1;                     // 3 LS3_1 
+    Uint16 LS4_1:1;                     // 4 LS4_1 
+    Uint16 LS5_1:1;                     // 5 LS5_1 
     Uint16 rsvd1:10;                    // 15:6 Reserved
     Uint16 rsvd2:16;                    // 31:16 Reserved
 };
@@ -394,12 +347,12 @@ union DC18_REG {
 };
 
 struct DC19_BITS {                      // bits description
-    Uint16 LS0_2:1;                     // 0 LS0_2
-    Uint16 LS1_2:1;                     // 1 LS1_2
-    Uint16 LS2_2:1;                     // 2 LS2_2
-    Uint16 LS3_2:1;                     // 3 LS3_2
-    Uint16 LS4_2:1;                     // 4 LS4_2
-    Uint16 LS5_2:1;                     // 5 LS5_2
+    Uint16 LS0_2:1;                     // 0 LS0_2 
+    Uint16 LS1_2:1;                     // 1 LS1_2 
+    Uint16 LS2_2:1;                     // 2 LS2_2 
+    Uint16 LS3_2:1;                     // 3 LS3_2 
+    Uint16 LS4_2:1;                     // 4 LS4_2 
+    Uint16 LS5_2:1;                     // 5 LS5_2 
     Uint16 rsvd1:10;                    // 15:6 Reserved
     Uint16 rsvd2:16;                    // 31:16 Reserved
 };
@@ -410,22 +363,22 @@ union DC19_REG {
 };
 
 struct DC20_BITS {                      // bits description
-    Uint16 GS0:1;                       // 0 GS0
-    Uint16 GS1:1;                       // 1 GS1
-    Uint16 GS2:1;                       // 2 GS2
-    Uint16 GS3:1;                       // 3 GS3
-    Uint16 GS4:1;                       // 4 GS4
-    Uint16 GS5:1;                       // 5 GS5
-    Uint16 GS6:1;                       // 6 GS6
-    Uint16 GS7:1;                       // 7 GS7
-    Uint16 GS8:1;                       // 8 GS8
-    Uint16 GS9:1;                       // 9 GS9
-    Uint16 GS10:1;                      // 10 GS10
-    Uint16 GS11:1;                      // 11 GS11
-    Uint16 GS12:1;                      // 12 GS12
-    Uint16 GS13:1;                      // 13 GS13
-    Uint16 GS14:1;                      // 14 GS14
-    Uint16 GS15:1;                      // 15 GS15
+    Uint16 GS0:1;                       // 0 GS0 
+    Uint16 GS1:1;                       // 1 GS1 
+    Uint16 GS2:1;                       // 2 GS2 
+    Uint16 GS3:1;                       // 3 GS3 
+    Uint16 GS4:1;                       // 4 GS4 
+    Uint16 GS5:1;                       // 5 GS5 
+    Uint16 GS6:1;                       // 6 GS6 
+    Uint16 GS7:1;                       // 7 GS7 
+    Uint16 GS8:1;                       // 8 GS8 
+    Uint16 GS9:1;                       // 9 GS9 
+    Uint16 GS10:1;                      // 10 GS10 
+    Uint16 GS11:1;                      // 11 GS11 
+    Uint16 GS12:1;                      // 12 GS12 
+    Uint16 GS13:1;                      // 13 GS13 
+    Uint16 GS14:1;                      // 14 GS14 
+    Uint16 GS15:1;                      // 15 GS15 
     Uint16 rsvd1:16;                    // 31:16 Reserved
 };
 
@@ -440,7 +393,7 @@ struct PERCNF1_BITS {                   // bits description
     Uint16 ADC_C_MODE:1;                // 2 ADC_C mode setting bit
     Uint16 ADC_D_MODE:1;                // 3 ADC_D mode setting bit
     Uint16 rsvd1:12;                    // 15:4 Reserved
-    Uint16 USB_A_PHY:1;                 // 16 USB_A_PHY
+    Uint16 USB_A_PHY:1;                 // 16 USB_A_PHY 
     Uint16 rsvd2:1;                     // 17 Reserved
     Uint16 rsvd3:14;                    // 31:18 Reserved
 };
@@ -924,7 +877,7 @@ struct DEV_CFG_REGS {
     union   DC3_REG                          DC3;                          // Device Capability: Peripheral Customization
     union   DC4_REG                          DC4;                          // Device Capability: Peripheral Customization
     union   DC5_REG                          DC5;                          // Device Capability: Peripheral Customization
-    union   DC6_REG                          DC6;                          // Device Capability: Peripheral Customization
+    Uint16                                   rsvd3[2];                     // Reserved
     union   DC7_REG                          DC7;                          // Device Capability: Peripheral Customization
     union   DC8_REG                          DC8;                          // Device Capability: Peripheral Customization
     union   DC9_REG                          DC9;                          // Device Capability: Peripheral Customization
@@ -934,54 +887,54 @@ struct DEV_CFG_REGS {
     union   DC13_REG                         DC13;                         // Device Capability: Peripheral Customization
     union   DC14_REG                         DC14;                         // Device Capability: Analog Modules Customization
     union   DC15_REG                         DC15;                         // Device Capability: Analog Modules Customization
-    Uint16                                   rsvd3[2];                     // Reserved
+    Uint16                                   rsvd4[2];                     // Reserved
     union   DC17_REG                         DC17;                         // Device Capability: Analog Modules Customization
     union   DC18_REG                         DC18;                         // Device Capability: CPU1 Lx SRAM Customization
     union   DC19_REG                         DC19;                         // Device Capability: CPU2 Lx SRAM Customization
     union   DC20_REG                         DC20;                         // Device Capability: GSx SRAM Customization
-    Uint16                                   rsvd4[38];                    // Reserved
+    Uint16                                   rsvd5[38];                    // Reserved
     union   PERCNF1_REG                      PERCNF1;                      // Peripheral Configuration register
-    Uint16                                   rsvd5[18];                    // Reserved
+    Uint16                                   rsvd6[18];                    // Reserved
     union   FUSEERR_REG                      FUSEERR;                      // e-Fuse error Status register
-    Uint16                                   rsvd6[12];                    // Reserved
+    Uint16                                   rsvd7[12];                    // Reserved
     union   SOFTPRES0_REG                    SOFTPRES0;                    // Processing Block Software Reset register
     union   SOFTPRES1_REG                    SOFTPRES1;                    // EMIF Software Reset register
     union   SOFTPRES2_REG                    SOFTPRES2;                    // Peripheral Software Reset register
     union   SOFTPRES3_REG                    SOFTPRES3;                    // Peripheral Software Reset register
     union   SOFTPRES4_REG                    SOFTPRES4;                    // Peripheral Software Reset register
-    Uint16                                   rsvd7[2];                     // Reserved
+    Uint16                                   rsvd8[2];                     // Reserved
     union   SOFTPRES6_REG                    SOFTPRES6;                    // Peripheral Software Reset register
     union   SOFTPRES7_REG                    SOFTPRES7;                    // Peripheral Software Reset register
     union   SOFTPRES8_REG                    SOFTPRES8;                    // Peripheral Software Reset register
     union   SOFTPRES9_REG                    SOFTPRES9;                    // Peripheral Software Reset register
-    Uint16                                   rsvd8[2];                     // Reserved
-    union   SOFTPRES11_REG                   SOFTPRES11;                   // Peripheral Software Reset register
     Uint16                                   rsvd9[2];                     // Reserved
+    union   SOFTPRES11_REG                   SOFTPRES11;                   // Peripheral Software Reset register
+    Uint16                                   rsvd10[2];                    // Reserved
     union   SOFTPRES13_REG                   SOFTPRES13;                   // Peripheral Software Reset register
     union   SOFTPRES14_REG                   SOFTPRES14;                   // Peripheral Software Reset register
-    Uint16                                   rsvd10[2];                    // Reserved
+    Uint16                                   rsvd11[2];                    // Reserved
     union   SOFTPRES16_REG                   SOFTPRES16;                   // Peripheral Software Reset register
-    Uint16                                   rsvd11[50];                   // Reserved
+    Uint16                                   rsvd12[50];                   // Reserved
     union   CPUSEL0_REG                      CPUSEL0;                      // CPU Select register for common peripherals
     union   CPUSEL1_REG                      CPUSEL1;                      // CPU Select register for common peripherals
     union   CPUSEL2_REG                      CPUSEL2;                      // CPU Select register for common peripherals
-    Uint16                                   rsvd12[2];                    // Reserved
+    Uint16                                   rsvd13[2];                    // Reserved
     union   CPUSEL4_REG                      CPUSEL4;                      // CPU Select register for common peripherals
     union   CPUSEL5_REG                      CPUSEL5;                      // CPU Select register for common peripherals
     union   CPUSEL6_REG                      CPUSEL6;                      // CPU Select register for common peripherals
     union   CPUSEL7_REG                      CPUSEL7;                      // CPU Select register for common peripherals
     union   CPUSEL8_REG                      CPUSEL8;                      // CPU Select register for common peripherals
     union   CPUSEL9_REG                      CPUSEL9;                      // CPU Select register for common peripherals
-    Uint16                                   rsvd13[2];                    // Reserved
+    Uint16                                   rsvd14[2];                    // Reserved
     union   CPUSEL11_REG                     CPUSEL11;                     // CPU Select register for common peripherals
     union   CPUSEL12_REG                     CPUSEL12;                     // CPU Select register for common peripherals
-    Uint16                                   rsvd14[2];                    // Reserved
+    Uint16                                   rsvd15[2];                    // Reserved
     union   CPUSEL14_REG                     CPUSEL14;                     // CPU Select register for common peripherals
-    Uint16                                   rsvd15[46];                   // Reserved
+    Uint16                                   rsvd16[46];                   // Reserved
     union   CPU2RESCTL_REG                   CPU2RESCTL;                   // CPU2 Reset Control Register
     union   RSTSTAT_REG                      RSTSTAT;                      // Reset Status register for secondary C28x CPUs
     union   LPMSTAT_REG                      LPMSTAT;                      // LPM Status Register for secondary C28x CPUs
-    Uint16                                   rsvd16[6];                    // Reserved
+    Uint16                                   rsvd17[6];                    // Reserved
     union   SYSDBGCTL_REG                    SYSDBGCTL;                    // System Debug Control register
 };
 
@@ -1885,31 +1838,31 @@ union SYNCSELECT_REG {
 };
 
 struct ADCSOCOUTSELECT_BITS {           // bits description
-    Uint16 PWM1SOCAEN:1;                // 0 PWM1SOCAEN Enable for ADCSOCAO
-    Uint16 PWM2SOCAEN:1;                // 1 PWM2SOCAEN Enable for ADCSOCAO
-    Uint16 PWM3SOCAEN:1;                // 2 PWM3SOCAEN Enable for ADCSOCAO
-    Uint16 PWM4SOCAEN:1;                // 3 PWM4SOCAEN Enable for ADCSOCAO
-    Uint16 PWM5SOCAEN:1;                // 4 PWM5SOCAEN Enable for ADCSOCAO
-    Uint16 PWM6SOCAEN:1;                // 5 PWM6SOCAEN Enable for ADCSOCAO
-    Uint16 PWM7SOCAEN:1;                // 6 PWM7SOCAEN Enable for ADCSOCAO
-    Uint16 PWM8SOCAEN:1;                // 7 PWM8SOCAEN Enable for ADCSOCAO
-    Uint16 PWM9SOCAEN:1;                // 8 PWM9SOCAEN Enable for ADCSOCAO
-    Uint16 PWM10SOCAEN:1;               // 9 PWM10SOCAEN Enable for ADCSOCAO
-    Uint16 PWM11SOCAEN:1;               // 10 PWM11SOCAEN Enable for ADCSOCAO
-    Uint16 PWM12SOCAEN:1;               // 11 PWM12SOCAEN Enable for ADCSOCAO
+    Uint16 PWM1SOCAEN:1;                // 0 PWM1SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM2SOCAEN:1;                // 1 PWM2SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM3SOCAEN:1;                // 2 PWM3SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM4SOCAEN:1;                // 3 PWM4SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM5SOCAEN:1;                // 4 PWM5SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM6SOCAEN:1;                // 5 PWM6SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM7SOCAEN:1;                // 6 PWM7SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM8SOCAEN:1;                // 7 PWM8SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM9SOCAEN:1;                // 8 PWM9SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM10SOCAEN:1;               // 9 PWM10SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM11SOCAEN:1;               // 10 PWM11SOCAEN Enable for ADCSOCAO 
+    Uint16 PWM12SOCAEN:1;               // 11 PWM12SOCAEN Enable for ADCSOCAO 
     Uint16 rsvd1:4;                     // 15:12 Reserved
-    Uint16 PWM1SOCBEN:1;                // 16 PWM1SOCBEN Enable for ADCSOCBO
-    Uint16 PWM2SOCBEN:1;                // 17 PWM2SOCBEN Enable for ADCSOCBO
-    Uint16 PWM3SOCBEN:1;                // 18 PWM3SOCBEN Enable for ADCSOCBO
-    Uint16 PWM4SOCBEN:1;                // 19 PWM4SOCBEN Enable for ADCSOCBO
-    Uint16 PWM5SOCBEN:1;                // 20 PWM5SOCBEN Enable for ADCSOCBO
-    Uint16 PWM6SOCBEN:1;                // 21 PWM6SOCBEN Enable for ADCSOCBO
-    Uint16 PWM7SOCBEN:1;                // 22 PWM7SOCBEN Enable for ADCSOCBO
-    Uint16 PWM8SOCBEN:1;                // 23 PWM8SOCBEN Enable for ADCSOCBO
-    Uint16 PWM9SOCBEN:1;                // 24 PWM9SOCBEN Enable for ADCSOCBO
-    Uint16 PWM10SOCBEN:1;               // 25 PWM10SOCBEN Enable for ADCSOCBO
-    Uint16 PWM11SOCBEN:1;               // 26 PWM11SOCBEN Enable for ADCSOCBO
-    Uint16 PWM12SOCBEN:1;               // 27 PWM12SOCBEN Enable for ADCSOCBO
+    Uint16 PWM1SOCBEN:1;                // 16 PWM1SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM2SOCBEN:1;                // 17 PWM2SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM3SOCBEN:1;                // 18 PWM3SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM4SOCBEN:1;                // 19 PWM4SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM5SOCBEN:1;                // 20 PWM5SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM6SOCBEN:1;                // 21 PWM6SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM7SOCBEN:1;                // 22 PWM7SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM8SOCBEN:1;                // 23 PWM8SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM9SOCBEN:1;                // 24 PWM9SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM10SOCBEN:1;               // 25 PWM10SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM11SOCBEN:1;               // 26 PWM11SOCBEN Enable for ADCSOCBO 
+    Uint16 PWM12SOCBEN:1;               // 27 PWM12SOCBEN Enable for ADCSOCBO 
     Uint16 rsvd2:4;                     // 31:28 Reserved
 };
 

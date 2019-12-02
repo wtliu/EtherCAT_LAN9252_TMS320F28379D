@@ -2,42 +2,13 @@
 //
 // FILE:    F2837xD_gpio.h
 //
-// TITLE:   GPIO Register Definitions.
+// TITLE:   F2837xD Device GPIO Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2837xD Support Library v3.05.00.00 $
-// $Release Date: Thu Oct 18 15:48:42 CDT 2018 $
-// $Copyright:
-// Copyright (C) 2013-2018 Texas Instruments Incorporated - http://www.ti.com/
-//
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions 
-// are met:
-// 
-//   Redistributions of source code must retain the above copyright 
-//   notice, this list of conditions and the following disclaimer.
-// 
-//   Redistributions in binary form must reproduce the above copyright
-//   notice, this list of conditions and the following disclaimer in the 
-//   documentation and/or other materials provided with the   
-//   distribution.
-// 
-//   Neither the name of Texas Instruments Incorporated nor the names of
-//   its contributors may be used to endorse or promote products derived
-//   from this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// $
+// $TI Release: F2837xD Support Library v210 $
+// $Release Date: Tue Nov  1 14:46:15 CDT 2016 $
+// $Copyright: Copyright (C) 2013-2016 Texas Instruments Incorporated -
+//             http://www.ti.com/ ALL RIGHTS RESERVED $
 //###########################################################################
 
 #ifndef __F2837xD_GPIO_H__
@@ -2754,7 +2725,7 @@ struct GPIO_CTRL_REGS {
     union   GPAMUX1_REG                      GPAMUX1;                      // GPIO A Mux 1 Register (GPIO0 to 15)
     union   GPAMUX2_REG                      GPAMUX2;                      // GPIO A Mux 2 Register (GPIO16 to 31)
     union   GPADIR_REG                       GPADIR;                       // GPIO A Direction Register (GPIO0 to 31)
-    union   GPAPUD_REG                       GPAPUD;                       // GPIO A Pull Up Disable Register (GPIO0 to 31)
+    union   GPAPUD_REG                       GPAPUD;                       // GPIO A Pull Up Disable Register (GPIO0 to 31) 
     Uint16                                   rsvd1[2];                     // Reserved
     union   GPAINV_REG                       GPAINV;                       // GPIO A Input Polarity Invert Registers (GPIO0 to 31)
     union   GPAODR_REG                       GPAODR;                       // GPIO A Open Drain Output Register (GPIO0 to GPIO31)
@@ -2775,7 +2746,7 @@ struct GPIO_CTRL_REGS {
     union   GPBMUX1_REG                      GPBMUX1;                      // GPIO B Mux 1 Register (GPIO32 to 47)
     union   GPBMUX2_REG                      GPBMUX2;                      // GPIO B Mux 2 Register (GPIO48 to 63)
     union   GPBDIR_REG                       GPBDIR;                       // GPIO B Direction Register (GPIO32 to 63)
-    union   GPBPUD_REG                       GPBPUD;                       // GPIO B Pull Up Disable Register (GPIO32 to 63)
+    union   GPBPUD_REG                       GPBPUD;                       // GPIO B Pull Up Disable Register (GPIO32 to 63) 
     Uint16                                   rsvd5[2];                     // Reserved
     union   GPBINV_REG                       GPBINV;                       // GPIO B Input Polarity Invert Registers (GPIO32 to 63)
     union   GPBODR_REG                       GPBODR;                       // GPIO B Open Drain Output Register (GPIO32 to GPIO63)
@@ -2797,7 +2768,7 @@ struct GPIO_CTRL_REGS {
     union   GPCMUX1_REG                      GPCMUX1;                      // GPIO C Mux 1 Register (GPIO64 to 79)
     union   GPCMUX2_REG                      GPCMUX2;                      // GPIO C Mux 2 Register (GPIO80  to 95)
     union   GPCDIR_REG                       GPCDIR;                       // GPIO C Direction Register (GPIO64 to 95)
-    union   GPCPUD_REG                       GPCPUD;                       // GPIO C Pull Up Disable Register (GPIO64 to 95)
+    union   GPCPUD_REG                       GPCPUD;                       // GPIO C Pull Up Disable Register (GPIO64 to 95) 
     Uint16                                   rsvd9[2];                     // Reserved
     union   GPCINV_REG                       GPCINV;                       // GPIO C Input Polarity Invert Registers (GPIO64 to 95)
     union   GPCODR_REG                       GPCODR;                       // GPIO C Open Drain Output Register (GPIO64 to GPIO95)
@@ -2818,7 +2789,7 @@ struct GPIO_CTRL_REGS {
     union   GPDMUX1_REG                      GPDMUX1;                      // GPIO D Mux 1 Register (GPIO96 to 111)
     union   GPDMUX2_REG                      GPDMUX2;                      // GPIO D Mux 2 Register (GPIO112 to 127)
     union   GPDDIR_REG                       GPDDIR;                       // GPIO D Direction Register (GPIO96 to 127)
-    union   GPDPUD_REG                       GPDPUD;                       // GPIO D Pull Up Disable Register (GPIO96 to 127)
+    union   GPDPUD_REG                       GPDPUD;                       // GPIO D Pull Up Disable Register (GPIO96 to 127) 
     Uint16                                   rsvd13[2];                    // Reserved
     union   GPDINV_REG                       GPDINV;                       // GPIO D Input Polarity Invert Registers (GPIO96 to 127)
     union   GPDODR_REG                       GPDODR;                       // GPIO D Open Drain Output Register (GPIO96 to GPIO127)
@@ -2839,7 +2810,7 @@ struct GPIO_CTRL_REGS {
     union   GPEMUX1_REG                      GPEMUX1;                      // GPIO E Mux 1 Register (GPIO128 to 143)
     union   GPEMUX2_REG                      GPEMUX2;                      // GPIO E Mux 2 Register (GPIO144  to 159)
     union   GPEDIR_REG                       GPEDIR;                       // GPIO E Direction Register (GPIO128 to 159)
-    union   GPEPUD_REG                       GPEPUD;                       // GPIO E Pull Up Disable Register (GPIO128 to 159)
+    union   GPEPUD_REG                       GPEPUD;                       // GPIO E Pull Up Disable Register (GPIO128 to 159) 
     Uint16                                   rsvd17[2];                    // Reserved
     union   GPEINV_REG                       GPEINV;                       // GPIO E Input Polarity Invert Registers (GPIO128 to 159)
     union   GPEODR_REG                       GPEODR;                       // GPIO E Open Drain Output Register (GPIO128 to GPIO159)
@@ -2860,7 +2831,7 @@ struct GPIO_CTRL_REGS {
     union   GPFMUX1_REG                      GPFMUX1;                      // GPIO F Mux 1 Register (GPIO160 to 168)
     Uint16                                   rsvd22[2];                    // Reserved
     union   GPFDIR_REG                       GPFDIR;                       // GPIO F Direction Register (GPIO160 to 168)
-    union   GPFPUD_REG                       GPFPUD;                       // GPIO F Pull Up Disable Register (GPIO160 to 168)
+    union   GPFPUD_REG                       GPFPUD;                       // GPIO F Pull Up Disable Register (GPIO160 to 168) 
     Uint16                                   rsvd23[2];                    // Reserved
     union   GPFINV_REG                       GPFINV;                       // GPIO F Input Polarity Invert Registers (GPIO160 to 168)
     union   GPFODR_REG                       GPFODR;                       // GPIO F Open Drain Output Register (GPIO160 to GPIO168)
@@ -3838,27 +3809,27 @@ struct GPIO_DATA_REGS {
     union   GPADAT_REG                       GPADAT;                       // GPIO A Data Register (GPIO0 to 31)
     union   GPASET_REG                       GPASET;                       // GPIO A Data Set Register (GPIO0 to 31)
     union   GPACLEAR_REG                     GPACLEAR;                     // GPIO A Data Clear Register (GPIO0 to 31)
-    union   GPATOGGLE_REG                    GPATOGGLE;                    // GPIO A Data Toggle Register (GPIO0 to 31)
+    union   GPATOGGLE_REG                    GPATOGGLE;                    // GPIO A Data Toggle Register (GPIO0 to 31) 
     union   GPBDAT_REG                       GPBDAT;                       // GPIO B Data Register (GPIO32 to 63)
     union   GPBSET_REG                       GPBSET;                       // GPIO B Data Set Register (GPIO32 to 63)
     union   GPBCLEAR_REG                     GPBCLEAR;                     // GPIO B Data Clear Register (GPIO32 to 63)
-    union   GPBTOGGLE_REG                    GPBTOGGLE;                    // GPIO B Data Toggle Register (GPIO32 to 63)
+    union   GPBTOGGLE_REG                    GPBTOGGLE;                    // GPIO B Data Toggle Register (GPIO32 to 63) 
     union   GPCDAT_REG                       GPCDAT;                       // GPIO C Data Register (GPIO64 to 95)
     union   GPCSET_REG                       GPCSET;                       // GPIO C Data Set Register (GPIO64 to 95)
     union   GPCCLEAR_REG                     GPCCLEAR;                     // GPIO C Data Clear Register (GPIO64 to 95)
-    union   GPCTOGGLE_REG                    GPCTOGGLE;                    // GPIO C Data Toggle Register (GPIO64 to 95)
+    union   GPCTOGGLE_REG                    GPCTOGGLE;                    // GPIO C Data Toggle Register (GPIO64 to 95) 
     union   GPDDAT_REG                       GPDDAT;                       // GPIO D Data Register (GPIO96 to 127)
     union   GPDSET_REG                       GPDSET;                       // GPIO D Data Set Register (GPIO96 to 127)
     union   GPDCLEAR_REG                     GPDCLEAR;                     // GPIO D Data Clear Register (GPIO96 to 127)
-    union   GPDTOGGLE_REG                    GPDTOGGLE;                    // GPIO D Data Toggle Register (GPIO96 to 127)
+    union   GPDTOGGLE_REG                    GPDTOGGLE;                    // GPIO D Data Toggle Register (GPIO96 to 127) 
     union   GPEDAT_REG                       GPEDAT;                       // GPIO E Data Register (GPIO128 to 159)
     union   GPESET_REG                       GPESET;                       // GPIO E Data Set Register (GPIO128 to 159)
     union   GPECLEAR_REG                     GPECLEAR;                     // GPIO E Data Clear Register (GPIO128 to 159)
-    union   GPETOGGLE_REG                    GPETOGGLE;                    // GPIO E Data Toggle Register (GPIO128 to 159)
+    union   GPETOGGLE_REG                    GPETOGGLE;                    // GPIO E Data Toggle Register (GPIO128 to 159) 
     union   GPFDAT_REG                       GPFDAT;                       // GPIO F Data Register (GPIO160 to 168)
     union   GPFSET_REG                       GPFSET;                       // GPIO F Data Set Register (GPIO160 to 168)
     union   GPFCLEAR_REG                     GPFCLEAR;                     // GPIO F Data Clear Register (GPIO160 to 168)
-    union   GPFTOGGLE_REG                    GPFTOGGLE;                    // GPIO F Data Toggle Register (GPIO160 to 168)
+    union   GPFTOGGLE_REG                    GPFTOGGLE;                    // GPIO F Data Toggle Register (GPIO160 to 168) 
 };
 
 //---------------------------------------------------------------------------
