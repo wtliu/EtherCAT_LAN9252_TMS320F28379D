@@ -54,6 +54,7 @@ SECTIONS
 {
    codestart        : > BEGIN,     PAGE = 0
    ramfuncs         : > RAMM0      PAGE = 0
+   .TI.ramfunc      : > RAMM0      PAGE = 0
    .text            : >>RAMLS1 | RAMLS2 | RAMLS3 | RAMLS4 | RAMGS0 | RAMGS1 | RAMGS2,   PAGE = 0
    .cinit           : > RAMLS0,     PAGE = 0
    .pinit           : >>RAMM0 | RAMD0,     PAGE = 0
@@ -61,9 +62,9 @@ SECTIONS
    .reset           : > RESET,     PAGE = 0, TYPE = DSECT /* not used, */
 
    .stack           : > RAMM1,     PAGE = 1
-   .ebss            : > RAMLS5,    PAGE = 1
+   .ebss            : > RAMGS5,    PAGE = 1
    .econst          : > RAMGS4,    PAGE = 1
-   .esysmem         : > RAMGS4,    PAGE = 1
+   .esysmem         : > RAMGS8,    PAGE = 1,  ALIGN(4)
    Filter_RegsFile  : > RAMGS4,	   PAGE = 1
 
    ramgs0           : > RAMGS4,    PAGE = 1

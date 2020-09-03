@@ -177,19 +177,19 @@ volatile struct DAC_REGS DacbRegs;
 volatile struct DAC_REGS DaccRegs;
 //----------------------------------------
 
-#ifdef __cplusplus
-#pragma DATA_SECTION("Cla1RegsFile")
-#else
-#pragma DATA_SECTION(Cla1Regs,"Cla1RegsFile");
-#endif
-volatile struct CLA_REGS Cla1Regs;
-//----------------------------------------
-#ifdef __cplusplus
-#pragma DATA_SECTION("Cla1SoftIntRegsFile")
-#else
-#pragma DATA_SECTION(Cla1SoftIntRegs,"Cla1SoftIntRegsFile");
-#endif
-volatile struct CLA_SOFTINT_REGS Cla1SoftIntRegs;
+//#ifdef __cplusplus
+//#pragma DATA_SECTION("Cla1RegsFile")
+//#else
+//#pragma DATA_SECTION(Cla1Regs,"Cla1RegsFile");
+//#endif
+//volatile struct CLA_REGS Cla1Regs;
+////----------------------------------------
+//#ifdef __cplusplus
+//#pragma DATA_SECTION("Cla1SoftIntRegsFile")
+//#else
+//#pragma DATA_SECTION(Cla1SoftIntRegs,"Cla1SoftIntRegsFile");
+//#endif
+//volatile struct CLA_SOFTINT_REGS Cla1SoftIntRegs;
 //----------------------------------------
 #ifdef __cplusplus
 #pragma DATA_SECTION("ClkCfgRegsFile")

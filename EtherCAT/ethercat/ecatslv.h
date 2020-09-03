@@ -1,8 +1,3 @@
-/*
-* This source file is part of the EtherCAT Slave Stack Code licensed by Beckhoff Automation GmbH & Co KG, 33415 Verl, Germany.
-* The corresponding license agreement applies. This hint shall not be removed.
-*/
-
 /**
  * \addtogroup ESM EtherCAT State Machine
  * @{
@@ -12,11 +7,8 @@
 \file ecatslv.h
 \author EthercatSSC@beckhoff.com
 
-\version 5.12
+\version 5.11
 
-<br>Changes to version V5.11:<br>
-V5.12 COE4: add timestamp object (0x10F8) and update diagnosis handling<br>
-V5.12 ECAT6: remove mailbox SyncManager if no mailbox is supported (SM0 Output, SM1 Input)<br>
 <br>Changes to version V5.10:<br>
 V5.11 ECAT10: change PROTO handling to prevent compiler errors<br>
 V5.11 ECAT4: enhance SM/Sync monitoring for input/output only slaves<br>
@@ -33,19 +25,19 @@ V5.10 ECAT13: Update Synchronisation handling (FreeRun,SM Sync, Sync0, Sync1)<br
 V5.01 : Start file change log
  */
 
+#ifndef _ECATSLV_H_
+#define _ECATSLV_H_
+
 /*-----------------------------------------------------------------------------------------
 ------
 ------    Includes
 ------
 -----------------------------------------------------------------------------------------*/
 
-#include "ecat_def.h"
+#include "../ethercat/ecat_def.h"
 
-#include  "esc.h"
-#include "9252_HW.h"
-
-#ifndef _ECATSLV_H_
-#define _ECATSLV_H_
+#include  "../ethercat/esc.h"
+#include "9252_hw.h"
 
 
 /*-----------------------------------------------------------------------------------------
@@ -240,9 +232,10 @@ V5.01 : Start file change log
 #define    ALSTATUSCODE_NOERROR                        0x0000 /**< \brief No error*/
 #define    ALSTATUSCODE_UNSPECIFIEDERROR               0x0001 /**< \brief Unspecified error*/
 #define    ALSTATUSCODE_NOMEMORY                       0x0002 /**< \brief No Memory*/
-#define    ALSTATUSCODE_INVALID_REVISION               0x0004 /**< \brief Output/Input mapping is not valid for this hardware or software revision (0x1018:03)*/
+/* ECATCHANGE_START(V5.11) ECAT9*/
 #define    ALSTATUSCODE_FW_SII_NOT_MATCH               0x0006 /**< \brief Firmware and EEPROM do not match. Slave needs BOOT-INIT transition*/
 #define    ALSTATUSCODE_FW_UPDATE_FAILED               0x0007 /**< \brief Firmware update not successful. Old firmware still running*/
+/* ECATCHANGE_END(V5.11) ECAT9*/
 #define    ALSTATUSCODE_INVALIDALCONTROL               0x0011 /**< \brief Invalid requested state change*/
 #define    ALSTATUSCODE_UNKNOWNALCONTROL               0x0012 /**< \brief Unknown requested state*/
 #define    ALSTATUSCODE_BOOTNOTSUPP                    0x0013 /**< \brief Bootstrap not supported*/
@@ -290,12 +283,7 @@ V5.01 : Start file change log
 #define    ALSTATUSCODE_EE_NOACCESS                    0x0050 /**< \brief EEPROM no access*/
 #define    ALSTATUSCODE_EE_ERROR                       0x0051 /**< \brief EEPROM Error*/
 #define    ALSTATUSCODE_EXT_HARDWARE_NOT_READY         0x0052 /**< \brief External hardware not ready. This AL Status Code should be used if the EtherCAT-Slave refused the state transition due to an external connection to another device or signal is missing*/
-#define    ALSTATUSCODE_DEVICE_IDENT_VALUE_UPDATED     0x0061 /**< \brief In legacy identification mode (dip switch mapped to register 0x12) this error is returned if the EEPROM ID value does not match to dipswitch value*/
 #define    ALSTATUSCODE_MODULE_ID_LIST_NOT_MATCH       0x0070 /**< \brief Detected Module Ident List (0xF030) and Configured Module Ident List (0xF050) does not match*/
-#define    ALSTATUSCODE_SUPPLY_VOLTAGE_TOO_LOW         0x0080 /**< \brief The slave supply voltage is too low*/
-#define    ALSTATUSCODE_SUPPLY_VOLTAGE_TOO_HIGH        0x0081 /**< \brief The slave supply voltage is too high*/
-#define    ALSTATUSCODE_TEMPERATURE_TOO_LOW            0x0080 /**< \brief The slave temperature is too low*/
-#define    ALSTATUSCODE_TEMPERATURE_TOO_HIGH           0x0081 /**< \brief The slave temperature is too high*/
                                                               
 
                                                               
@@ -303,8 +291,10 @@ V5.01 : Start file change log
 -    Configured Sync Type (0x1C32.1 / 0x1C33.1)
 -----------------------------------------------*/
 #define     SYNCTYPE_FREERUN            0x0000 /**< \brief Sync type FreeRun*/
+/*ECATCHANGE_START(V5.11) ESM7*/
 #define     SYNCTYPE_SM_SYNCHRON        0x0001 /**< \brief SyncManager synchron (synchron to the corresponding SM, 0x1C32.1 -> SM2 ; 0x1C33.1 -> SM3)  */
 #define     SYNCTYPE_SM2_SYNCHRON       0x0022 /**< \brief SyncManager2 synchron (only used for 0x1C33.1)*/
+/*ECATCHANGE_END(V5.11) ESM7*/
 #define     SYNCTYPE_DCSYNC0            0x0002 /**< \brief Sync type Sync0 synchron*/
 #define     SYNCTYPE_DCSYNC1            0x0003 /**< \brief Sync type Sync1 synchron*/
 
@@ -322,6 +312,12 @@ V5.01 : Start file change log
 #define     PROCESS_OUTPUT_EVENT                ((UINT16) 0x0400) /**< \brief Output process data write event*/
 #define     PROCESS_INPUT_EVENT                 ((UINT16) 0x0800) /**< \brief Input process data read event*/
 
+
+#ifndef MAX_PD_SYNC_MAN_CHANNELS
+    #define    MAX_PD_SYNC_MAN_CHANNELS         2 /**< \brief maximum number of process data SyncManager channels*/
+#endif
+#define    MAX_NUMBER_OF_SYNCMAN                ((MAX_PD_SYNC_MAN_CHANNELS)+2) /**< \brief Maximum number of SyncManagers (max number of Pd SM + 2 mailbox SyncManager)*/
+
 #define    MAILBOX_WRITE                        0 /**< \brief SyncManager ID for MBoxOut (master to slave)*/
 #define    MAILBOX_READ                         1 /**< \brief SyncManager ID for MBoxIn (slave to master)*/
 #define    PROCESS_DATA_OUT                     2 /**< \brief SyncManager ID for output process data (master to slave)*/
@@ -330,21 +326,14 @@ V5.01 : Start file change log
 
 
 
-/*---------------------------------------------
--     Codes for LED
-      bit 7: invert flag
-      bit 6: toggle    (if toggle == 1 and number of flashes == 0 => infinite toggle)
-      bit 5: fast toggle flag (50ms cycle)
-      bit 4-0: number of flashes
------------------------------------------------*/
-#define    LED_OFF                      0x00 /**< \brief LED off*/
-#define    LED_FLICKERING               0x60 /**< \brief LED flickering*/
-#define    LED_BLINKING                 0x40 /**< \brief LED blinking*/
-#define    LED_SINGLEFLASH              0x41 /**< \brief LED single flash*/
-#define    LED_DOUBLEFLASH              0x42 /**< \brief LED double flash*/
-#define    LED_INVERT_DOUBLEFLASH       0xC2 /**< \brief LED invert double flash*/
-#define    LED_ON                       0x01 /**< \brief LED on*/
 
+#define    LED_OFF                      0x00 /**< \brief LED off*/
+#define    LED_FLICKERING               0x0E /**< \brief LED flickering*/
+#define    LED_BLINKING                 0x0D /**< \brief LED blinking*/
+#define    LED_SINGLEFLASH              0x01 /**< \brief LED single flash*/
+#define    LED_DOUBLEFLASH              0x02 /**< \brief LED double flash*/
+#define    LED_ON                       0x0F /**< \brief LED on*/
+#define    LED_OVERRIDE                 0x10 /**< \brief LED override (required to force the LED value within the ESC)*/
 
 
 #define    MEMORY_START_ADDRESS            0x1000 /**< \brief ESC DPRAM start address*/
@@ -360,7 +349,9 @@ V5.01 : Start file change log
 
 #endif //_ECATSLV_H_
 
+/* ECATCHANGE_START(V5.11) ECAT10*/
 #if defined(_ECATSLV_) && (_ECATSLV_ == 1)
+/* ECATCHANGE_END(V5.11) ECAT10*/
     #define PROTO
 #else
     #define PROTO extern
@@ -409,9 +400,6 @@ PROTO UINT16                            Sync1WdValue; /**< \brief Sync1 watchdog
 PROTO UINT16                            LatchInputSync0Value; /**< \brief Sync0 event on which the inputs shall be latched and copied to the ESC buffer. If the inputs shall be latched base don Sync1 the value is set to 0.*/
 PROTO UINT16                            LatchInputSync0Counter; /**< \brief Sync0 counter used to get the Sync0 event to latch the Inputs. */
 
-/*ECATCHANGE_START(V5.12) COE4*/
-PROTO BOOL b32BitDc;
-/*ECATCHANGE_END(V5.12) COE4*/
 
 
 
@@ -428,13 +416,15 @@ PROTO BOOL                              bEcatWaitForAlControlRes; /**< \brief Co
 
 PROTO UINT16                            nEcatStateTrans; /**< \brief Current state transition*/
 
-PROTO UINT8                             u8EcatErrorLed; /**< \brief Current value of the error LED*/
+PROTO UINT8                             u8EcatErrorLed; /**< \brief Current value of the run LED*/
 
-PROTO UINT8                             u8EcatRunLed; /**< \brief Current value of the run LED*/
+PROTO UINT8                             u8EcatRunLed; /**< \brief Current value of the error LED*/
+/*ECATCHANGE_START(V5.11) ECAT4*/
 
 PROTO UINT16                            nPdInputSize; /**< \brief Contains the input size (SM3 size)/SM2 if no outputs are supported, has to be written by the application*/
 
 PROTO UINT16                            nPdOutputSize; /**< \brief Contains the output size (SM2 size), has to be written by the application*/
+/*ECATCHANGE_END(V5.11) ECAT4*/
 
 PROTO UINT8                             nMaxSyncMan; /**< \brief Contains the maximum number of Sync Manager channels, will be initialized in ECAT_Main*/
 
@@ -442,9 +432,8 @@ PROTO UINT16                            nMaxEscAddress; /**< \brief Max supporte
 
 PROTO UINT8                             nAlStatus; /**< \brief Contains the actual AL Status, will be written in AL_ControlInd*/
 
-PROTO BOOL                              bExplicitDevIdRequested; /**< \brief Indicates if 0x0120.5 is set*/
 
-PROTO UINT16                            EcatWdValue; /**< \brief Contains the value of the watchdog in ms, will be written in StartInputHandler. 
+PROTO UINT16                            EcatWdValue; /**< \brief Contains the value of the watchdog in 100us, will be written in StartInputHandler. 
                                                                     In case that the ESC watchdog feature is used this variable just indicates if the watchdog is enabled or disabled*/
 PROTO    UINT16                         nEscAddrOutputData; /**< \brief Contains the SM address for the output process data*/
 PROTO    UINT16                         nEscAddrInputData; /**< \brief Contains the SM address for the input process data*/
@@ -455,9 +444,11 @@ PROTO    UINT16                         nEscAddrInputData; /**< \brief Contains 
 ------    Global Functions
 ------
 -----------------------------------------------------------------------------------------*/
+/*ECATCHANGE_START(V5.11) HW1*/
 PROTO void EnableSyncManChannel(UINT8 channel);
 PROTO void DisableSyncManChannel(UINT8 channel);
 PROTO TSYNCMAN ESCMEM *GetSyncMan(UINT8 channel);
+/*ECATCHANGE_END(V5.11) HW1*/
 PROTO void SetALStatus(UINT8 alStatus, UINT16 alStatusCode);
 PROTO void AL_ControlInd(UINT8 alControl, UINT16 alStatusCode);
 PROTO void DC_CheckWatchdog(void);

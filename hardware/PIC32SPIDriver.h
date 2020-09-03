@@ -51,8 +51,8 @@
 // *****************************************************************************
 
 //#include <plib.h>
-#include "ecat_def.h"
-#include "SPIDriver.h"
+#include "../EtherCAT/ethercat/ecat_def.h"
+#include "../hardware/SPIDriver.h"
 
 #ifndef PIC32SPIDRIVER_H
 #define	PIC32SPIDRIVER_H

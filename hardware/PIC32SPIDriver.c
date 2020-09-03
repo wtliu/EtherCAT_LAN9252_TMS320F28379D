@@ -115,7 +115,7 @@ void ESC_initSPIFIFO(void)
     /*清除中断标志*/
     SpiaRegs.SPISTS.all=0x0000;        // Clear Status bits (TxBufFull,INT, Overrun)
     //配置低速外设时钟
-    ClkCfgRegs.LOSPCP.all = 0x0; // 0:LSPCLK = SYSCLK/1 = 200M; 1: = sysclk/2 = 100M
+    //ClkCfgRegs.LOSPCP.all = 0x0; // 0:LSPCLK = SYSCLK/1 = 200M; 1: = sysclk/2 = 100M
     //配置SPI模块时钟：
      /*配置时钟分频为4*/
     SpiaRegs.SPIBRR.all=0x003;     // Baud Rate = LSPCLK / (SPIBRR+1) [LSPCLK=SysClk/4 by]
@@ -197,7 +197,8 @@ void ESC_initSPIAGpio(void)
 void ESC_initHW()
 {
     // Initialize system clock
-    InitSysCtrl();
+    //InitSysCtrl();
+    Device_init();
     // Disable global interrupt
     DINT;
     //  Initialize the PIE control registers to their default state.

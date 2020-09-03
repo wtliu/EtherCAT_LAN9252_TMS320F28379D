@@ -266,7 +266,7 @@ typedef unsigned long bp_32 __attribute__((byte_peripheral));
 //
 #include "F2837xD_adc.h"
 #include "F2837xD_analogsubsys.h"
-#include "F2837xD_cla.h"
+//#include "F2837xD_cla.h"
 #include "F2837xD_cmpss.h"
 #include "F2837xD_cputimer.h"
 #include "F2837xD_dac.h"

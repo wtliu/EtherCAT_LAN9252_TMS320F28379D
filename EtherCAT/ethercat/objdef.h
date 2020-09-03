@@ -1,8 +1,3 @@
-/*
-* This source file is part of the EtherCAT Slave Stack Code licensed by Beckhoff Automation GmbH & Co KG, 33415 Verl, Germany.
-* The corresponding license agreement applies. This hint shall not be removed.
-*/
-
 /**
  * \addtogroup CoE CAN Application Profile over EtherCAT
  * @{
@@ -31,16 +26,15 @@ V5.10 ECAT8: Update Datatype defines according ETG.1020<br>
 V5.01 : Start file change log
  */
 
+#ifndef _OBJDEF_H_
+#define _OBJDEF_H_
+
 /*-----------------------------------------------------------------------------------------
 ------
 ------    Includes
 ------
 -----------------------------------------------------------------------------------------*/
-#include "sdoserv.h"
-
-
-#ifndef _OBJDEF_H_
-#define _OBJDEF_H_
+#include "../ethercat/sdoserv.h"
 
 
 /*-----------------------------------------------------------------------------------------
@@ -56,14 +50,9 @@ V5.01 : Start file change log
 #define     DEFTYPE_BOOLEAN             0x0001 /**< \brief BOOLEAN*/
 #define     DEFTYPE_INTEGER8            0x0002 /**< \brief INTEGER8*/
 #define     DEFTYPE_INTEGER16           0x0003 /**< \brief INTEGER16*/
-#define     DEFTYPE_INTEGER24           0x0010 /**< \brief INTEGER24*/
 #define     DEFTYPE_INTEGER32           0x0004 /**< \brief INTEGER32*/
-#define     DEFTYPE_INTEGER40           0x0012 /**< \brief INTEGER40*/
-#define     DEFTYPE_INTEGER48           0x0013 /**< \brief INTEGER48*/
-#define     DEFTYPE_INTEGER56           0x0014 /**< \brief INTEGER56*/
 #define     DEFTYPE_UNSIGNED8           0x0005 /**< \brief UNSIGNED8*/
 #define     DEFTYPE_UNSIGNED16          0x0006 /**< \brief UNSIGNED16*/
-#define     DEFTYPE_UNSIGNED24          0x0016 /**< \brief UNSIGNED24*/
 #define     DEFTYPE_UNSIGNED32          0x0007 /**< \brief UNSIGNED32*/
 #define     DEFTYPE_REAL32              0x0008 /**< \brief REAL32*/
 #define     DEFTYPE_VISIBLESTRING       0x0009 /**< \brief VISIBLE_STRING*/
@@ -122,7 +111,9 @@ V5.01 : Start file change log
 -    Flags for supported Synctypes (0x1C32.4 / 0x1C33.4)
 -----------------------------------------------*/
 
+/*ECATCHANGE_START(V5.11) COE2*/
 #define     SYNCTYPE_FREERUNSUPP        0x0001 /**< \brief FreeRun supported*/
+/*ECATCHANGE_END(V5.11) COE2*/
 #define     SYNCTYPE_SYNCHRONSUPP       0x0002 /**< \brief SyncManager synchron supported*/
 #define     SYNCTYPE_DCSYNC0SUPP        0x0004 /**< \brief Sync0 synchron supported*/
 #define     SYNCTYPE_DCSYNC1SUPP        0x0008 /**< \brief Sync1 synchron supported*/
@@ -166,8 +157,8 @@ typedef struct OBJ_STRUCT_PACKED_START
 {
     UINT16    subindex0;/**< \brief SubIndex0*/
     UINT16    u16SyncType; /**< \brief SunbIndex 001: Sync type*/
-    UINT32    u32CycleTime;/**< \brief SunbIndex 002: Cycle time */
-    UINT32    u32Subindex003;/**< \brief SunbIndex 003: Shift time (not supported, variable is only used as a place holder)*/
+    UINT32    u32CycleTime;/**< \brief SunbIndex 002: Cycle time*/
+    UINT32    u32ShiftTime;/**< \brief SunbIndex 003: Shift time (not supported, variable is only used as a place holder)*/
     UINT16    u16SyncTypesSupported;/**< \brief SunbIndex 004: Supported Sync types*/
     UINT32    u32MinCycleTime;/**< \brief SunbIndex 005: Min cycle time*/
     UINT32    u32CalcAndCopyTime;/**< \brief SunbIndex 006: Calc and Copy time*/
@@ -203,7 +194,9 @@ TCYCLEDIAG;
 typedef struct OBJ_STRUCT_PACKED_START {
    UINT16   u16SubIndex0; /**< \brief SubIndex0*/
    UINT32   u32LocalErrorReaction; /**< \brief Local error reaction*/
+/*ECATCHANGE_START(V5.11) COE3*/
    UINT16   u16SyncErrorCounterLimit; /**< \brief Sync error counter limit*/
+/*ECATCHANGE_END(V5.11) COE3*/
 } OBJ_STRUCT_PACKED_END
 TOBJ10F1;
 
@@ -215,7 +208,9 @@ TOBJ10F1;
 ------    Global variables
 ------
 -----------------------------------------------------------------------------------------*/
+/* ECATCHANGE_START(V5.11) ECAT10*/
 #if defined(_OBJDEF_) && (_OBJDEF_ == 1)
+/* ECATCHANGE_END(V5.11) ECAT10*/
     #define PROTO
 #else
     #define PROTO extern
@@ -253,7 +248,9 @@ PROTO TSYNCMANPAR MBXMEM sSyncManInPar;
  * Sync error counter limit : MAX_SM_EVENT_MISSED
  */
 PROTO TOBJ10F1 sErrorSettings
+/* ECATCHANGE_START(V5.11) ECAT10*/
 #if defined(_OBJDEF_) && (_OBJDEF_ == 1)
+/* ECATCHANGE_END(V5.11) ECAT10*/
 = {2, 0x01, MAX_SM_EVENT_MISSED}
 #endif
 ;
@@ -263,7 +260,9 @@ PROTO TOBJ10F1 sErrorSettings
  * \brief Default entry name "SubIndex 000"
  */
 PROTO    CHAR OBJMEM         aSubindexDesc[13]
+/* ECATCHANGE_START(V5.11) ECAT10*/
 #if defined(_OBJDEF_) && (_OBJDEF_ == 1)
+/* ECATCHANGE_END(V5.11) ECAT10*/
  = { "SubIndex 000" }
 #endif
 ;

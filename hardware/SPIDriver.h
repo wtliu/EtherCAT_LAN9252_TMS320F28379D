@@ -54,7 +54,7 @@
 #ifndef SPIDRIVER_H
 #define	SPIDRIVER_H
 
-#include "ecat_def.h"
+#include "../EtherCAT/ethercat/ecat_def.h"
 
 #ifdef	__cplusplus
 extern "C" {

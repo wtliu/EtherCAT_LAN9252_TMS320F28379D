@@ -319,7 +319,7 @@ extern "C" {
 #include "F2837xD_cputimervars.h"
 #include "F2837xD_Cla_defines.h"            // Macros used for CLA examples.
 #include "F2837xD_EPwm_defines.h"           // Macros used for PWM examples.
-#include "F2837xD_Adc_defines.h"            // Macros used for ADC examples.
+//#include "F2837xD_Adc_defines.h"            // Macros used for ADC examples.
 #include "F2837xD_Emif_defines.h"           // Macros used for EMIF examples.
 #include "F2837xD_Gpio_defines.h"           // Macros used for GPIO support code
 #include "F2837xD_I2c_defines.h"            // Macros used for I2C examples.

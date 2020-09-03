@@ -78,10 +78,19 @@ SECTIONS
                          RUN_END(_RamfuncsRunEnd),
                          PAGE = 0, ALIGN(4)
 
+   .TI.ramfunc         : LOAD = FLASHD,
+                         RUN = RAMLS0 | RAMLS1 | RAMLS2 |RAMLS3,
+                         LOAD_START(_RamfuncsLoadStart),
+                         LOAD_SIZE(_RamfuncsLoadSize),
+                         LOAD_END(_RamfuncsLoadEnd),
+                         RUN_START(_RamfuncsRunStart),
+                         RUN_SIZE(_RamfuncsRunSize),
+                         RUN_END(_RamfuncsRunEnd),
+                         PAGE = 0, ALIGN(4)
    /* Allocate uninitalized data sections: */
    .stack              : > RAMM1        PAGE = 1
    .ebss               : >> RAMLS5 | RAMGS0 | RAMGS1       PAGE = 1
-   .esysmem            : > RAMLS5       PAGE = 1
+   .esysmem            : > RAMGS4       PAGE = 1, ALIGN(4)
 
    /* Initalized sections go in Flash */
    .econst             : >> FLASHF | FLASHG | FLASHH      PAGE = 0, ALIGN(4)

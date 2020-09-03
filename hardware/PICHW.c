@@ -17,7 +17,7 @@
 
 // Included files
 
-#include "ecatappl.h"
+#include <ecatappl.h>
 #include "9252_HW.h"
 
 /* ************************************************************************** */
@@ -45,14 +45,11 @@
 ------
 -----------------------------------------------------------------------------------------*/
 
-#define    ESC_SPI_INT_GPIO             55U
+#define    ESC_SPI_INT_GPIO            55U
 
-#define    ESC_INT_REQ                 (PieCtrlRegs.PIEACK.all) //ESC Interrupt (INT1) state
-
-#define    ACK_ESC_INT                 {(ESC_INT_REQ)=PIEACK_GROUP1;}
+#define    ACK_ESC_INT                 {(PieCtrlRegs.PIEACK.all)=PIEACK_GROUP1;}
 
 #define    INIT_ESC_INT                ESC_configureIRQGPIO()
-
 /*-----------------------------------------------------------------------------------------
 ------
 ------    SYNC0 Interrupt

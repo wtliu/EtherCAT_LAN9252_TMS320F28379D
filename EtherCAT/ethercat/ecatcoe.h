@@ -1,8 +1,3 @@
-/*
-* This source file is part of the EtherCAT Slave Stack Code licensed by Beckhoff Automation GmbH & Co KG, 33415 Verl, Germany.
-* The corresponding license agreement applies. This hint shall not be removed.
-*/
-
 /**
  * \addtogroup CoE CAN Application Profile over EtherCAT
  * @{
@@ -20,16 +15,16 @@ V5.11 ECAT10: change PROTO handling to prevent compiler errors<br>
 <br>Changes to version - :<br>
 V5.01 : Start file change log
  */
+#ifndef _ECATCOE_H_
+
+#define _ECATCOE_H_
 
 /*-----------------------------------------------------------------------------------------
 ------
 ------    Includes
 ------
 -----------------------------------------------------------------------------------------*/
-#include "mailbox.h"
-
-#ifndef _ECATCOE_H_
-#define _ECATCOE_H_
+#include "../ethercat/mailbox.h"
 
 /*-----------------------------------------------------------------------------------------
 ------
@@ -83,7 +78,9 @@ TCOEMBX;
 
 #endif //_ECATCOE_H_
 
+/* ECATCHANGE_START(V5.11) ECAT10*/
 #if defined(_ECATCOE_) && (_ECATCOE_ == 1)
+/* ECATCHANGE_END(V5.11) ECAT10*/
     #define PROTO
 #else
     #define PROTO extern
@@ -108,7 +105,9 @@ PROTO    TMBX MBXMEM * VARMEM pCoeSendStored;                /** if the mailbox 
 
 PROTO   void     COE_Init(void);
 PROTO   UINT8    COE_ServiceInd(TCOEMBX MBXMEM *pCoeMbx);
+/*ECATCHANGE_START(V5.11) COE4*/
 PROTO   UINT8     COE_ContinueInd(TMBX MBXMEM * pMbx);
+/*ECATCHANGE_END(V5.11) COE4*/
 
 #undef PROTO
 /** @}*/

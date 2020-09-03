@@ -1,8 +1,3 @@
-/*
-* This source file is part of the EtherCAT Slave Stack Code licensed by Beckhoff Automation GmbH & Co KG, 33415 Verl, Germany.
-* The corresponding license agreement applies. This hint shall not be removed.
-*/
-
 /**
  * \addtogroup CoE CAN Application Profile over EtherCAT
  * @{
@@ -14,11 +9,8 @@
 \author EthercatSSC@beckhoff.com
 \brief SDO Service definitions
 
-\version 5.12
+\version 5.11
 
-<br>Changes to version V5.11:<br>
-V5.12 ECAT2: big endian changes<br>
-V5.12 MBX3: handle incomplete mailbox communication<br>
 <br>Changes to version V5.10:<br>
 V5.11 ECAT10: change PROTO handling to prevent compiler errors<br>
 V5.11 SDO10: add new SDO abort code 0x6010004 (complete access not supported)<br>
@@ -28,17 +20,17 @@ V5.10 SDO3: Add new SDO Abort Code (0x06090033)<br>
 V5.01 : Start file change log
  */
 
+#ifndef _SDOSERV_H_
+
+#define _SDOSERV_H_
 
 /*-----------------------------------------------------------------------------------------
 ------
 ------    Includes
 ------
 -----------------------------------------------------------------------------------------*/
-#include "ecatcoe.h"
+#include "../ethercat/ecatcoe.h"
 
-
-#ifndef _SDOSERV_H_
-#define _SDOSERV_H_
 
 /*-----------------------------------------------------------------------------------------
 ------
@@ -99,24 +91,19 @@ V5.01 : Start file change log
 typedef struct MBX_STRUCT_PACKED_START
 {
     UINT16 Sdo[2]; /**< \brief 32Bit SDO header buffer*/
-/* ECATCHANGE_START(V5.12) ECAT2*/
             #define     SDOHEADER_COMMANDOFFSET             0 /**< \brief Memory offset for the command*/
             #define     SDOHEADER_INDEXLOOFFSET             0 /**< \brief Memory offset for the low Byte of the object index*/
             #define     SDOHEADER_INDEXHIOFFSET             1 /**< \brief Memory offset for the high Byte of the object index*/
             #define     SDOHEADER_SUBINDEXOFFSET            1 /**< \brief Memory offset for subindex*/
             #define     SDOHEADER_COMMANDMASK               0xFF /**< \brief Mask to get the command Byte*/
-            #define     SDOHEADER_COMMANDSHIFT              0 /***< \brief Shift to get the command byte*/
             #define     SDOHEADER_INDEXLOSHIFT              8 /**< \brief Shift to get the low Byte of the object index*/
-            #define     SDOHEADER_INDEXLOMASK               0x00FF /** < \brief Mask to get the low byte of the object index */
             #define     SDOHEADER_INDEXHIMASK               0xFF /**< \brief Mask to get the high byte of the object index*/
             #define     SDOHEADER_SUBINDEXSHIFT             8 /**< \brief Shift to get the subindex*/
-            #define     SDOHEADER_SUBINDEXMASK              0xFF /**< \brief Mask to get the subindex*/
-/* ECATCHANGE_END(V5.12) ECAT2*/
 }MBX_STRUCT_PACKED_END
 TINITSDOHEADER;
 
 
-#define INITSDO_HEADER_SIZE     4 /**< \brief Size of the SDO header*/
+#define INITSDO_HEADER_SIZE     SIZEOF(TINITSDOHEADER) /**< \brief Size of the SDO header*/
 
 
 /**
@@ -319,7 +306,9 @@ TABORTSDOTRANSFERREQMBX;
 #define     ABORT_WRITE_ONLY_ENTRY                                          0x06010001 /**< \brief Write only entry*/
 #define     ABORT_READ_ONLY_ENTRY                                           0x06010002 /**< \brief Read only entry*/
 #define     ABORT_ENTRY_CANT_BE_WRITTEN_SI0_NOT_0                           0x06010003 /**< \brief Entry can not be written because Subindex0 is not 0*/
+/* ECATCHANGE_START(V5.11) SDO10*/
 #define     ABORT_COMPLETE_ACCESS_NOT_SUPPORTED                             0x06010004 /**< \brief The object can not be accessed via complete access*/
+/* ECATCHANGE_END(V5.11) SDO10*/
 #define     ABORT_OBJECT_NOT_EXISTING                                       0x06020000 /**< \brief Object not existing*/
 #define     ABORT_OBJECT_CANT_BE_PDOMAPPED                                  0x06040041 /**< \brief Object can not be mapped to PDO*/
 #define     ABORT_MAPPED_OBJECTS_EXCEED_PDO                                 0x06040042 /**< \brief Mapped Object exceeds PDO*/
@@ -375,7 +364,9 @@ TABORTSDOTRANSFERREQMBX;
 #define     ABORTIDX_IN_THIS_STATE_DATA_CANNOT_BE_READ_OR_STORED            0x1A /**< \brief Index of "Data can not be read or written in the current state"*/
 #define     ABORTIDX_NO_OBJECT_DICTIONARY_IS_PRESENT                        0x1B /**< \brief Index of "Object is not in the object dictionary"*/
 #define     ABORTIDX_ENTRY_CANT_BE_WRITTEN_SI0_NOT_0                        0x1C /**< \brief Index of "Entry can not be written because Subindex0 is not 0"*/
+/* ECATCHANGE_START(V5.11) SDO10*/
 #define     ABORTIDX_COMPLETE_ACCESS_NOT_SUPPORTED                          0x1D /**< \brief The object can not be accessed via complete access*/
+/* ECATCHANGE_END(V5.11) SDO10*/
 #define     ABORTIDX_WORKING                                                0xFF /**< \brief Index of application is handling the SDO request*/
 /** @}*/
 /** @}*/
@@ -602,7 +593,9 @@ TSDOINFORMATION;
 ------    Global Variables
 ------
 -----------------------------------------------------------------------------------------*/
+/* ECATCHANGE_START(V5.11) ECAT10*/
 #if defined(_SDOSERV_) && (_SDOSERV_ == 1)
+/* ECATCHANGE_END(V5.11) ECAT10*/
     #define PROTO
 #else
     #define PROTO extern
@@ -643,10 +636,6 @@ PROTO    UINT8 SDOS_SdoInfoInd(TSDOINFORMATION MBXMEM *pSdoInfoInd);
 PROTO    UINT8 SDOS_SdoInd(TINITSDOMBX MBXMEM *pSdoInd);
 
 PROTO    void  SDOS_SdoRes(UINT8 abort, UINT32 objLength, UINT16 MBXMEM *pData);
-/* ECATCHANGE_START(V5.12) MBX3*/
-PROTO    void  SODS_ClearPendingResponse();
-/* ECATCHANGE_END(V5.12) MBX3*/
-
 
 #undef PROTO
 /** @}*/

@@ -1,25 +1,15 @@
-/*
-* This source file is part of the EtherCAT Slave Stack Code licensed by Beckhoff Automation GmbH & Co KG, 33415 Verl, Germany.
-* The corresponding license agreement applies. This hint shall not be removed.
-*/
-
 /**
 \addtogroup EcatAppl EtherCAT application
 @{
 */
 
 /**
-\file applInterface.h
+\file applInterface.c
 \author EthercatSSC@beckhoff.com
 \brief Definition of the application interface functions
 
-\version 5.12
+\version 5.11
 
-<br>Changes to version V5.11:<br>
-V5.12 APPL1: add optional application function called from the main loop (after mbx and esm are executed)<br>
-V5.12 EEPROM3: implement a store EEPROM timeout handler<br>
-V5.12 EOE1: move icmp sample to the sampleappl,add EoE application interface functions<br>
-V5.12 FOE1: update new interface,move the FoE sample to sampleappl,add FoE application callback functions<br>
 <br>Changes to version - :<br>
 V5.10.1 : Start file change log
 */
@@ -34,23 +24,15 @@ V5.10.1 : Start file change log
 #ifndef _APPL_INTERFACE_H_
 #define _APPL_INTERFACE_H_
 
-#include "ecat_def.h"
+#include "../ethercat/ecat_def.h"
 #include <stdlib.h>
 #include <string.h>
-#include "esc.h"
-#include "ecatslv.h"
-#include "objdef.h"
-#include "ecatappl.h"
+#include "../ethercat/esc.h"
+#include "../ethercat/ecatslv.h"
+#include "../ethercat/objdef.h"
+#include "../ethercat/ecatappl.h"
 
 
-
-/*ECATCHANGE_START(V5.12) EOE1*/
-#include "eoeappl.h"
-/*ECATCHANGE_END(V5.12) EOE1*/
-
-/*ECATCHANGE_START(V5.12) FOE1*/
-#include "foeappl.h"
-/*ECATCHANGE_END(V5.12) FOE1*/
 
 #endif /*#ifndef _APPL_INTERFACE_H_*/
 
@@ -66,165 +48,39 @@ V5.10.1 : Start file change log
 ------
 -----------------------------------------------------------------------------------------*/
 
-
-
-/*ECATCHANGE_START(V5.12) EOE1*/
 /////////////////////////////////////////////////////////////////////////////////////////
 /**
-
-\param    pData     pointer to the received Ethernet frame
-\param    length    length of the received frame
-
-\brief    This function is called by the SSC if a new Ethernet frame is received via EoE 
-\brief    The response shall be send via "EOE_SendFrameRequest()"
+ \return   0 if successful or greater 0 in case of an error
+ 
+ \param    wordaddr      Word address of the EEPROM data to be read
+ 
+ \brief    This function shall copy EEPROM data to the ESC EEPROM data register (0x508:0x50F/0x50B).
+ \brief    The EEPROM data starting at the specified word address and the length specified with "EEPROM_READ_SIZE".
+ \brief    The data shall be copied to the ESC EEPROM buffer (ESC offset 0x508)
 *////////////////////////////////////////////////////////////////////////////////////////
-PROTO void(*pAPPL_EoeReceive)(UINT16 *pData, UINT16 length);
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/**
-
-\param    pMac                  pointer to configured MAC address
-\param    pIp                   pointer to configured IP address
-\param    pSubNet               pointer to configured Subnet mask address
-\param    pDefaultGateway       pointer to configured default gateway address
-\param    pDnsIp                pointer to configured DNS server IP address
-
-
-\brief    This function is called by the SSC if a new EoE settings are written
-*////////////////////////////////////////////////////////////////////////////////////////
-PROTO void(*pAPPL_EoeSettingInd)(UINT16 *pMac, UINT16 *pIp, UINT16 *pSubNet, UINT16 *pDefaultGateway, UINT16 *pDnsIp);
-/*ECATCHANGE_END(V5.12) EOE1*/
-
-
-/*ECATCHANGE_START(V5.12) FOE1*/
+PROTO UINT16 (* pAPPL_EEPROM_Read)(UINT32 wordaddr);
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /**
-\param     pName         Pointer to the name of the file (the pointer is null if the function is called due to a previous busy state)
-\param     nameSize      Length of the file name (the value is 0 if the function is called due to a previous busy state)
-\param     password      Password for the file read (the value is 0 if the function is called due to a previous busy state)
-\param     maxBlockSize  Maximum size of a data block (copied to pData)
-\param     pData         Destination pointer for the first FoE fragment
-                        
+\return   0 if successful or greater 0 in case of an error
 
+\param    wordaddr      Word address of the EEPROM data to be written
 
-\return                  block size:
-                            < FOE_MAXBUSY-101    (0x7F95)
-                         busy:
-                            FOE_MAXBUSY-100 (0%)    (0x7FFA - 0x64)
-                            ...
-                            FOE_MAXBUSY (100%) (0x7FFA)
-                         error:
-                            ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
-                            ECAT_FOE_ERRCODE_NOTFOUND (0x8001)
-                            ECAT_FOE_ERRCODE_ACCESS    (0x8002)
-                            ECAT_FOE_ERRCODE_DISKFULL (0x8003)
-                            ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
-                            ECAT_FOE_ERRCODE_EXISTS    (0x8006)
-                            ECAT_FOE_ERRCODE_NOUSER    (0x8007)
-
-\brief    The function is called when a file read request was received. The Foe fragments shall always have the length of "maxBlockSize" till the last file fragment.
-\brief    In case that the file size is a multiple of "maxBlockSize" 0 shall be returned after the last fragment.
-
+\brief    This function shall copy data from the ESC EEPROM data register (0x508:0x50F/0x50B) to the EEPROM memory.
+\brief    The EEPROM data starting at the specified word address and the length specified with "EEPROM_WRITE_SIZE".
 *////////////////////////////////////////////////////////////////////////////////////////
-PROTO UINT16 (*pAPPL_FoeRead)(UINT16 MBXMEM * pName, UINT16 nameSize, UINT32 password, UINT16 maxBlockSize, UINT16 *pData);
-
+PROTO UINT16(*pAPPL_EEPROM_Write)(UINT32 wordaddr);
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /**
-\param     offset        File offset which shall be transmitted next
-\param     maxBlockSize  Maximum size of a data block (copied to pData)
-\param     pData         Destination pointer for the next foe fragment
+\return   0 if successful or greater 0 in case of an error
 
-
-
-\return                  block size:
-                            < FOE_MAXBUSY-101    (0x7F95)
-                        busy:
-                            FOE_MAXBUSY-100 (0%)    (0x7FFA - 0x64)
-                            ...
-                            FOE_MAXBUSY (100%) (0x7FFA)
-                        error:
-                            ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
-                            ECAT_FOE_ERRCODE_NOTFOUND (0x8001)
-                            ECAT_FOE_ERRCODE_ACCESS    (0x8002)
-                            ECAT_FOE_ERRCODE_DISKFULL (0x8003)
-                            ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
-                            ECAT_FOE_ERRCODE_EXISTS    (0x8006)
-                            ECAT_FOE_ERRCODE_NOUSER    (0x8007)
-
-\brief    The function is called to transmit FoE read data 2 .. n (the slave received an acknowledge on a previous accepted file read request). The Foe fragments shall always have the length of "maxBlockSize" till the last file fragment.
-\brief    In case that the file size is a multiple of "maxBlockSize" 0 shall be returned after the last fragment.
-
+\brief    This function shall copy the EEPROM reload information to the ESC EEPROM data register (0x508:0x50F/0x50B).
+\brief    Read the ESC data sheet for the reload information (e.g. Beckhoff IPCore ESC Datasheet section II, clause 3.45.1)
 *////////////////////////////////////////////////////////////////////////////////////////
-PROTO UINT16(*pAPPL_FoeReadData)(UINT32 offset, UINT16 maxBlockSize, UINT16 *pData);
+PROTO UINT16(*pAPPL_EEPROM_Reload)(void);
 
 
-/////////////////////////////////////////////////////////////////////////////////////////
-/**
-\param     errorCode     Error code send by the EtherCAT master
-
-
-\brief    The function is called when the master has send an FoE Abort.
-
-*////////////////////////////////////////////////////////////////////////////////////////
-PROTO void(*pAPPL_FoeError)(UINT32 errorCode);
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/**
-\param     pName         Pointer to the name of the file
-\param     nameSize      Length of the file name
-\param     password      Password for the file read
-
-\return                 okay, or an error code
-                        0 (okay)
-                        ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
-                        ECAT_FOE_ERRCODE_NOTFOUND (0x8001)
-                        ECAT_FOE_ERRCODE_ACCESS    (0x8002)
-                        ECAT_FOE_ERRCODE_DISKFULL (0x8003)
-                        ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
-                        ECAT_FOE_ERRCODE_EXISTS    (0x8006)
-                        ECAT_FOE_ERRCODE_NOUSER    (0x8007)
-
-\brief    This function is called on a received FoE write request.
-\brief    (no busy response shall be returned by this function. If the slave requires some time to handle the incoming data the function pAPPL_FoeData() shall return a busy)
-
-
-*////////////////////////////////////////////////////////////////////////////////////////
-PROTO UINT16 (*pAPPL_FoeWrite)(UINT16 MBXMEM * pName, UINT16 nameSize, UINT32 password);
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/**
-\param     pData            Received file data
-\param 	   Size             Length of received file data
-\param 	   bDataFollowing   TRUE if more FoE Data requests are following
-
-\return                     okay, busy or an error code
-                            0 (okay)
-                            FOE_MAXBUSY-100 (0%)    (0x7FFa - 100)
-                            FOE_MAXBUSY (100%) (0x7FFA)
-                            ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
-                            ECAT_FOE_ERRCODE_ACCESS    (0x8002)
-                            ECAT_FOE_ERRCODE_DISKFULL (0x8003)
-                            ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
-                            ECAT_FOE_ERRCODE_NOUSER    (0x8007)
-
-\brief    This function is called on a FoE Data request
-
-*////////////////////////////////////////////////////////////////////////////////////////
-PROTO UINT16(*pAPPL_FoeWriteData)(UINT16 MBXMEM * pData, UINT16 Size, BOOL bDataFollowing);
-/*ECATCHANGE_END(V5.12) FOE1*/
-
-/*ECATCHANGE_START(V5.12) APPL1*/
-/////////////////////////////////////////////////////////////////////////////////////////
-/**
-\brief    This function is called by the SSC from the main loop
-*////////////////////////////////////////////////////////////////////////////////////////
-PROTO void(*pAPPL_MainLoop)();
-/*ECATCHANGE_END(V5.12) APPL1*/
 
 /*-----------------------------------------------------------------------------------------
 ------
@@ -265,21 +121,5 @@ PROTO void MainLoop(void);
 \brief    NOTE: state requests to a higher state than the current state are not allowed.
 *////////////////////////////////////////////////////////////////////////////////////////
 PROTO void ECAT_StateChange(UINT8 alStatus, UINT16 alStatusCode);
-
-
-/*ECATCHANGE_START(V5.12) EOE1*/
-/////////////////////////////////////////////////////////////////////////////////////////
-/**
-\return   0 = sending of frame started, 1 = frame could not be sent, try it later
-
-\param    pData    pointer to the Ethernet frame to be send 
-                   in case that STATIC_ETHERNET_BUFFER is 0 the memory will be freed after the last fragment was send
-\param    length   length of the Ethernet frame
-
-\brief    This function sends an Ethernet frame via EoE to the master
-\brief    The frame buffer shall dynamic allocated memory which will be deallocated by the SSC after the last EOE segment was send.
-*////////////////////////////////////////////////////////////////////////////////////////
-PROTO UINT16 EOE_SendFrameRequest(UINT16 *pData, UINT16 length);
-/*ECATCHANGE_END(V5.12) EOE1*/
 
 #undef PROTO
